@@ -2,1207 +2,1718 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Credteria — New business criteria. Real business credibility</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Credteria — New business criteria. Real business credibility.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --purple-dark:#3c0d5b;
-  --purple-900:#2d0947;
-  --purple-mid:#6b21a8;
-  --purple-600:#9333ea;
-  --purple-400:#c084fc;
-  --purple-300:#d8b4fe;
-  --purple-200:#ede9fe;
-  --purple-100:#f5f3ff;
-  --lavender:#debdff;
-  --lavender-light:#f3ebff;
-  --lavender-soft:#faf5ff;
-  --white:#ffffff;
-  --text-dark:#1a0a2e;
-  --text-mid:#4a1d7a;
-  --text-muted:#8b5cf6;
-  --border-purple:rgba(168,85,247,0.2);
-  --border-light:rgba(222,189,255,0.4);
-  --font-body:'Sora',sans-serif;
-  --font-display:'DM Serif Display',serif;
-  --radius:10px;
-  --radius-lg:14px;
-  --radius-xl:20px;
-  --sidebar-w:210px;
+:root {
+  --p900: #0f0121;
+  --p800: #1a0630;
+  --p700: #2d0d52;
+  --p600: #3c0d5b;
+  --p500: #5b1c8a;
+  --p400: #7c3aed;
+  --p300: #a855f7;
+  --p200: #c084fc;
+  --p100: #ddd6fe;
+  --lav: #debdff;
+  --lav-light: #f0e8ff;
+  --lav-bg: #f5f0ff;
+  --white: #ffffff;
+  --td: #1a0630;
+  --tm: #4a3060;
+  --tmu: #9580b5;
+  --border: #e4d4ff;
+  --glow: rgba(168,85,247,0.3);
+  --ease: cubic-bezier(.4,0,.2,1);
+  --spring: cubic-bezier(.34,1.56,.64,1);
 }
-body{font-family:var(--font-body);background:var(--lavender-soft);overflow:hidden}
-.app{display:flex;height:100vh;min-height:720px}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html { font-size: 16px; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--lav-bg);
+  overflow: hidden;
+  height: 100dvh;
+  height: 100vh;
+  touch-action: pan-y;
+}
 
-/* === SIDEBAR === */
-.sidebar{
-  width:var(--sidebar-w);
-  background:linear-gradient(165deg,#3c0d5b 0%,#5b1a8a 50%,#3c0d5b 100%);
-  display:flex;flex-direction:column;flex-shrink:0;
-  position:relative;overflow:hidden;
-  border-right:1px solid rgba(168,85,247,0.3);
+/* ─── COVER ─── */
+#cover {
+  position: fixed; inset: 0; z-index: 9999;
+  background: linear-gradient(150deg, #060010 0%, #0f0121 30%, #1a0630 60%, #2d0d52 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden;
 }
-.sidebar::before{
-  content:'';position:absolute;top:-60px;right:-40px;
-  width:180px;height:180px;
-  background:radial-gradient(circle,rgba(192,132,252,0.15) 0%,transparent 70%);
-  pointer-events:none;
+.c-mesh {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 35%, rgba(124,58,237,.4) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 50% at 15% 75%, rgba(92,9,139,.5) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 45% at 85% 15%, rgba(168,85,247,.25) 0%, transparent 55%);
 }
-.sidebar::after{
-  content:'';position:absolute;bottom:-40px;left:-30px;
-  width:140px;height:140px;
-  background:radial-gradient(circle,rgba(147,51,234,0.2) 0%,transparent 70%);
-  pointer-events:none;
+.c-noise {
+  position: absolute; inset: 0; opacity: .04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
 }
-.logo-area{padding:18px 14px 14px;border-bottom:1px solid rgba(222,189,255,0.12)}
-.logo-row{display:flex;align-items:center;gap:9px}
-.logo-ic{
-  width:32px;height:32px;
-  background:linear-gradient(135deg,var(--purple-400),var(--purple-600));
-  border-radius:9px;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 12px rgba(192,132,252,0.4);
-  flex-shrink:0;
+.c-rings { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.c-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(168,85,247,.18);
+  animation: ring-pulse 5s ease-in-out infinite;
 }
-.logo-ic i{font-size:16px;color:#fff}
-.logo-name{font-family:var(--font-display);font-size:18px;color:#fff;letter-spacing:0.01em;line-height:1}
-.logo-sub{font-size:8.5px;color:rgba(222,189,255,0.55);margin-top:2px;letter-spacing:0.04em;line-height:1.3}
-.nav-sec{padding:8px 8px 4px}
-.nav-lbl{font-size:8.5px;color:rgba(222,189,255,0.35);letter-spacing:.1em;text-transform:uppercase;padding:0 8px;margin-bottom:4px;font-weight:500}
-.nav-item{
-  display:flex;align-items:center;gap:8px;
-  padding:7px 9px;border-radius:9px;
-  font-size:11.5px;color:rgba(222,189,255,0.6);
-  cursor:pointer;transition:all .2s cubic-bezier(.4,0,.2,1);
-  user-select:none;font-weight:400;
-  position:relative;
+@keyframes ring-pulse {
+  0%, 100% { transform: scale(1); opacity: .2; }
+  50% { transform: scale(1.06); opacity: .55; }
 }
-.nav-item:hover{background:rgba(192,132,252,0.12);color:rgba(255,255,255,0.9)}
-.nav-item.active{
-  background:linear-gradient(135deg,rgba(192,132,252,0.25),rgba(147,51,234,0.2));
-  color:#fff;
-  box-shadow:inset 0 0 0 1px rgba(192,132,252,0.3);
+.c-particles { position: absolute; inset: 0; pointer-events: none; }
+.c-particle {
+  position: absolute; border-radius: 50%; pointer-events: none;
+  animation: float-up linear infinite; opacity: 0;
 }
-.nav-item.active::before{
-  content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
-  width:3px;height:18px;background:var(--lavender);border-radius:0 3px 3px 0;
+@keyframes float-up {
+  0% { transform: translateY(110vh) scale(0); opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: .5; }
+  100% { transform: translateY(-10vh) scale(1.4); opacity: 0; }
 }
-.nav-item i{font-size:14px;flex-shrink:0;opacity:0.9}
-.sidebar-bottom{margin-top:auto;padding:10px 8px;border-top:1px solid rgba(222,189,255,0.1)}
-.user-pill{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:9px;cursor:pointer;transition:background .2s}
-.user-pill:hover{background:rgba(192,132,252,0.12)}
-.av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--purple-400),var(--purple-600));display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:600;color:#fff;flex-shrink:0;box-shadow:0 2px 8px rgba(147,51,234,0.4)}
+.c-card {
+  position: relative; z-index: 2; text-align: center; padding: 0 24px;
+  animation: slide-up .9s var(--ease) both;
+  max-width: 420px; width: 100%;
+}
+@keyframes slide-up { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: translateY(0); } }
+.c-logo-box {
+  width: 72px; height: 72px; margin: 0 auto 18px;
+  background: linear-gradient(135deg, rgba(168,85,247,.35), rgba(124,58,237,.55));
+  border: 1px solid rgba(168,85,247,.6); border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 48px rgba(168,85,247,.5), 0 0 80px rgba(124,58,237,.25), inset 0 1px 0 rgba(255,255,255,.18);
+  backdrop-filter: blur(8px);
+  animation: slide-up .9s .1s var(--ease) both;
+}
+.c-logo-box i { font-size: 34px; color: var(--lav); }
+.c-brand {
+  font-family: 'Playfair Display', serif; font-size: clamp(48px, 14vw, 72px); font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, #debdff 45%, #a855f7 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  letter-spacing: -.03em; line-height: 1; margin-bottom: 10px;
+  animation: slide-up .9s .18s var(--ease) both;
+}
+.c-slogan {
+  font-size: 11px; color: rgba(222,189,255,.65); font-weight: 400; letter-spacing: .1em;
+  text-transform: uppercase; margin-bottom: 28px;
+  animation: slide-up .9s .26s var(--ease) both;
+}
+.c-badges {
+  display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px;
+  animation: slide-up .9s .34s var(--ease) both;
+}
+.c-badge {
+  padding: 5px 12px; border-radius: 20px; font-size: 10px; font-weight: 500;
+  border: 1px solid rgba(168,85,247,.4); color: var(--lav);
+  background: rgba(168,85,247,.14); backdrop-filter: blur(8px); letter-spacing: .04em;
+}
+.c-enter {
+  padding: 15px 44px; border-radius: 14px; font-size: 13px; font-weight: 600;
+  background: linear-gradient(135deg, #7c3aed, #a855f7); color: #fff; border: none; cursor: pointer;
+  box-shadow: 0 8px 36px rgba(124,58,237,.55), 0 2px 8px rgba(0,0,0,.2);
+  letter-spacing: .05em; text-transform: uppercase; font-family: 'DM Sans', sans-serif;
+  transition: all .25s var(--ease);
+  animation: slide-up .9s .42s var(--ease) both;
+  position: relative; overflow: hidden;
+}
+.c-enter::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.15), transparent);
+  opacity: 0; transition: opacity .25s;
+}
+.c-enter:active { transform: scale(.96); }
+.c-enter:hover::before { opacity: 1; }
+.c-stats {
+  display: flex; gap: 24px; justify-content: center; margin-top: 28px;
+  animation: slide-up .9s .52s var(--ease) both;
+}
+.cstat { text-align: center; }
+.cstat-n { font-size: 18px; font-weight: 600; color: var(--lav); font-family: 'Playfair Display', serif; }
+.cstat-l { font-size: 9px; color: rgba(222,189,255,.45); letter-spacing: .08em; text-transform: uppercase; margin-top: 2px; }
+.cover-exit { animation: exit-cover .6s var(--ease) forwards; }
+@keyframes exit-cover { to { opacity: 0; transform: scale(1.06) translateY(-8px); pointer-events: none; } }
 
-/* === MAIN === */
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--lavender-soft)}
-.topbar{
-  background:rgba(255,255,255,0.85);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border-light);
-  padding:0 20px;height:52px;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-shrink:0;
+/* ─── APP ─── */
+#app {
+  display: flex; flex-direction: column; height: 100dvh; height: 100vh;
+  opacity: 0; transition: opacity .5s .1s;
 }
-.page-title{font-family:var(--font-display);font-size:17px;color:var(--text-dark);letter-spacing:0.01em}
-.page-sub{font-size:10px;color:var(--text-muted);margin-top:1px}
-.topbar-r{display:flex;align-items:center;gap:10px}
-.date-btn{display:flex;align-items:center;gap:5px;background:rgba(167,139,250,0.08);border:1px solid var(--border-purple);border-radius:8px;padding:5px 11px;font-size:11px;color:var(--text-mid);cursor:pointer;transition:all .15s;font-family:var(--font-body)}
-.date-btn:hover{background:rgba(167,139,250,0.15);border-color:var(--purple-400)}
-.notif-btn{position:relative;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:8px;transition:background .15s}
-.notif-btn:hover{background:rgba(167,139,250,0.12)}
-.notif-badge{position:absolute;top:5px;right:5px;width:7px;height:7px;background:#ef4444;border-radius:50%;border:1.5px solid var(--lavender-soft);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
-.user-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--purple-400),var(--purple-600));display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#fff;cursor:pointer;box-shadow:0 2px 8px rgba(147,51,234,0.3)}
+#app.visible { opacity: 1; }
 
-/* === CONTENT === */
-.content{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:14px}
-.content::-webkit-scrollbar{width:5px}
-.content::-webkit-scrollbar-track{background:transparent}
-.content::-webkit-scrollbar-thumb{background:var(--border-purple);border-radius:10px}
-.page-view{display:none;flex-direction:column;gap:14px;animation:fadeSlideIn .35s cubic-bezier(.4,0,.2,1)}
-.page-view.active{display:flex}
-@keyframes fadeSlideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+/* ─── TOPBAR ─── */
+.topbar {
+  background: rgba(255,255,255,.94); backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(196,153,255,.3);
+  padding: 0 16px; height: 56px; display: flex; align-items: center;
+  justify-content: space-between; flex-shrink: 0; position: relative; z-index: 100;
+  box-shadow: 0 1px 20px rgba(124,58,237,.06);
+}
+.topbar-l { display: flex; align-items: center; gap: 10px; }
+.menu-btn {
+  width: 36px; height: 36px; border-radius: 10px; border: none;
+  background: rgba(124,58,237,.08); cursor: pointer; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 4px; transition: background .2s;
+}
+.menu-btn span {
+  display: block; width: 16px; height: 1.5px; background: var(--p400); border-radius: 2px;
+  transition: all .3s var(--ease);
+}
+.menu-btn.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.menu-btn.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+.topbar-logo { display: flex; align-items: center; gap: 7px; }
+.tb-logo-ic {
+  width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(168,85,247,.5), rgba(124,58,237,.7));
+  border: 1px solid rgba(168,85,247,.5);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 10px rgba(168,85,247,.3);
+}
+.tb-logo-ic i { font-size: 14px; color: var(--lav); }
+.tb-brand { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; color: var(--td); letter-spacing: -.01em; }
+.topbar-r { display: flex; align-items: center; gap: 8px; }
+.notif-btn {
+  position: relative; width: 34px; height: 34px; display: flex;
+  align-items: center; justify-content: center; border-radius: 10px; cursor: pointer;
+  background: transparent; border: none; transition: background .15s;
+}
+.notif-btn:active { background: rgba(168,85,247,.1); }
+.notif-dot {
+  position: absolute; top: 6px; right: 6px; width: 7px; height: 7px;
+  background: var(--p300); border-radius: 50%; border: 1.5px solid var(--lav-bg);
+  animation: notif-pulse 2.5s infinite;
+}
+@keyframes notif-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(168,85,247,.7); }
+  50% { box-shadow: 0 0 0 4px rgba(168,85,247,0); }
+}
+.user-av {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 600; color: #fff; cursor: pointer;
+  box-shadow: 0 0 10px rgba(168,85,247,.4);
+}
 
-/* === CARDS === */
-.card{
-  background:rgba(255,255,255,0.92);
-  border:1px solid var(--border-light);
-  border-radius:var(--radius-lg);
-  padding:14px;
-  transition:border-color .2s, box-shadow .2s;
+/* ─── DRAWER ─── */
+.drawer-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(10,2,24,.55); backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none; transition: opacity .3s var(--ease);
 }
-.card:hover{border-color:rgba(168,85,247,0.3);box-shadow:0 4px 20px rgba(147,51,234,0.06)}
-.card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.card-title{font-size:12.5px;font-weight:600;color:var(--text-dark)}
-.view-all{font-size:10.5px;color:var(--purple-600);cursor:pointer;display:flex;align-items:center;gap:3px}
-.view-all:hover{text-decoration:underline}
+.drawer-overlay.open { opacity: 1; pointer-events: all; }
+.drawer {
+  position: fixed; left: 0; top: 0; bottom: 0; width: 260px; z-index: 201;
+  background: linear-gradient(175deg, #1a0630 0%, #2d0d52 50%, #3c0d5b 100%);
+  transform: translateX(-100%); transition: transform .35s var(--ease);
+  display: flex; flex-direction: column; overflow: hidden;
+  box-shadow: 6px 0 40px rgba(0,0,0,.5);
+}
+.drawer.open { transform: translateX(0); }
+.drawer::after {
+  content: ''; position: absolute; top: 0; right: 0; width: 1px; height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(168,85,247,.4), transparent);
+}
+.dr-logo { padding: 20px 16px 16px; border-bottom: 1px solid rgba(168,85,247,.15); flex-shrink: 0; }
+.dr-logo-row { display: flex; align-items: center; gap: 9px; }
+.dr-logo-ic {
+  width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(168,85,247,.45), rgba(124,58,237,.65));
+  border: 1px solid rgba(168,85,247,.45); display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 14px rgba(168,85,247,.35);
+}
+.dr-logo-ic i { font-size: 16px; color: var(--lav); }
+.dr-name { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; color: #fff; }
+.dr-sub { font-size: 8px; color: rgba(222,189,255,.4); letter-spacing: .06em; text-transform: uppercase; margin-top: 1px; }
+.dr-nav { flex: 1; overflow-y: auto; padding: 8px 10px; }
+.dr-nav::-webkit-scrollbar { display: none; }
+.dr-sec-lbl {
+  font-size: 8px; color: rgba(222,189,255,.3); letter-spacing: .1em; text-transform: uppercase;
+  padding: 10px 8px 4px; font-weight: 500;
+}
+.dr-item {
+  display: flex; align-items: center; gap: 9px; padding: 9px 10px; border-radius: 9px;
+  font-size: 12px; color: rgba(222,189,255,.6); cursor: pointer;
+  transition: all .2s var(--ease); user-select: none; position: relative; overflow: hidden;
+  margin-bottom: 1px;
+}
+.dr-item::before {
+  content: ''; position: absolute; inset: 0; border-radius: 9px;
+  background: linear-gradient(135deg, rgba(168,85,247,.2), rgba(124,58,237,.15));
+  opacity: 0; transition: opacity .2s;
+}
+.dr-item:active::before { opacity: 1; }
+.dr-item:active { transform: translateX(2px); }
+.dr-item.active {
+  background: linear-gradient(135deg, rgba(168,85,247,.3), rgba(124,58,237,.2));
+  color: #fff; border: 1px solid rgba(168,85,247,.35);
+  box-shadow: 0 2px 12px rgba(168,85,247,.2);
+}
+.dr-item.active::after {
+  content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 3px; height: 60%; background: var(--p200); border-radius: 0 2px 2px 0;
+}
+.dr-item i { font-size: 16px; flex-shrink: 0; opacity: .85; }
+.dr-bottom {
+  padding: 12px 10px; border-top: 1px solid rgba(168,85,247,.12); flex-shrink: 0;
+}
+.dr-user {
+  display: flex; align-items: center; gap: 8px; padding: 8px;
+  border-radius: 10px; cursor: pointer; transition: background .2s;
+}
+.dr-user:active { background: rgba(168,85,247,.1); }
+.dr-av {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 600; color: #fff; flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(168,85,247,.4);
+}
+.dr-uname { font-size: 11px; font-weight: 500; color: rgba(255,255,255,.9); }
+.dr-uid { font-size: 9px; color: rgba(222,189,255,.35); }
 
-/* === KPI === */
-.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.kpi{
-  background:rgba(255,255,255,0.92);
-  border:1px solid var(--border-light);
-  border-radius:var(--radius-lg);
-  padding:14px;cursor:pointer;
-  transition:all .25s cubic-bezier(.4,0,.2,1);
-  position:relative;overflow:hidden;
+/* ─── CONTENT AREA ─── */
+.content-wrap {
+  flex: 1; overflow: hidden; display: flex; flex-direction: column;
 }
-.kpi::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(222,189,255,0.06),transparent);pointer-events:none;opacity:0;transition:opacity .2s}
-.kpi:hover{border-color:rgba(168,85,247,0.4);transform:translateY(-2px);box-shadow:0 8px 24px rgba(147,51,234,0.1)}
-.kpi:hover::after{opacity:1}
-.kpi-lbl{font-size:9.5px;color:var(--text-muted);font-weight:500;text-transform:uppercase;letter-spacing:.07em;display:flex;align-items:center;gap:4px;margin-bottom:8px}
-.kpi-lbl i{font-size:11px}
-.kpi-num{font-size:22px;font-weight:600;letter-spacing:-.02em;color:var(--text-dark)}
-.kpi-sub{font-size:10px;color:#6b7280;margin-top:3px}
-.sbar{margin-top:8px;height:4px;background:rgba(222,189,255,0.3);border-radius:10px;overflow:hidden}
-.sfill{height:100%;border-radius:10px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+.content-scroll {
+  flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: 16px;
+  scroll-behavior: smooth;
+}
+.content-scroll::-webkit-scrollbar { display: none; }
 
-/* === BADGES === */
-.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:9.5px;font-weight:500}
-.bg{background:#dcfce7;color:#16a34a}
-.ba{background:#fef3c7;color:#d97706}
-.bb{background:#dbeafe;color:#2563eb}
-.br{background:#fee2e2;color:#dc2626}
-.bp{background:rgba(222,189,255,0.4);color:var(--purple-mid)}
+/* PAGE HEADER */
+.pg-header {
+  padding: 4px 0 12px;
+  animation: pg-in .4s var(--ease) both;
+}
+.pg-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--td); }
+.pg-sub { font-size: 11px; color: var(--tmu); margin-top: 2px; }
+@keyframes pg-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* === SOURCE ITEMS === */
-.src-item{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid rgba(222,189,255,0.2);cursor:pointer;transition:all .15s}
-.src-item:last-child{border-bottom:none}
-.src-item:hover{opacity:.8;transform:translateX(2px)}
-.src-logo{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;border:1px solid rgba(222,189,255,0.3)}
-.src-info{flex:1;min-width:0}
-.src-name{font-size:11.5px;font-weight:500;color:var(--text-dark)}
-.src-type{font-size:9.5px;color:#6b7280}
-.conn-btn{font-size:10px;padding:3px 10px;border:1px solid rgba(147,51,234,0.4);border-radius:6px;color:var(--purple-mid);cursor:pointer;background:none;transition:all .15s;font-family:var(--font-body)}
-.conn-btn:hover{background:var(--purple-600);color:#fff;border-color:var(--purple-600)}
+.page-view { display: none; }
+.page-view.active { display: flex; flex-direction: column; gap: 12px; animation: pg-in .4s var(--ease); }
 
-/* === GRID LAYOUTS === */
-.mid-row{display:grid;grid-template-columns:240px 1fr;gap:10px}
-.bot-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.full-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+/* ─── CARDS ─── */
+.card {
+  background: rgba(255,255,255,.82); backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(196,153,255,.32); border-radius: 16px; padding: 15px;
+  box-shadow: 0 2px 20px rgba(124,58,237,.07);
+  transition: all .25s var(--ease);
+  animation: pg-in .4s var(--ease) both;
+}
+.card:active { box-shadow: 0 4px 28px rgba(124,58,237,.14); border-color: rgba(168,85,247,.4); transform: scale(.995); }
+.card-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 13px; }
+.card-title { font-size: 13px; font-weight: 600; color: var(--td); font-family: 'Playfair Display', serif; }
+.view-all { font-size: 10px; color: var(--p300); cursor: pointer; display: flex; align-items: center; gap: 3px; }
 
-/* === HEALTH ITEMS === */
-.h-item{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid rgba(222,189,255,0.2)}
-.h-item:last-child{border-bottom:none}
-.h-ic{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.h-lbl{flex:1;font-size:10.5px;color:#374151}
-.h-val{font-size:12px;font-weight:600;color:var(--text-dark)}
-.donut-wrap{display:flex;align-items:center;gap:14px}
-.ch-list{flex:1}
-.ch-item{display:flex;align-items:center;justify-content:space-between;font-size:10.5px;padding:2px 0}
-.ldot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px}
+/* ─── KPI CARDS ─── */
+.kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.kpi {
+  background: rgba(255,255,255,.88); border: 1px solid rgba(196,153,255,.32);
+  border-radius: 16px; padding: 14px; cursor: pointer;
+  transition: all .3s var(--ease); position: relative; overflow: hidden;
+  animation: pg-in .4s var(--ease) both;
+}
+.kpi::before {
+  content: ''; position: absolute; inset: 0; border-radius: 16px;
+  background: linear-gradient(135deg, rgba(168,85,247,.09), rgba(124,58,237,.05));
+  opacity: 0; transition: opacity .3s;
+}
+.kpi:active::before { opacity: 1; }
+.kpi:active { transform: scale(.97); box-shadow: 0 6px 24px rgba(124,58,237,.16); }
+.kpi-lbl { font-size: 9px; color: var(--tmu); font-weight: 500; text-transform: uppercase; letter-spacing: .07em; display: flex; align-items: center; gap: 4px; margin-bottom: 8px; }
+.kpi-lbl i { font-size: 12px; }
+.kpi-num { font-size: 20px; font-weight: 600; letter-spacing: -.02em; font-family: 'Playfair Display', serif; }
+.kpi-sub { font-size: 9.5px; color: var(--tmu); margin-top: 4px; }
+.sbar { margin-top: 8px; height: 3px; background: rgba(196,153,255,.25); border-radius: 10px; overflow: hidden; }
+.sfill { height: 100%; background: linear-gradient(90deg, #7c3aed, #a855f7); border-radius: 10px; width: 0; transition: width 1s var(--ease); }
 
-/* === RISK ITEMS === */
-.risk-item{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid rgba(222,189,255,0.2)}
-.risk-item:last-child{border-bottom:none}
-.risk-ic{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.risk-title{font-size:11px;font-weight:500;color:var(--text-dark)}
-.risk-desc{font-size:9.5px;color:#6b7280;margin-top:2px}
+/* ─── BADGES ─── */
+.badge { display: inline-block; padding: 2px 7px; border-radius: 20px; font-size: 9px; font-weight: 500; letter-spacing: .03em; }
+.bg { background: rgba(34,197,94,.12); color: #16a34a; border: 1px solid rgba(34,197,94,.22); }
+.ba { background: rgba(245,158,11,.12); color: #d97706; border: 1px solid rgba(245,158,11,.22); }
+.bb { background: rgba(168,85,247,.12); color: #7c3aed; border: 1px solid rgba(168,85,247,.22); }
+.br { background: rgba(239,68,68,.1); color: #dc2626; border: 1px solid rgba(239,68,68,.22); }
 
-/* === FORMS === */
-.form-row{margin-bottom:12px}
-.form-lbl{font-size:11px;color:#6b7280;margin-bottom:4px;display:block}
-.form-input{width:100%;padding:7px 10px;border:1px solid var(--border-purple);border-radius:8px;font-size:12px;color:var(--text-dark);outline:none;transition:border .15s;background:rgba(255,255,255,0.9);font-family:var(--font-body)}
-.form-input:focus{border-color:var(--purple-600);box-shadow:0 0 0 3px rgba(147,51,234,0.08)}
-.form-select{width:100%;padding:7px 10px;border:1px solid var(--border-purple);border-radius:8px;font-size:12px;color:var(--text-dark);background:rgba(255,255,255,0.9);outline:none;font-family:var(--font-body)}
-.submit-btn{width:100%;padding:9px;background:linear-gradient(135deg,var(--purple-600),var(--purple-mid));color:#fff;border:none;border-radius:9px;font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font-body);box-shadow:0 4px 12px rgba(147,51,234,0.3)}
-.submit-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(147,51,234,0.4)}
-.submit-btn:active{transform:translateY(0)}
+/* ─── SCORE RING ─── */
+.score-hero {
+  background: linear-gradient(150deg, #1a0630 0%, #2d0d52 50%, #5b1c8a 100%);
+  border-radius: 20px; padding: 22px 20px; position: relative; overflow: hidden;
+  animation: pg-in .4s var(--ease) both;
+}
+.score-hero::before {
+  content: ''; position: absolute; top: -60%; right: -30%; width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(168,85,247,.35), transparent 70%);
+  border-radius: 50%;
+}
+.score-hero::after {
+  content: ''; position: absolute; bottom: -40%; left: -20%; width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(124,58,237,.25), transparent 70%);
+  border-radius: 50%;
+}
+.score-hero-inner { position: relative; z-index: 1; }
+.score-hero-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.score-hero-title { font-family: 'Playfair Display', serif; font-size: 16px; color: #fff; font-weight: 700; }
+.score-hero-sub { font-size: 10px; color: rgba(222,189,255,.6); margin-top: 3px; }
+.score-display { display: flex; align-items: center; gap: 16px; }
+.score-ring-wrap { position: relative; width: 90px; height: 90px; flex-shrink: 0; }
+.score-ring-wrap svg { width: 90px; height: 90px; transform: rotate(-90deg); }
+.score-ring-bg { fill: none; stroke: rgba(168,85,247,.2); stroke-width: 6; }
+.score-ring-fill {
+  fill: none; stroke: url(#scoreGrad); stroke-width: 6;
+  stroke-linecap: round; stroke-dasharray: 245; stroke-dashoffset: 245;
+  transition: stroke-dashoffset 1.5s var(--ease);
+}
+.score-ring-center {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  text-align: center;
+}
+.score-ring-num { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #fff; line-height: 1; }
+.score-ring-max { font-size: 9px; color: rgba(222,189,255,.5); }
+.score-stats { display: flex; flex-direction: column; gap: 6px; }
+.score-stat-row { display: flex; align-items: center; gap: 8px; }
+.score-stat-ic { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.score-stat-ic i { font-size: 12px; }
+.score-stat-lbl { font-size: 10px; color: rgba(222,189,255,.65); }
+.score-stat-val { font-size: 12px; font-weight: 600; color: #fff; margin-left: auto; }
 
-/* === STAT GRID === */
-.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
-.stat-card{background:rgba(255,255,255,0.92);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:12px;text-align:center;transition:all .2s}
-.stat-card:hover{border-color:rgba(168,85,247,0.35);transform:translateY(-1px)}
-.stat-num{font-size:20px;font-weight:600;color:var(--text-dark);margin-bottom:2px}
-.stat-lbl{font-size:9.5px;color:#6b7280}
-.progress-bar{height:6px;background:rgba(222,189,255,0.3);border-radius:10px;overflow:hidden;margin:6px 0}
-.progress-fill{height:100%;border-radius:10px;transition:width .6s cubic-bezier(.4,0,.2,1)}
-.section-title{font-family:var(--font-display);font-size:17px;color:var(--text-dark);margin-bottom:10px}
-.input-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+/* ─── SRC ITEMS ─── */
+.src-item { display: flex; align-items: center; gap: 9px; padding: 10px 0; border-bottom: 1px solid rgba(196,153,255,.12); cursor: pointer; transition: all .2s; }
+.src-item:last-child { border-bottom: none; }
+.src-item:active { padding-left: 6px; }
+.src-logo { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; border: 1px solid rgba(196,153,255,.22); }
+.src-name { font-size: 12px; font-weight: 500; color: var(--td); }
+.src-type { font-size: 9.5px; color: var(--tmu); }
+.conn-btn { font-size: 10px; padding: 5px 11px; border: 1px solid rgba(168,85,247,.4); border-radius: 7px; color: var(--p400); cursor: pointer; background: rgba(168,85,247,.07); transition: all .2s; font-family: 'DM Sans', sans-serif; }
 
-/* === TOAST === */
-.toast{
-  position:fixed;bottom:20px;right:20px;
-  background:linear-gradient(135deg,var(--purple-dark),var(--purple-mid));
-  color:#fff;padding:10px 16px;border-radius:10px;font-size:12px;
-  z-index:200;opacity:0;transition:opacity .3s,transform .3s;
-  pointer-events:none;transform:translateY(10px);
-  border:1px solid rgba(192,132,252,0.3);
-  box-shadow:0 8px 24px rgba(60,13,91,0.3);
-}
-.toast.show{opacity:1;transform:translateY(0)}
+/* ─── HEALTH ITEMS ─── */
+.h-item { display: flex; align-items: center; gap: 9px; padding: 9px 0; border-bottom: 1px solid rgba(196,153,255,.15); }
+.h-item:last-child { border-bottom: none; }
+.h-ic { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.h-ic i { font-size: 13px; }
+.h-lbl { flex: 1; font-size: 11px; color: var(--tm); }
+.h-val { font-size: 12px; font-weight: 600; color: var(--td); }
 
-/* === SLIDERS === */
-.slider-wrap{display:flex;align-items:center;gap:10px;margin:8px 0}
-.slider-wrap input[type=range]{flex:1;accent-color:var(--purple-600)}
-.slider-val{font-size:12px;font-weight:600;color:var(--purple-600);min-width:60px;text-align:right}
-.info-row{display:flex;justify-content:space-between;font-size:11px;color:#6b7280;margin:3px 0;padding:6px 0;border-bottom:1px solid rgba(222,189,255,0.2)}
-.info-row span:last-child{color:var(--text-dark);font-weight:500}
+/* ─── RISK ITEMS ─── */
+.risk-item { display: flex; align-items: flex-start; gap: 9px; padding: 9px 0; border-bottom: 1px solid rgba(196,153,255,.12); }
+.risk-item:last-child { border-bottom: none; }
+.risk-ic { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.risk-ic i { font-size: 13px; }
+.risk-title { font-size: 11.5px; font-weight: 500; color: var(--td); }
+.risk-desc { font-size: 9.5px; color: var(--tmu); margin-top: 2px; }
 
-/* === CHIPS === */
-.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.chip{padding:4px 11px;border-radius:20px;font-size:10.5px;border:1px solid var(--border-purple);cursor:pointer;color:var(--text-mid);background:rgba(255,255,255,0.9);transition:all .15s;font-family:var(--font-body)}
-.chip.sel{background:var(--purple-600);color:#fff;border-color:var(--purple-600)}
+/* ─── CHART ─── */
+.chart-wrap { position: relative; width: 100%; height: 160px; margin-top: 4px; }
+.chart-legend { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.ldot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 4px; flex-shrink: 0; }
+.legend-item { display: flex; align-items: center; font-size: 10px; color: var(--tm); }
 
-/* === TOGGLE === */
-.toggle{position:relative;width:36px;height:20px;cursor:pointer;flex-shrink:0;display:inline-block}
-.toggle input{opacity:0;width:0;height:0}
-.toggle-slider{position:absolute;inset:0;background:#d1d5db;border-radius:20px;transition:.3s}
-.toggle-slider:before{content:'';position:absolute;width:14px;height:14px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}
-.toggle input:checked+.toggle-slider{background:var(--purple-600)}
-.toggle input:checked+.toggle-slider:before{transform:translateX(16px)}
+/* ─── DONUT ─── */
+.donut-row { display: flex; align-items: center; gap: 14px; }
+.donut-wrap { position: relative; width: 100px; height: 100px; flex-shrink: 0; }
+.donut-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
+.donut-num { font-size: 13px; font-weight: 600; color: var(--td); font-family: 'Playfair Display', serif; }
+.donut-unit { font-size: 8px; color: var(--tmu); }
+.ch-list { flex: 1; }
+.ch-item { display: flex; align-items: center; justify-content: space-between; font-size: 10.5px; padding: 3px 0; gap: 6px; }
 
-/* === TAB === */
-.tab{padding:5px 13px;border-radius:7px;font-size:11px;cursor:pointer;border:1px solid var(--border-purple);color:var(--text-mid);background:rgba(255,255,255,0.9);transition:all .15s;font-family:var(--font-body)}
-.tab.active{background:var(--purple-600);color:#fff;border-color:var(--purple-600)}
+/* ─── BANK MATCH ─── */
+.bank-hero {
+  background: linear-gradient(135deg, #1a0630 0%, #3c0d5b 60%, #5b1c8a 100%);
+  border-radius: 18px; padding: 20px; position: relative; overflow: hidden;
+  animation: pg-in .4s var(--ease) both;
+}
+.bank-hero::before {
+  content: ''; position: absolute; top: -50%; right: -25%; width: 250px; height: 250px;
+  background: radial-gradient(circle, rgba(168,85,247,.3), transparent 70%); border-radius: 50%;
+}
+.bank-hero-title { font-family: 'Playfair Display', serif; font-size: 17px; color: #fff; font-weight: 700; margin-bottom: 5px; position: relative; z-index: 1; }
+.bank-hero-sub { font-size: 10.5px; color: rgba(222,189,255,.7); line-height: 1.6; position: relative; z-index: 1; }
+.score-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(168,85,247,.2); border: 1px solid rgba(168,85,247,.45);
+  border-radius: 30px; padding: 7px 16px; margin-top: 14px;
+  position: relative; z-index: 1;
+}
+.score-pill-num { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--lav); }
+.score-pill-lbl { font-size: 10px; color: rgba(222,189,255,.7); }
+.limit-box {
+  margin-top: 14px; background: rgba(168,85,247,.14); border: 1px solid rgba(168,85,247,.28);
+  border-radius: 12px; padding: 13px; position: relative; z-index: 1;
+}
+.limit-lbl { font-size: 9px; color: rgba(222,189,255,.6); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+.limit-num { font-size: 22px; font-weight: 700; color: #fff; font-family: 'Playfair Display', serif; }
+.limit-sub { font-size: 9px; color: rgba(222,189,255,.5); margin-top: 2px; }
 
-/* === MODAL === */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(60,13,91,0.5);z-index:100;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
-.modal-overlay.show{display:flex;animation:fadeIn .2s}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal{
-  background:rgba(255,255,255,0.97);
-  border-radius:16px;padding:22px;
-  width:380px;max-width:90%;max-height:90vh;overflow-y:auto;
-  border:1px solid rgba(222,189,255,0.5);
-  box-shadow:0 20px 60px rgba(60,13,91,0.25);
-  animation:modalIn .25s cubic-bezier(.4,0,.2,1);
+.bank-list { display: flex; flex-direction: column; gap: 10px; }
+.bank-card {
+  background: rgba(255,255,255,.9); border: 2px solid rgba(196,153,255,.3);
+  border-radius: 14px; padding: 14px; cursor: pointer;
+  transition: all .3s var(--ease); position: relative; overflow: hidden;
+  animation: pg-in .4s var(--ease) both;
 }
-@keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.modal-title{font-family:var(--font-display);font-size:15px;color:var(--text-dark);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
-.modal-close{cursor:pointer;color:#6b7280;font-size:16px;flex-shrink:0}
-.modal-close:hover{color:var(--text-dark)}
+.bank-card:active { transform: scale(.98); }
+.bank-card.selected { border-color: #7c3aed; background: rgba(245,240,255,.97); box-shadow: 0 6px 24px rgba(124,58,237,.2); }
+.bank-card.selected::after {
+  content: '✓'; position: absolute; top: 10px; right: 12px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff; font-size: 12px; display: flex; align-items: center; justify-content: center;
+}
+.bank-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.bank-logo { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+.bank-name { font-size: 14px; font-weight: 600; color: var(--td); }
+.bank-tagline { font-size: 9.5px; color: var(--tmu); }
+.bank-rate { font-size: 22px; font-weight: 700; color: var(--p400); font-family: 'Playfair Display', serif; }
+.bank-rate span { font-size: 11px; font-weight: 400; color: var(--tmu); }
+.bank-rate-lbl { font-size: 9px; color: var(--tmu); margin-top: 1px; margin-bottom: 8px; }
+.bank-terms { display: flex; flex-wrap: wrap; gap: 6px; }
+.bank-term { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--tm); background: rgba(196,153,255,.15); padding: 3px 8px; border-radius: 20px; }
+.bank-match-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 9.5px; color: #16a34a; background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.2); padding: 3px 9px; border-radius: 20px; margin-top: 10px; }
 
-/* ======= COVER PAGE ======= */
-#pg-cover{
-  position:fixed;inset:0;
-  background:linear-gradient(135deg,#2d0947 0%,#3c0d5b 30%,#5b1a8a 65%,#7c3aed 100%);
-  z-index:300;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  cursor:pointer;
-  overflow:hidden;
+.match-actions { margin-top: 4px; }
+.match-count-lbl { font-size: 11px; color: var(--tmu); margin-bottom: 8px; }
+.match-send-btn {
+  width: 100%; padding: 14px; background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff; border: none; border-radius: 12px; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all .25s var(--ease); font-family: 'DM Sans', sans-serif;
+  letter-spacing: .04em; box-shadow: 0 6px 24px rgba(124,58,237,.4);
+  position: relative; overflow: hidden;
 }
-#pg-cover.hide{animation:coverOut .6s cubic-bezier(.4,0,.2,1) forwards}
-@keyframes coverOut{to{opacity:0;transform:scale(1.05)}}
-.cover-bg-circle{
-  position:absolute;border-radius:50%;
-  background:radial-gradient(circle,rgba(192,132,252,0.15) 0%,transparent 70%);
-  pointer-events:none;
+.match-send-btn:disabled { opacity: .4; cursor: not-allowed; }
+.match-send-btn:active:not(:disabled) { transform: scale(.97); }
+.match-send-btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.15), transparent);
+  opacity: 0; transition: opacity .2s;
 }
-.cover-orb-1{width:500px;height:500px;top:-100px;right:-100px}
-.cover-orb-2{width:400px;height:400px;bottom:-80px;left:-80px}
-.cover-orb-3{width:300px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(167,139,250,0.08) 0%,transparent 60%)}
-.cover-grid{
-  position:absolute;inset:0;
-  background-image:linear-gradient(rgba(192,132,252,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(192,132,252,0.06) 1px,transparent 1px);
-  background-size:40px 40px;
-}
-.cover-content{position:relative;z-index:1;text-align:center;padding:0 20px}
-.cover-logo-ic{
-  width:72px;height:72px;
-  background:linear-gradient(135deg,rgba(192,132,252,0.3),rgba(147,51,234,0.4));
-  border-radius:20px;display:flex;align-items:center;justify-content:center;
-  margin:0 auto 20px;
-  border:1px solid rgba(192,132,252,0.4);
-  box-shadow:0 0 40px rgba(192,132,252,0.2),inset 0 1px 0 rgba(255,255,255,0.15);
-  animation:floatLogo 3s ease-in-out infinite;
-}
-@keyframes floatLogo{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.cover-logo-ic i{font-size:32px;color:var(--lavender)}
-.cover-title{
-  font-family:var(--font-display);
-  font-size:56px;color:#fff;
-  letter-spacing:-0.01em;line-height:1;
-  margin-bottom:8px;
-  text-shadow:0 2px 20px rgba(60,13,91,0.5);
-}
-.cover-slogan{
-  font-size:14px;color:rgba(222,189,255,0.7);
-  letter-spacing:0.05em;margin-bottom:36px;
-  font-style:italic;
-}
-.cover-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:40px}
-.cover-pill{
-  padding:6px 14px;border-radius:20px;font-size:10.5px;font-weight:500;
-  border:1px solid rgba(222,189,255,0.3);color:rgba(222,189,255,0.8);
-  background:rgba(255,255,255,0.05);
-  display:flex;align-items:center;gap:5px;
-}
-.cover-cta{
-  display:flex;align-items:center;gap:8px;
-  padding:12px 28px;
-  background:linear-gradient(135deg,rgba(192,132,252,0.25),rgba(147,51,234,0.3));
-  border:1px solid rgba(222,189,255,0.4);
-  border-radius:12px;color:#fff;font-size:13px;font-weight:500;
-  cursor:pointer;transition:all .2s;margin:0 auto;
-  font-family:var(--font-body);
-  animation:glow 2s ease-in-out infinite;
-}
-.cover-cta:hover{background:rgba(192,132,252,0.35);transform:translateY(-2px)}
-@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(192,132,252,0.2)}50%{box-shadow:0 0 35px rgba(192,132,252,0.4)}}
-.cover-floating-tag{
-  position:absolute;background:rgba(255,255,255,0.08);
-  border:1px solid rgba(222,189,255,0.2);border-radius:10px;
-  padding:8px 12px;font-size:10.5px;color:rgba(222,189,255,0.7);
-  display:flex;align-items:center;gap:6px;backdrop-filter:blur(8px);
-}
-.tag-1{top:18%;left:8%;animation:floatTag1 4s ease-in-out infinite}
-.tag-2{top:22%;right:8%;animation:floatTag1 4s ease-in-out infinite 1s}
-.tag-3{bottom:25%;left:6%;animation:floatTag1 4s ease-in-out infinite 0.5s}
-.tag-4{bottom:20%;right:7%;animation:floatTag1 4s ease-in-out infinite 1.5s}
-@keyframes floatTag1{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.match-send-btn:active:not(:disabled)::before { opacity: 1; }
 
-/* === BANK MATCHING SECTION === */
-.bank-section{margin-top:12px}
-.bank-intro{
-  background:linear-gradient(135deg,rgba(109,40,217,0.08),rgba(222,189,255,0.15));
-  border:1px solid rgba(168,85,247,0.25);
-  border-radius:var(--radius-lg);padding:14px;margin-bottom:12px;
-}
-.bank-intro-title{font-size:12px;font-weight:600;color:var(--text-dark);margin-bottom:4px}
-.bank-intro-sub{font-size:10.5px;color:#6b7280}
-.bank-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.bank-card{
-  background:rgba(255,255,255,0.95);
-  border:1.5px solid var(--border-light);border-radius:var(--radius-lg);
-  padding:12px;cursor:pointer;
-  transition:all .25s cubic-bezier(.4,0,.2,1);
-  position:relative;overflow:hidden;
-}
-.bank-card:hover{border-color:rgba(147,51,234,0.4);transform:translateY(-2px);box-shadow:0 8px 24px rgba(147,51,234,0.1)}
-.bank-card.selected{border-color:var(--purple-600);background:rgba(167,139,250,0.06);box-shadow:0 0 0 3px rgba(147,51,234,0.1)}
-.bank-card.selected::after{content:'✓';position:absolute;top:8px;right:8px;width:20px;height:20px;background:var(--purple-600);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;animation:checkIn .2s cubic-bezier(.4,0,.2,1)}
-@keyframes checkIn{from{transform:scale(0)}to{transform:scale(1)}}
-.bank-logo{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-bottom:8px;border:1px solid rgba(222,189,255,0.3)}
-.bank-name{font-size:12px;font-weight:600;color:var(--text-dark);margin-bottom:2px}
-.bank-match{font-size:10px;color:var(--purple-600);font-weight:500}
-.bank-rate{font-size:11px;color:#6b7280;margin-top:4px}
-.bank-check-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(222,189,255,0.2)}
-.bank-check-row:last-child{border-bottom:none}
-.bank-check-label{flex:1;font-size:11px;color:var(--text-dark)}
-.match-bar-wrap{flex:1;display:flex;align-items:center;gap:8px}
-.match-bar{flex:1;height:4px;background:rgba(222,189,255,0.3);border-radius:10px;overflow:hidden}
-.match-fill{height:100%;border-radius:10px;transition:width .8s cubic-bezier(.4,0,.2,1)}
-.step-indicator{display:flex;align-items:center;gap:8px;margin-bottom:14px}
-.step-dot{
-  width:24px;height:24px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:10px;font-weight:600;
-  border:1.5px solid var(--border-purple);
-  color:var(--text-muted);background:rgba(255,255,255,0.8);
-  transition:all .3s;flex-shrink:0;
-}
-.step-dot.done{background:var(--purple-600);border-color:var(--purple-600);color:#fff}
-.step-dot.active{border-color:var(--purple-600);color:var(--purple-600);background:rgba(147,51,234,0.08)}
-.step-line{flex:1;height:1px;background:var(--border-purple)}
-.step-label{font-size:9.5px;color:#6b7280}
-.consent-box{
-  background:rgba(109,40,217,0.04);
-  border:1px solid rgba(147,51,234,0.2);
-  border-radius:var(--radius-lg);padding:14px;margin:12px 0;
-}
-.consent-title{font-size:11.5px;font-weight:600;color:var(--text-dark);margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.consent-desc{font-size:10.5px;color:#6b7280;line-height:1.5}
-.consent-banks{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}
-.consent-bank-pill{
-  padding:4px 10px;border-radius:20px;
-  background:rgba(167,139,250,0.12);
-  border:1px solid rgba(147,51,234,0.2);
-  font-size:10px;color:var(--text-mid);font-weight:500;
-  display:flex;align-items:center;gap:4px;
-}
-.agree-btn{
-  width:100%;padding:10px;
-  background:linear-gradient(135deg,var(--purple-600),var(--purple-mid));
-  color:#fff;border:none;border-radius:9px;font-size:12.5px;font-weight:500;
-  cursor:pointer;transition:all .2s;font-family:var(--font-body);
-  box-shadow:0 4px 14px rgba(147,51,234,0.3);
-  margin-top:8px;
-}
-.agree-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(147,51,234,0.4)}
-.send-confirm{
-  background:linear-gradient(135deg,rgba(220,252,231,0.8),rgba(187,247,208,0.6));
-  border:1px solid rgba(22,163,74,0.25);
-  border-radius:var(--radius-lg);padding:14px;text-align:center;
-  display:none;
-  animation:fadeSlideIn .4s cubic-bezier(.4,0,.2,1);
-}
-.send-confirm.show{display:block}
-.success-ic{
-  width:48px;height:48px;background:linear-gradient(135deg,#16a34a,#22c55e);
-  border-radius:50%;display:flex;align-items:center;justify-content:center;
-  margin:0 auto 10px;box-shadow:0 4px 16px rgba(22,163,74,0.3);
-  animation:successPop .4s cubic-bezier(.4,0,.2,1);
-}
-@keyframes successPop{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}
+/* ─── CASHFLOW / FORECAST ─── */
+.tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+.tab { padding: 6px 14px; border-radius: 8px; font-size: 11px; cursor: pointer; border: 1px solid rgba(196,153,255,.3); color: var(--tmu); background: rgba(255,255,255,.75); transition: all .2s; font-family: 'DM Sans', sans-serif; }
+.tab.active { background: linear-gradient(135deg, #7c3aed, #a855f7); color: #fff; border-color: transparent; box-shadow: 0 2px 10px rgba(124,58,237,.35); }
 
-/* ===== SCORE RING ===== */
-.score-ring-wrap{display:flex;align-items:center;justify-content:center;position:relative}
+/* ─── FORECAST ─── */
+.slider-row { display: flex; align-items: center; gap: 10px; margin: 8px 0; }
+.slider-lbl { font-size: 11px; color: var(--tm); min-width: 80px; }
+.slider-row input[type=range] { flex: 1; accent-color: #7c3aed; }
+.slider-val { font-size: 12px; font-weight: 600; color: var(--p300); min-width: 40px; text-align: right; }
+.fc-results { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 12px; }
+.fc-box { background: rgba(168,85,247,.07); border: 1px solid rgba(168,85,247,.2); border-radius: 10px; padding: 10px; text-align: center; }
+.fc-box-lbl { font-size: 9px; color: var(--tmu); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 4px; }
+.fc-box-val { font-size: 15px; font-weight: 700; color: var(--p400); font-family: 'Playfair Display', serif; }
+
+/* ─── STAT GRID ─── */
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.stat-card {
+  background: linear-gradient(135deg, rgba(255,255,255,.9), rgba(245,240,255,.7));
+  border: 1px solid rgba(196,153,255,.3); border-radius: 12px; padding: 12px; text-align: center;
+  transition: all .25s;
+}
+.stat-card:active { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(124,58,237,.1); }
+.stat-num { font-size: 18px; font-weight: 600; color: var(--td); margin-bottom: 3px; font-family: 'Playfair Display', serif; }
+.stat-lbl { font-size: 9px; color: var(--tmu); letter-spacing: .03em; }
+.progress-bar { height: 5px; background: rgba(196,153,255,.2); border-radius: 10px; overflow: hidden; margin: 5px 0; }
+.progress-fill { height: 100%; border-radius: 10px; transition: width .9s var(--ease); }
+
+/* ─── SYNC LOG ─── */
+.sync-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(196,153,255,.1); font-size: 11px; animation: pg-in .3s var(--ease); }
+.sync-row:last-child { border-bottom: none; }
+
+/* ─── FORM ─── */
+.form-row { margin-bottom: 12px; }
+.form-lbl { font-size: 11px; color: var(--tm); margin-bottom: 4px; font-weight: 500; }
+.form-input {
+  width: 100%; padding: 10px 12px; border: 1px solid rgba(196,153,255,.35); border-radius: 10px;
+  font-size: 13px; color: var(--td); outline: none; transition: border .15s;
+  background: rgba(255,255,255,.9); font-family: 'DM Sans', sans-serif;
+  -webkit-appearance: none;
+}
+.form-input:focus { border-color: var(--p300); box-shadow: 0 0 0 3px rgba(168,85,247,.12); }
+.form-select { width: 100%; padding: 10px 12px; border: 1px solid rgba(196,153,255,.35); border-radius: 10px; font-size: 13px; color: var(--td); background: rgba(255,255,255,.9); outline: none; font-family: 'DM Sans', sans-serif; -webkit-appearance: none; }
+.submit-btn {
+  width: 100%; padding: 13px; background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff; border: none; border-radius: 11px; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all .2s; font-family: 'DM Sans', sans-serif;
+  letter-spacing: .03em; box-shadow: 0 4px 18px rgba(124,58,237,.35);
+}
+.submit-btn:active { transform: scale(.97); }
+.input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.info-row { display: flex; justify-content: space-between; font-size: 11px; color: var(--tmu); padding: 7px 0; border-bottom: 1px solid rgba(196,153,255,.12); }
+.info-row span:last-child { color: var(--td); font-weight: 500; }
+.chip-row { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+.chip { padding: 6px 14px; border-radius: 20px; font-size: 11px; border: 1px solid rgba(168,85,247,.2); cursor: pointer; color: var(--tm); background: rgba(255,255,255,.85); transition: all .2s; }
+.chip.sel { background: linear-gradient(135deg, #7c3aed, #a855f7); color: #fff; border-color: transparent; box-shadow: 0 2px 10px rgba(124,58,237,.3); }
+.toggle { position: relative; width: 40px; height: 22px; cursor: pointer; flex-shrink: 0; display: inline-block; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; inset: 0; background: rgba(196,153,255,.4); border-radius: 22px; transition: .3s; }
+.toggle-slider::before { content: ''; position: absolute; width: 16px; height: 16px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: .3s; box-shadow: 0 1px 4px rgba(0,0,0,.2); }
+.toggle input:checked + .toggle-slider { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+.toggle input:checked + .toggle-slider::before { transform: translateX(18px); }
+
+/* ─── BANK CHIP ─── */
+.bank-chip {
+  display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px;
+  border-radius: 20px; font-size: 10.5px; font-weight: 500;
+  background: rgba(168,85,247,.1); color: var(--p400); border: 1px solid rgba(168,85,247,.2); margin: 2px;
+}
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: rgba(15,4,35,.65); backdrop-filter: blur(8px);
+  align-items: flex-end; justify-content: center;
+}
+.modal-overlay.show { display: flex; animation: modal-fade .25s var(--ease); }
+@keyframes modal-fade { from { opacity: 0; } to { opacity: 1; } }
+.modal {
+  background: linear-gradient(160deg, rgba(255,255,255,.99), rgba(245,240,255,.97));
+  border: 1px solid rgba(196,153,255,.45); border-radius: 22px 22px 0 0;
+  padding: 24px 20px 32px; width: 100%; max-height: 90dvh; overflow-y: auto;
+  box-shadow: 0 -12px 60px rgba(60,13,91,.35);
+  animation: sheet-up .3s var(--ease);
+}
+.modal-center-wrap { align-items: center; }
+.modal-center-wrap .modal { border-radius: 18px; max-width: 420px; margin: 16px; }
+@keyframes sheet-up { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.modal-handle { width: 36px; height: 4px; background: rgba(168,85,247,.3); border-radius: 4px; margin: 0 auto 18px; }
+.modal-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--td); margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
+.modal-close { cursor: pointer; color: var(--tmu); font-size: 18px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(168,85,247,.08); }
+
+/* ─── TOAST ─── */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(10px);
+  background: linear-gradient(135deg, #1a0630, #3c0d5b); color: var(--lav);
+  padding: 12px 20px; border-radius: 12px; font-size: 12px; z-index: 1000;
+  opacity: 0; transition: opacity .3s, transform .3s; pointer-events: none;
+  border: 1px solid rgba(168,85,247,.35); box-shadow: 0 8px 36px rgba(124,58,237,.35);
+  white-space: nowrap; max-width: calc(100vw - 40px);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ─── SPARKLE ─── */
+.sparkle { position: fixed; pointer-events: none; z-index: 9000; animation: sparkle-out .6s var(--ease) forwards; }
+@keyframes sparkle-out { 0% { transform: scale(0) rotate(0deg); opacity: 1; } 100% { transform: scale(1.5) rotate(180deg); opacity: 0; } }
+
+/* ─── BOTTOM NAV ─── */
+.bottom-nav {
+  background: rgba(255,255,255,.95); backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid rgba(196,153,255,.3); height: 60px;
+  display: flex; align-items: center; justify-content: space-around;
+  flex-shrink: 0; padding: 0 4px;
+  box-shadow: 0 -2px 20px rgba(124,58,237,.06);
+}
+.bn-item {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2px; flex: 1; height: 100%; cursor: pointer; border: none; background: none;
+  transition: all .2s var(--ease); position: relative; border-radius: 10px;
+}
+.bn-item::before {
+  content: ''; position: absolute; inset: 4px; border-radius: 8px;
+  background: rgba(168,85,247,.1); opacity: 0; transition: opacity .2s; scale: .9;
+  transition: opacity .2s, scale .2s;
+}
+.bn-item.active::before { opacity: 1; scale: 1; }
+.bn-item i { font-size: 20px; color: var(--tmu); transition: color .2s, transform .2s; }
+.bn-item.active i { color: var(--p400); transform: scale(1.1); }
+.bn-lbl { font-size: 9px; color: var(--tmu); transition: color .2s; letter-spacing: .02em; }
+.bn-item.active .bn-lbl { color: var(--p400); font-weight: 600; }
+
+/* ─── ANIMATED ENTRY STAGGER ─── */
+.page-view.active .card:nth-child(1) { animation-delay: 0ms; }
+.page-view.active .card:nth-child(2) { animation-delay: 50ms; }
+.page-view.active .card:nth-child(3) { animation-delay: 100ms; }
+.page-view.active .card:nth-child(4) { animation-delay: 150ms; }
+.page-view.active .kpi:nth-child(1) { animation-delay: 0ms; }
+.page-view.active .kpi:nth-child(2) { animation-delay: 60ms; }
+.page-view.active .kpi:nth-child(3) { animation-delay: 120ms; }
+.page-view.active .kpi:nth-child(4) { animation-delay: 180ms; }
+
+/* ─── CONNECT PAGE ─── */
+.connect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.connect-card {
+  background: rgba(255,255,255,.88); border: 1px solid rgba(196,153,255,.3);
+  border-radius: 14px; padding: 14px; cursor: pointer;
+  transition: all .25s var(--ease); text-align: center;
+  animation: pg-in .4s var(--ease) both;
+}
+.connect-card:active { transform: scale(.96); border-color: rgba(168,85,247,.5); }
+.connect-card.linked { border-color: rgba(34,197,94,.3); }
+.connect-logo { width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; margin: 0 auto 8px; border: 1px solid rgba(196,153,255,.22); }
+.connect-name { font-size: 12px; font-weight: 600; color: var(--td); margin-bottom: 3px; }
+.connect-type { font-size: 9.5px; color: var(--tmu); margin-bottom: 8px; }
+
+/* ─── SETTINGS ─── */
+.settings-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 0; border-bottom: 1px solid rgba(196,153,255,.12);
+}
+.settings-row:last-child { border-bottom: none; }
+.settings-lbl { font-size: 12px; color: var(--td); }
+.settings-sub { font-size: 10px; color: var(--tmu); margin-top: 1px; }
+
+/* Scrollbar fix for modal */
+.modal::-webkit-scrollbar { display: none; }
 </style>
 </head>
 <body>
 
-<!-- COVER PAGE -->
-<div id="pg-cover" onclick="hideCover()">
-  <div class="cover-grid"></div>
-  <div class="cover-bg-circle cover-orb-1"></div>
-  <div class="cover-bg-circle cover-orb-2"></div>
-  <div class="cover-bg-circle cover-orb-3"></div>
-
-  <div class="cover-floating-tag tag-1"><i class="ti ti-shield-check" style="font-size:13px;color:#c084fc"></i>Tín nhiệm số hóa</div>
-  <div class="cover-floating-tag tag-2"><i class="ti ti-building-bank" style="font-size:13px;color:#c084fc"></i>Kết nối ngân hàng AI</div>
-  <div class="cover-floating-tag tag-3"><i class="ti ti-chart-line" style="font-size:13px;color:#c084fc"></i>Dự báo dòng tiền</div>
-  <div class="cover-floating-tag tag-4"><i class="ti ti-database" style="font-size:13px;color:#c084fc"></i>Dữ liệu thời gian thực</div>
-
-  <div class="cover-content">
-    <div class="cover-logo-ic"><i class="ti ti-layers-intersect"></i></div>
-    <div class="cover-title">Credteria</div>
-    <div class="cover-slogan">New business criteria. Real business credibility</div>
-    <div class="cover-pills">
-      <span class="cover-pill"><i class="ti ti-bolt" style="font-size:11px;color:#c084fc"></i>Ra quyết định nhanh hơn</span>
-      <span class="cover-pill"><i class="ti ti-target" style="font-size:11px;color:#c084fc"></i>Chính xác hơn</span>
-      <span class="cover-pill"><i class="ti ti-lock-open" style="font-size:11px;color:#c084fc"></i>Giảm phụ thuộc tài sản thế chấp</span>
+<!-- COVER -->
+<div id="cover">
+  <div class="c-mesh"></div>
+  <div class="c-noise"></div>
+  <div class="c-rings">
+    <div class="c-ring" style="width:320px;height:320px;animation-delay:0s"></div>
+    <div class="c-ring" style="width:520px;height:520px;animation-delay:1s"></div>
+    <div class="c-ring" style="width:720px;height:720px;animation-delay:2s"></div>
+  </div>
+  <div class="c-particles" id="cParticles"></div>
+  <div class="c-card">
+    <div class="c-logo-box"><i class="ti ti-layers-intersect"></i></div>
+    <div class="c-brand">Credteria</div>
+    <div class="c-slogan">New business criteria. Real business credibility.</div>
+    <div class="c-badges">
+      <span class="c-badge">AI Scoring</span>
+      <span class="c-badge">Bank Matching</span>
+      <span class="c-badge">Real-Time</span>
     </div>
-    <button class="cover-cta" onclick="hideCover()">
-      <i class="ti ti-arrow-right" style="font-size:14px"></i>
-      Khám phá nền tảng
-    </button>
+    <button class="c-enter" onclick="enterApp()">Vào hệ thống →</button>
+    <div class="c-stats">
+      <div class="cstat"><div class="cstat-n">2,400+</div><div class="cstat-l">SMEs</div></div>
+      <div class="cstat"><div class="cstat-n">98.2%</div><div class="cstat-l">Accuracy</div></div>
+      <div class="cstat"><div class="cstat-n">12</div><div class="cstat-l">Ngân hàng</div></div>
+    </div>
   </div>
 </div>
 
-<!-- MAIN APP -->
-<div class="app">
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="logo-area">
-      <div class="logo-row">
-        <div class="logo-ic"><i class="ti ti-layers-intersect"></i></div>
-        <div>
-          <div class="logo-name">Credteria</div>
-          <div class="logo-sub">SME Credit Intelligence</div>
-        </div>
+<!-- APP -->
+<div id="app">
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-l">
+      <button class="menu-btn" id="menuBtn" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-logo">
+        <div class="tb-logo-ic"><i class="ti ti-layers-intersect"></i></div>
+        <div class="tb-brand">Credteria</div>
       </div>
     </div>
-    <div class="nav-sec">
-      <div class="nav-item active" onclick="nav('dashboard',this)"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
+    <div class="topbar-r">
+      <button class="notif-btn" onclick="showModal('notifModal')">
+        <i class="ti ti-bell" style="font-size:18px;color:var(--tm)"></i>
+        <span class="notif-dot"></span>
+      </button>
+      <div class="user-av" onclick="nav('company')">NV</div>
     </div>
-    <div class="nav-sec">
-      <div class="nav-lbl">Dữ liệu & Tích hợp</div>
-      <div class="nav-item" onclick="nav('connect',this)"><i class="ti ti-plug-connected"></i> Kết nối dữ liệu</div>
-      <div class="nav-item" onclick="nav('sources',this)"><i class="ti ti-database"></i> Nguồn dữ liệu</div>
-      <div class="nav-item" onclick="nav('sync',this)"><i class="ti ti-refresh"></i> Lịch sử đồng bộ</div>
+  </div>
+
+  <!-- DRAWER -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+  <div class="drawer" id="drawer">
+    <div class="dr-logo">
+      <div class="dr-logo-row">
+        <div class="dr-logo-ic"><i class="ti ti-layers-intersect"></i></div>
+        <div><div class="dr-name">Credteria</div><div class="dr-sub">SME Credit Intelligence</div></div>
+      </div>
     </div>
-    <div class="nav-sec">
-      <div class="nav-lbl">Phân tích</div>
-      <div class="nav-item" onclick="nav('health',this)"><i class="ti ti-heart-rate-monitor"></i> Sức khỏe tài chính</div>
-      <div class="nav-item" onclick="nav('cashflow',this)"><i class="ti ti-currency-dollar"></i> Dòng tiền</div>
-      <div class="nav-item" onclick="nav('ops',this)"><i class="ti ti-chart-bar"></i> Chỉ số vận hành</div>
-      <div class="nav-item" onclick="nav('forecast',this)"><i class="ti ti-telescope"></i> Dự báo AI</div>
+    <div class="dr-nav" id="drNav">
+      <div class="dr-sec-lbl">Tổng quan</div>
+      <div class="dr-item active" data-page="dashboard" onclick="nav('dashboard')"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
+
+      <div class="dr-sec-lbl">Dữ liệu & Tích hợp</div>
+      <div class="dr-item" data-page="connect" onclick="nav('connect')"><i class="ti ti-plug-connected"></i> Kết nối dữ liệu</div>
+      <div class="dr-item" data-page="sync" onclick="nav('sync')"><i class="ti ti-refresh"></i> Lịch sử đồng bộ</div>
+
+      <div class="dr-sec-lbl">Phân tích</div>
+      <div class="dr-item" data-page="health" onclick="nav('health')"><i class="ti ti-heart-rate-monitor"></i> Sức khỏe tài chính</div>
+      <div class="dr-item" data-page="cashflow" onclick="nav('cashflow')"><i class="ti ti-currency-dollar"></i> Dòng tiền</div>
+      <div class="dr-item" data-page="ops" onclick="nav('ops')"><i class="ti ti-chart-bar"></i> Chỉ số vận hành</div>
+      <div class="dr-item" data-page="forecast" onclick="nav('forecast')"><i class="ti ti-telescope"></i> Dự báo AI</div>
+
+      <div class="dr-sec-lbl">Tín dụng</div>
+      <div class="dr-item" data-page="bankmatch" onclick="nav('bankmatch')"><i class="ti ti-building-bank"></i> Ghép ngân hàng</div>
+      <div class="dr-item" data-page="report" onclick="nav('report')"><i class="ti ti-file-certificate"></i> Báo cáo tín nhiệm</div>
+
+      <div class="dr-sec-lbl">Cài đặt</div>
+      <div class="dr-item" data-page="company" onclick="nav('company')"><i class="ti ti-building"></i> Doanh nghiệp</div>
+      <div class="dr-item" data-page="settings" onclick="nav('settings')"><i class="ti ti-settings"></i> Cài đặt</div>
     </div>
-    <div class="nav-sec">
-      <div class="nav-lbl">Báo cáo & Vay vốn</div>
-      <div class="nav-item" onclick="nav('report',this)"><i class="ti ti-file-certificate"></i> Báo cáo tín nhiệm</div>
-      <div class="nav-item" onclick="nav('banks',this)"><i class="ti ti-building-bank"></i> Kết nối ngân hàng</div>
-      <div class="nav-item" onclick="nav('history',this)"><i class="ti ti-history"></i> Lịch sử báo cáo</div>
-    </div>
-    <div class="nav-sec">
-      <div class="nav-lbl">Cài đặt</div>
-      <div class="nav-item" onclick="nav('company',this)"><i class="ti ti-building"></i> Thông tin DN</div>
-      <div class="nav-item" onclick="nav('settings',this)"><i class="ti ti-settings"></i> Cài đặt</div>
-    </div>
-    <div class="sidebar-bottom">
-      <div class="user-pill" onclick="nav('company',null)">
-        <div class="av">DN</div>
-        <div>
-          <div style="font-size:10.5px;font-weight:500;color:rgba(255,255,255,0.9)">Cty TNHH ABC</div>
-          <div style="font-size:8.5px;color:rgba(222,189,255,0.4)">SME ID: 1000123</div>
-        </div>
+    <div class="dr-bottom">
+      <div class="dr-user" onclick="nav('company')">
+        <div class="dr-av">DN</div>
+        <div><div class="dr-uname">Công ty TNHH ABC</div><div class="dr-uid">SME ID: 1000123</div></div>
       </div>
     </div>
   </div>
 
-  <!-- MAIN -->
-  <div class="main">
-    <div class="topbar">
-      <div>
-        <div class="page-title" id="page-title">Tổng quan</div>
-        <div class="page-sub" id="page-sub">Xin chào, Công ty TNHH ABC! Đây là cái nhìn tổng quan về sức khỏe tài chính.</div>
-      </div>
-      <div class="topbar-r">
-        <div class="date-btn" onclick="showModal('dateModal')"><i class="ti ti-calendar" style="font-size:12px;color:var(--purple-600)"></i> <span id="date-label">01/04/2024 – 30/04/2024</span> <i class="ti ti-chevron-down" style="font-size:11px;color:var(--text-muted)"></i></div>
-        <div class="notif-btn" onclick="showModal('notifModal')"><i class="ti ti-bell" style="font-size:17px;color:var(--text-mid)"></i><span class="notif-badge"></span></div>
-        <div class="user-av" onclick="nav('company',null)">NV</div>
-      </div>
-    </div>
-
-    <div class="content">
+  <!-- CONTENT -->
+  <div class="content-wrap">
+    <div class="content-scroll" id="contentScroll">
 
       <!-- DASHBOARD -->
       <div class="page-view active" id="pg-dashboard">
-        <div class="kpi-row">
-          <div class="kpi" onclick="nav('report',null)">
-            <div class="kpi-lbl"><i class="ti ti-shield-check" style="color:#16a34a"></i> Điểm tín nhiệm</div>
-            <div class="kpi-num" style="color:#16a34a">782 <span style="font-size:13px;font-weight:400;color:#9ca3af">/ 1000</span></div>
-            <div class="sbar"><div class="sfill" style="width:78.2%;background:linear-gradient(90deg,#16a34a,#22c55e)"></div></div>
-            <div class="kpi-sub">Xếp hạng: A– &nbsp;<span class="badge bg">Tốt</span></div>
-          </div>
-          <div class="kpi" onclick="nav('banks',null)">
-            <div class="kpi-lbl"><i class="ti ti-cash" style="color:var(--purple-600)"></i> Hạn mức đề xuất</div>
-            <div class="kpi-num" style="color:var(--purple-600);font-size:16px">5,000,000,000 đ</div>
-            <div class="kpi-sub">Dựa trên dòng tiền dự báo</div>
-            <div style="margin-top:8px;font-size:10.5px;color:var(--purple-600);cursor:pointer">Xem 3 ngân hàng phù hợp →</div>
-          </div>
-          <div class="kpi" onclick="nav('health',null)">
-            <div class="kpi-lbl"><i class="ti ti-wave-sine" style="color:#f59e0b"></i> Hệ số rủi ro</div>
-            <div class="kpi-num" style="color:#f59e0b">28 <span style="font-size:13px;font-weight:400;color:#9ca3af">/ 100</span></div>
-            <div class="sbar"><div class="sfill" style="width:28%;background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div></div>
-            <div class="kpi-sub"><span class="badge ba">Thấp</span> Doanh thu ổn định</div>
-          </div>
-          <div class="kpi" onclick="nav('sync',null)">
-            <div class="kpi-lbl"><i class="ti ti-cloud-upload" style="color:#16a34a"></i> Cập nhật dữ liệu</div>
-            <div style="display:flex;align-items:center;gap:8px;margin:4px 0">
-              <div style="width:32px;height:32px;border-radius:50%;background:#dcfce7;display:flex;align-items:center;justify-content:center"><i class="ti ti-check" style="font-size:16px;color:#16a34a"></i></div>
-              <div><div style="font-size:11px;font-weight:500;color:var(--text-dark)">Đã đồng bộ 2 giờ trước</div><div style="font-size:9.5px;color:#6b7280">Tiếp theo: 12:00 02/05/2024</div></div>
-            </div>
-          </div>
+        <div class="pg-header">
+          <div class="pg-title">Tổng quan</div>
+          <div class="pg-sub">Sức khỏe tài chính doanh nghiệp của bạn</div>
         </div>
-        <div class="mid-row">
-          <div class="card">
-            <div class="card-hdr"><div class="card-title">Nguồn dữ liệu</div><div class="view-all" onclick="nav('connect',null)">Xem tất cả <i class="ti ti-arrow-right" style="font-size:10px"></i></div></div>
-            <div class="src-item" onclick="showSrcDetail('KiotViet')">
-              <div class="src-logo" style="background:#fff5f5"><span style="color:#e53e3e">K</span></div>
-              <div class="src-info"><div class="src-name">KiotViet</div><div class="src-type">POS & Bán hàng</div></div>
-              <span class="badge bg">Đã kết nối</span>
+
+        <!-- Score Hero -->
+        <div class="score-hero" onclick="nav('report');sparkle(event)">
+          <div class="score-hero-inner">
+            <div class="score-hero-top">
+              <div>
+                <div class="score-hero-title">Điểm tín nhiệm</div>
+                <div class="score-hero-sub">Cập nhật 2 giờ trước</div>
+              </div>
+              <span class="badge bg" style="font-size:10px">Xếp hạng A–</span>
             </div>
-            <div class="src-item" onclick="showSrcDetail('MISA AMIS')">
-              <div class="src-logo" style="background:#fff7ed"><span style="color:#ea580c">M</span></div>
-              <div class="src-info"><div class="src-name">MISA AMIS</div><div class="src-type">Kế toán</div></div>
-              <span class="badge bg">Đã kết nối</span>
-            </div>
-            <div class="src-item" onclick="showSrcDetail('Shopee')">
-              <div class="src-logo" style="background:#fff0f6"><span style="color:#e0245e">S</span></div>
-              <div class="src-info"><div class="src-name">Shopee</div><div class="src-type">Sàn TMĐT</div></div>
-              <span class="badge bg">Đã kết nối</span>
-            </div>
-            <div class="src-item">
-              <div class="src-logo" style="background:#f0f9ff"><span style="color:#0284c7">H</span></div>
-              <div class="src-info"><div class="src-name">Haravan</div><div class="src-type">Bán hàng đa kênh</div></div>
-              <button class="conn-btn" onclick="event.stopPropagation();showModal('connectHaravan')">Kết nối</button>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-hdr">
-              <div class="card-title">Dự báo dòng tiền (3 tháng tới)</div>
-              <div style="display:flex;gap:12px;font-size:10px">
-                <span><span class="ldot" style="background:#22c55e"></span>Vào</span>
-                <span><span class="ldot" style="background:#f87171"></span>Ra</span>
-                <span><span class="ldot" style="background:var(--purple-400)"></span>Ròng</span>
+            <div class="score-display">
+              <div class="score-ring-wrap">
+                <svg viewBox="0 0 90 90">
+                  <defs>
+                    <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" style="stop-color:#7c3aed"/>
+                      <stop offset="100%" style="stop-color:#a855f7"/>
+                    </linearGradient>
+                  </defs>
+                  <circle class="score-ring-bg" cx="45" cy="45" r="39"/>
+                  <circle class="score-ring-fill" id="scoreRing" cx="45" cy="45" r="39"/>
+                </svg>
+                <div class="score-ring-center">
+                  <div class="score-ring-num">782</div>
+                  <div class="score-ring-max">/1000</div>
+                </div>
+              </div>
+              <div class="score-stats">
+                <div class="score-stat-row">
+                  <div class="score-stat-ic" style="background:rgba(34,197,94,.15)"><i class="ti ti-trending-up" style="color:#16a34a"></i></div>
+                  <div class="score-stat-lbl">Tăng trưởng</div>
+                  <div class="score-stat-val" style="color:#4ade80">+18.6%</div>
+                </div>
+                <div class="score-stat-row">
+                  <div class="score-stat-ic" style="background:rgba(168,85,247,.15)"><i class="ti ti-cash" style="color:#c084fc"></i></div>
+                  <div class="score-stat-lbl">Hạn mức</div>
+                  <div class="score-stat-val" style="color:#c084fc">5 tỷ đ</div>
+                </div>
+                <div class="score-stat-row">
+                  <div class="score-stat-ic" style="background:rgba(251,191,36,.15)"><i class="ti ti-wave-sine" style="color:#fbbf24"></i></div>
+                  <div class="score-stat-lbl">Rủi ro</div>
+                  <div class="score-stat-val" style="color:#fbbf24">28/100</div>
+                </div>
               </div>
             </div>
-            <div style="position:relative;width:100%;height:175px"><canvas id="c1" role="img" aria-label="Dự báo dòng tiền 3 tháng"></canvas></div>
           </div>
         </div>
-        <div class="bot-row">
-          <div class="card">
-            <div class="card-hdr"><div class="card-title">Sức khỏe tài chính</div></div>
-            <div class="h-item"><div class="h-ic" style="background:#dcfce7"><i class="ti ti-trending-up" style="font-size:12px;color:#16a34a"></i></div><div class="h-lbl">Tăng trưởng DT (MoM)</div><div style="display:flex;align-items:center;gap:5px"><div class="h-val" style="color:#16a34a">18.6%</div><span class="badge bg" style="font-size:8.5px">Tốt</span></div></div>
-            <div class="h-item"><div class="h-ic" style="background:#dbeafe"><i class="ti ti-receipt" style="font-size:12px;color:#2563eb"></i></div><div class="h-lbl">Lợi nhuận gộp</div><div style="display:flex;align-items:center;gap:5px"><div class="h-val" style="color:#2563eb">24.3%</div><span class="badge bb" style="font-size:8.5px">Tốt</span></div></div>
-            <div class="h-item"><div class="h-ic" style="background:#fef3c7"><i class="ti ti-package" style="font-size:12px;color:#d97706"></i></div><div class="h-lbl">Vòng quay tồn kho</div><div style="display:flex;align-items:center;gap:5px"><div class="h-val" style="color:#d97706">6.2 vòng</div><span class="badge ba" style="font-size:8.5px">TB</span></div></div>
-            <div class="h-item"><div class="h-ic" style="background:#dcfce7"><i class="ti ti-calendar-time" style="font-size:12px;color:#16a34a"></i></div><div class="h-lbl">DSO thu tiền TB</div><div style="display:flex;align-items:center;gap:5px"><div class="h-val" style="color:#16a34a">32 ngày</div><span class="badge bg" style="font-size:8.5px">Tốt</span></div></div>
+
+        <!-- KPI Grid -->
+        <div class="kpi-grid">
+          <div class="kpi" onclick="nav('cashflow');sparkle(event)">
+            <div class="kpi-lbl"><i class="ti ti-trending-up" style="color:#16a34a"></i> Doanh thu</div>
+            <div class="kpi-num" style="color:#16a34a">15.6<span style="font-size:13px;font-weight:400;color:var(--tmu)"> tỷ</span></div>
+            <div class="sbar"><div class="sfill" style="--w:78%"></div></div>
+            <div class="kpi-sub"><span class="badge bg">+18.6%</span> MoM</div>
           </div>
-          <div class="card">
-            <div class="card-hdr"><div class="card-title">Cơ cấu doanh thu</div></div>
+          <div class="kpi" onclick="showModal('limitModal');sparkle(event)">
+            <div class="kpi-lbl"><i class="ti ti-cash" style="color:var(--p300)"></i> Hạn mức</div>
+            <div class="kpi-num" style="color:var(--p400);font-size:16px">5 tỷ <span style="font-size:12px;font-weight:400;color:var(--tmu)">đ</span></div>
+            <div class="kpi-sub" style="margin-top:8px;font-size:9.5px">Không thế chấp</div>
+          </div>
+          <div class="kpi" onclick="nav('health');sparkle(event)">
+            <div class="kpi-lbl"><i class="ti ti-wave-sine" style="color:#f59e0b"></i> Rủi ro</div>
+            <div class="kpi-num" style="color:#f59e0b">28<span style="font-size:13px;font-weight:400;color:var(--tmu)">/100</span></div>
+            <div class="sbar"><div class="sfill" style="--w:28%;background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div></div>
+            <div class="kpi-sub"><span class="badge ba">Thấp</span></div>
+          </div>
+          <div class="kpi" onclick="nav('sync');sparkle(event)">
+            <div class="kpi-lbl"><i class="ti ti-cloud-upload" style="color:#16a34a"></i> Đồng bộ</div>
+            <div style="display:flex;align-items:center;gap:6px;margin:6px 0">
+              <div style="width:26px;height:26px;border-radius:50%;background:rgba(34,197,94,.12);display:flex;align-items:center;justify-content:center"><i class="ti ti-check" style="font-size:14px;color:#16a34a"></i></div>
+              <div><div style="font-size:10px;font-weight:500;color:var(--td)">2 giờ trước</div></div>
+            </div>
+            <div class="kpi-sub"><span class="badge bg">Cập nhật</span></div>
+          </div>
+        </div>
+
+        <!-- Cash Flow Chart -->
+        <div class="card">
+          <div class="card-hdr">
+            <div class="card-title">Dòng tiền 4 tháng</div>
+            <div class="chart-legend">
+              <span class="legend-item"><span class="ldot" style="background:#22c55e"></span>Vào</span>
+              <span class="legend-item"><span class="ldot" style="background:#f87171"></span>Ra</span>
+              <span class="legend-item"><span class="ldot" style="background:#a855f7"></span>Ròng</span>
+            </div>
+          </div>
+          <div class="chart-wrap"><canvas id="c1"></canvas></div>
+        </div>
+
+        <!-- Sources + Donut -->
+        <div class="card">
+          <div class="card-hdr">
+            <div class="card-title">Nguồn dữ liệu</div>
+            <div class="view-all" onclick="nav('connect')">Xem tất cả <i class="ti ti-arrow-right" style="font-size:10px"></i></div>
+          </div>
+          <div class="src-item" onclick="showSrcDetail('KiotViet')">
+            <div class="src-logo" style="background:rgba(229,57,53,.08)"><span style="color:#e53e3e;font-size:14px;font-weight:700">K</span></div>
+            <div style="flex:1"><div class="src-name">KiotViet</div><div class="src-type">POS & Bán hàng</div></div>
+            <span class="badge bg">Kết nối</span>
+          </div>
+          <div class="src-item" onclick="showSrcDetail('MISA AMIS')">
+            <div class="src-logo" style="background:rgba(234,88,12,.08)"><span style="color:#ea580c;font-size:14px;font-weight:700">M</span></div>
+            <div style="flex:1"><div class="src-name">MISA AMIS</div><div class="src-type">Kế toán</div></div>
+            <span class="badge bg">Kết nối</span>
+          </div>
+          <div class="src-item" onclick="showSrcDetail('Shopee')">
+            <div class="src-logo" style="background:rgba(224,36,94,.08)"><span style="color:#e0245e;font-size:14px;font-weight:700">S</span></div>
+            <div style="flex:1"><div class="src-name">Shopee</div><div class="src-type">Sàn TMĐT</div></div>
+            <span class="badge bg">Kết nối</span>
+          </div>
+          <div class="src-item">
+            <div class="src-logo" style="background:rgba(2,132,199,.08)"><span style="color:#0284c7;font-size:14px;font-weight:700">H</span></div>
+            <div style="flex:1"><div class="src-name">Haravan</div><div class="src-type">Đa kênh</div></div>
+            <button class="conn-btn" onclick="event.stopPropagation();showModal('connectModal',{name:'Haravan'})">Kết nối</button>
+          </div>
+        </div>
+
+        <!-- Revenue Donut -->
+        <div class="card">
+          <div class="card-hdr"><div class="card-title">Cơ cấu doanh thu</div></div>
+          <div class="donut-row">
             <div class="donut-wrap">
-              <div style="position:relative;width:100px;height:100px;flex-shrink:0"><canvas id="c2" role="img" aria-label="Cơ cấu doanh thu theo kênh"></canvas><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center"><div style="font-size:12px;font-weight:600;color:var(--text-dark)">15.6</div><div style="font-size:8px;color:#6b7280">Tỷ đồng</div></div></div>
-              <div class="ch-list">
-                <div class="ch-item"><span><span class="ldot" style="background:var(--purple-400)"></span><span style="color:#374151">Cửa hàng</span></span><span style="color:#9ca3af">45%</span><span style="font-weight:500;color:var(--text-dark);font-size:10.5px">7.02 tỷ</span></div>
-                <div class="ch-item"><span><span class="ldot" style="background:#f87171"></span><span style="color:#374151">Shopee</span></span><span style="color:#9ca3af">25%</span><span style="font-weight:500;color:var(--text-dark);font-size:10.5px">3.90 tỷ</span></div>
-                <div class="ch-item"><span><span class="ldot" style="background:#fb923c"></span><span style="color:#374151">Lazada</span></span><span style="color:#9ca3af">15%</span><span style="font-weight:500;color:var(--text-dark);font-size:10.5px">2.34 tỷ</span></div>
-                <div class="ch-item"><span><span class="ldot" style="background:#a78bfa"></span><span style="color:#374151">Website</span></span><span style="color:#9ca3af">10%</span><span style="font-weight:500;color:var(--text-dark);font-size:10.5px">1.56 tỷ</span></div>
-                <div class="ch-item"><span><span class="ldot" style="background:#d1d5db"></span><span style="color:#374151">Khác</span></span><span style="color:#9ca3af">5%</span><span style="font-weight:500;color:var(--text-dark);font-size:10.5px">0.78 tỷ</span></div>
-              </div>
+              <canvas id="c2"></canvas>
+              <div class="donut-center"><div class="donut-num">15.6</div><div class="donut-unit">Tỷ đồng</div></div>
+            </div>
+            <div class="ch-list">
+              <div class="ch-item"><span><span class="ldot" style="background:#7c3aed"></span>Cửa hàng</span><span style="color:var(--tmu)">45%</span><span style="font-weight:500;font-size:10px">7.02 tỷ</span></div>
+              <div class="ch-item"><span><span class="ldot" style="background:#f87171"></span>Shopee</span><span style="color:var(--tmu)">25%</span><span style="font-weight:500;font-size:10px">3.90 tỷ</span></div>
+              <div class="ch-item"><span><span class="ldot" style="background:#fb923c"></span>Lazada</span><span style="color:var(--tmu)">15%</span><span style="font-weight:500;font-size:10px">2.34 tỷ</span></div>
+              <div class="ch-item"><span><span class="ldot" style="background:#a78bfa"></span>Website</span><span style="color:var(--tmu)">10%</span><span style="font-weight:500;font-size:10px">1.56 tỷ</span></div>
+              <div class="ch-item"><span><span class="ldot" style="background:#d1d5db"></span>Khác</span><span style="color:var(--tmu)">5%</span><span style="font-weight:500;font-size:10px">0.78 tỷ</span></div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-hdr"><div class="card-title">Cảnh báo rủi ro</div><div class="view-all" onclick="nav('health',null)">Xem tất cả <i class="ti ti-arrow-right" style="font-size:10px"></i></div></div>
-            <div class="risk-item"><div class="risk-ic" style="background:#fef3c7"><i class="ti ti-alert-triangle" style="font-size:12px;color:#d97706"></i></div><div style="flex:1"><div class="risk-title">Tỷ lệ hoàn hàng tăng cao</div><div class="risk-desc">Tăng 15% so với tháng trước</div></div><span class="badge ba" style="font-size:8.5px">Trung bình</span></div>
-            <div class="risk-item"><div class="risk-ic" style="background:#dbeafe"><i class="ti ti-info-circle" style="font-size:12px;color:#2563eb"></i></div><div style="flex:1"><div class="risk-title">Khách hàng thanh toán chậm</div><div class="risk-desc">5 khách chiếm 35% doanh thu</div></div><span class="badge bb" style="font-size:8.5px">Thấp</span></div>
-            <div class="risk-item"><div class="risk-ic" style="background:#dcfce7"><i class="ti ti-circle-check" style="font-size:12px;color:#16a34a"></i></div><div style="flex:1"><div class="risk-title">Dòng tiền ổn định</div><div class="risk-desc">Duy trì ổn định 3 tháng qua</div></div><span class="badge bg" style="font-size:8.5px">Tốt</span></div>
-          </div>
         </div>
-      </div>
 
-      <!-- KẾT NỐI DỮ LIỆU -->
-      <div class="page-view" id="pg-connect">
-        <div class="section-title">Kết nối nguồn dữ liệu</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-          <div class="card" style="cursor:pointer" onclick="showSrcDetail('KiotViet')">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div class="src-logo" style="background:#fff5f5;width:38px;height:38px"><span style="color:#e53e3e;font-size:14px">K</span></div><div><div class="src-name" style="font-size:12.5px">KiotViet</div><div class="src-type">POS & Bán hàng</div></div></div>
-            <span class="badge bg">Đã kết nối</span><div style="font-size:9.5px;color:#6b7280;margin-top:6px">Đồng bộ: 2 giờ trước</div>
-          </div>
-          <div class="card" style="cursor:pointer" onclick="showSrcDetail('MISA AMIS')">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div class="src-logo" style="background:#fff7ed;width:38px;height:38px"><span style="color:#ea580c;font-size:14px">M</span></div><div><div class="src-name" style="font-size:12.5px">MISA AMIS</div><div class="src-type">Kế toán</div></div></div>
-            <span class="badge bg">Đã kết nối</span><div style="font-size:9.5px;color:#6b7280;margin-top:6px">Đồng bộ: 2 giờ trước</div>
-          </div>
-          <div class="card" style="cursor:pointer" onclick="showSrcDetail('Shopee')">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div class="src-logo" style="background:#fff0f6;width:38px;height:38px"><span style="color:#e0245e;font-size:14px">S</span></div><div><div class="src-name" style="font-size:12.5px">Shopee</div><div class="src-type">Sàn TMĐT</div></div></div>
-            <span class="badge bg">Đã kết nối</span><div style="font-size:9.5px;color:#6b7280;margin-top:6px">Đồng bộ: 2 giờ trước</div>
-          </div>
-          <div class="card" style="cursor:pointer;border:1.5px dashed rgba(168,85,247,0.3)" onclick="showModal('connectHaravan')">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div class="src-logo" style="background:#f0f9ff;width:38px;height:38px"><span style="color:#0284c7;font-size:14px">H</span></div><div><div class="src-name" style="font-size:12.5px">Haravan</div><div class="src-type">Bán hàng đa kênh</div></div></div>
-            <button class="conn-btn">+ Kết nối</button>
-          </div>
-          <div class="card" style="cursor:pointer;border:1.5px dashed rgba(168,85,247,0.3)" onclick="showModal('connectModal','Lazada')">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div class="src-logo" style="background:#faf5ff;width:38px;height:38px"><span style="color:#7c3aed;font-size:14px">L</span></div><div><div class="src-name" style="font-size:12.5px">Lazada</div><div class="src-type">Sàn TMĐT</div></div></div>
-            <button class="conn-btn">+ Kết nối</button>
-          </div>
-          <div class="card" style="cursor:pointer;border:1.5px dashed rgba(168,85,247,0.3)" onclick="showModal('connectModal','TikTok Shop')">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div class="src-logo" style="background:#f0fdf4;width:38px;height:38px"><span style="color:#16a34a;font-size:14px">T</span></div><div><div class="src-name" style="font-size:12.5px">TikTok Shop</div><div class="src-type">Social Commerce</div></div></div>
-            <button class="conn-btn">+ Kết nối</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- NGUỒN DỮ LIỆU -->
-      <div class="page-view" id="pg-sources">
-        <div class="section-title">Nguồn dữ liệu</div>
+        <!-- Risks -->
         <div class="card">
-          <div style="overflow-x:auto">
-            <table style="width:100%;border-collapse:collapse;font-size:11.5px">
-              <thead><tr style="border-bottom:1px solid rgba(222,189,255,0.3)">
-                <th style="text-align:left;padding:8px 10px;color:#6b7280;font-weight:500">Nguồn</th>
-                <th style="text-align:left;padding:8px 10px;color:#6b7280;font-weight:500">Loại</th>
-                <th style="text-align:left;padding:8px 10px;color:#6b7280;font-weight:500">Trạng thái</th>
-                <th style="text-align:left;padding:8px 10px;color:#6b7280;font-weight:500">Lần cuối đồng bộ</th>
-                <th style="text-align:left;padding:8px 10px;color:#6b7280;font-weight:500">Bản ghi</th>
-                <th style="text-align:right;padding:8px 10px;color:#6b7280;font-weight:500">Hành động</th>
-              </tr></thead>
-              <tbody>
-                <tr style="border-bottom:1px solid rgba(222,189,255,0.15)"><td style="padding:10px;color:var(--text-dark);font-weight:500"><div style="display:flex;align-items:center;gap:7px"><div class="src-logo" style="background:#fff5f5;width:24px;height:24px"><span style="color:#e53e3e;font-size:10px">K</span></div>KiotViet</div></td><td style="padding:10px;color:#6b7280">POS & Bán hàng</td><td style="padding:10px"><span class="badge bg">Hoạt động</span></td><td style="padding:10px;color:#6b7280">2 giờ trước</td><td style="padding:10px;color:#374151">12,480</td><td style="padding:10px;text-align:right"><button class="conn-btn" onclick="doSync('KiotViet')">Đồng bộ ngay</button></td></tr>
-                <tr style="border-bottom:1px solid rgba(222,189,255,0.15)"><td style="padding:10px;color:var(--text-dark);font-weight:500"><div style="display:flex;align-items:center;gap:7px"><div class="src-logo" style="background:#fff7ed;width:24px;height:24px"><span style="color:#ea580c;font-size:10px">M</span></div>MISA AMIS</div></td><td style="padding:10px;color:#6b7280">Kế toán</td><td style="padding:10px"><span class="badge bg">Hoạt động</span></td><td style="padding:10px;color:#6b7280">2 giờ trước</td><td style="padding:10px;color:#374151">8,220</td><td style="padding:10px;text-align:right"><button class="conn-btn" onclick="doSync('MISA AMIS')">Đồng bộ ngay</button></td></tr>
-                <tr><td style="padding:10px;color:var(--text-dark);font-weight:500"><div style="display:flex;align-items:center;gap:7px"><div class="src-logo" style="background:#fff0f6;width:24px;height:24px"><span style="color:#e0245e;font-size:10px">S</span></div>Shopee</div></td><td style="padding:10px;color:#6b7280">Sàn TMĐT</td><td style="padding:10px"><span class="badge bg">Hoạt động</span></td><td style="padding:10px;color:#6b7280">2 giờ trước</td><td style="padding:10px;color:#374151">5,640</td><td style="padding:10px;text-align:right"><button class="conn-btn" onclick="doSync('Shopee')">Đồng bộ ngay</button></td></tr>
-              </tbody>
-            </table>
+          <div class="card-hdr">
+            <div class="card-title">Cảnh báo rủi ro</div>
+            <div class="view-all" onclick="nav('health')">Xem tất cả <i class="ti ti-arrow-right" style="font-size:10px"></i></div>
+          </div>
+          <div class="risk-item">
+            <div class="risk-ic" style="background:rgba(245,158,11,.12)"><i class="ti ti-alert-triangle" style="color:#d97706"></i></div>
+            <div style="flex:1"><div class="risk-title">Tỷ lệ hoàn hàng tăng cao</div><div class="risk-desc">Tăng 15% so với tháng trước</div></div>
+            <span class="badge ba">TB</span>
+          </div>
+          <div class="risk-item">
+            <div class="risk-ic" style="background:rgba(168,85,247,.12)"><i class="ti ti-info-circle" style="color:var(--p300)"></i></div>
+            <div style="flex:1"><div class="risk-title">Khách hàng thanh toán chậm</div><div class="risk-desc">5 KH chiếm 35% doanh thu</div></div>
+            <span class="badge bb">Thấp</span>
+          </div>
+          <div class="risk-item" style="border:none">
+            <div class="risk-ic" style="background:rgba(34,197,94,.1)"><i class="ti ti-circle-check" style="color:#16a34a"></i></div>
+            <div style="flex:1"><div class="risk-title">Dòng tiền ổn định</div><div class="risk-desc">Duy trì ổn định 3 tháng qua</div></div>
+            <span class="badge bg">Tốt</span>
           </div>
         </div>
       </div>
 
-      <!-- LỊCH SỬ ĐỒNG BỘ -->
-      <div class="page-view" id="pg-sync">
-        <div class="section-title">Lịch sử đồng bộ</div>
+      <!-- BANK MATCH -->
+      <div class="page-view" id="pg-bankmatch">
+        <div class="pg-header"><div class="pg-title">Ghép ngân hàng</div><div class="pg-sub">AI đề xuất ngân hàng phù hợp nhất</div></div>
+
+        <div class="bank-hero">
+          <div class="bank-hero-title">Ghép ngân hàng thông minh</div>
+          <div class="bank-hero-sub">Dựa trên điểm tín nhiệm và hồ sơ tài chính — không cần tài sản thế chấp.</div>
+          <div class="score-pill">
+            <i class="ti ti-shield-check" style="font-size:15px;color:#a855f7"></i>
+            <div class="score-pill-num">782</div>
+            <div class="score-pill-lbl">/ 1000 · Xếp hạng A–</div>
+          </div>
+          <div class="limit-box">
+            <div class="limit-lbl">Hạn mức phê duyệt</div>
+            <div class="limit-num">5 tỷ đ</div>
+            <div class="limit-sub">Tối đa không thế chấp</div>
+          </div>
+        </div>
+
         <div class="card">
-          <div id="sync-log">
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(222,189,255,0.2);font-size:11.5px"><span style="color:var(--text-dark)">KiotViet — Đồng bộ thành công</span><div style="display:flex;align-items:center;gap:10px"><span class="badge bg">Thành công</span><span style="color:#6b7280">02/05/2024 10:00</span></div></div>
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(222,189,255,0.2);font-size:11.5px"><span style="color:var(--text-dark)">MISA AMIS — Đồng bộ thành công</span><div style="display:flex;align-items:center;gap:10px"><span class="badge bg">Thành công</span><span style="color:#6b7280">02/05/2024 10:00</span></div></div>
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(222,189,255,0.2);font-size:11.5px"><span style="color:var(--text-dark)">Shopee — Đồng bộ thành công</span><div style="display:flex;align-items:center;gap:10px"><span class="badge bg">Thành công</span><span style="color:#6b7280">02/05/2024 10:00</span></div></div>
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;font-size:11.5px"><span style="color:var(--text-dark)">KiotViet — Lỗi timeout</span><div style="display:flex;align-items:center;gap:10px"><span class="badge br">Lỗi</span><span style="color:#6b7280">01/05/2024 22:15</span></div></div>
+          <div class="card-hdr">
+            <div>
+              <div class="card-title">3 Ngân hàng phù hợp nhất</div>
+              <div style="font-size:10px;color:var(--tmu);margin-top:2px">Chọn ngân hàng để gửi hồ sơ</div>
+            </div>
+            <span class="badge bb"><i class="ti ti-sparkles" style="font-size:9px"></i> AI Matched</span>
           </div>
-          <button class="conn-btn" style="margin-top:12px;width:100%;padding:8px" onclick="addSyncLog()">Chạy đồng bộ thủ công</button>
+
+          <div class="bank-list">
+            <div class="bank-card" id="bank-vpbank" onclick="toggleBank('vpbank',event)">
+              <div class="bank-card-top">
+                <div class="bank-logo" style="background:linear-gradient(135deg,#1e5799,#2989d8);color:#fff">VP</div>
+                <div><div class="bank-name">VPBank</div><div class="bank-tagline">Ngân hàng Việt Nam Thịnh Vượng</div></div>
+              </div>
+              <div class="bank-rate">8.9%<span>/năm</span></div>
+              <div class="bank-rate-lbl">Lãi suất khởi điểm</div>
+              <div class="bank-terms">
+                <span class="bank-term"><i class="ti ti-clock" style="font-size:10px;color:var(--tmu)"></i> 36 tháng</span>
+                <span class="bank-term"><i class="ti ti-coins" style="font-size:10px;color:var(--tmu)"></i> 5 tỷ đ</span>
+                <span class="bank-term"><i class="ti ti-lock-open" style="font-size:10px;color:#16a34a"></i> Không thế chấp</span>
+              </div>
+              <div class="bank-match-badge"><i class="ti ti-check" style="font-size:10px"></i> Phù hợp 95%</div>
+            </div>
+
+            <div class="bank-card" id="bank-msb" onclick="toggleBank('msb',event)">
+              <div class="bank-card-top">
+                <div class="bank-logo" style="background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff">MSB</div>
+                <div><div class="bank-name">MSB</div><div class="bank-tagline">Maritime Bank</div></div>
+              </div>
+              <div class="bank-rate">9.2%<span>/năm</span></div>
+              <div class="bank-rate-lbl">Lãi suất khởi điểm</div>
+              <div class="bank-terms">
+                <span class="bank-term"><i class="ti ti-clock" style="font-size:10px;color:var(--tmu)"></i> 48 tháng</span>
+                <span class="bank-term"><i class="ti ti-coins" style="font-size:10px;color:var(--tmu)"></i> 4.5 tỷ đ</span>
+                <span class="bank-term"><i class="ti ti-lock-open" style="font-size:10px;color:#16a34a"></i> Không thế chấp</span>
+              </div>
+              <div class="bank-match-badge"><i class="ti ti-check" style="font-size:10px"></i> Phù hợp 88%</div>
+            </div>
+
+            <div class="bank-card" id="bank-tcb" onclick="toggleBank('tcb',event)">
+              <div class="bank-card-top">
+                <div class="bank-logo" style="background:linear-gradient(135deg,#064e3b,#059669);color:#fff">TCB</div>
+                <div><div class="bank-name">Techcombank</div><div class="bank-tagline">Ngân hàng Kỹ Thương Việt Nam</div></div>
+              </div>
+              <div class="bank-rate">9.5%<span>/năm</span></div>
+              <div class="bank-rate-lbl">Lãi suất khởi điểm</div>
+              <div class="bank-terms">
+                <span class="bank-term"><i class="ti ti-clock" style="font-size:10px;color:var(--tmu)"></i> 60 tháng</span>
+                <span class="bank-term"><i class="ti ti-coins" style="font-size:10px;color:var(--tmu)"></i> 4 tỷ đ</span>
+                <span class="bank-term"><i class="ti ti-lock-open" style="font-size:10px;color:#16a34a"></i> Không thế chấp</span>
+              </div>
+              <div class="bank-match-badge"><i class="ti ti-check" style="font-size:10px"></i> Phù hợp 82%</div>
+            </div>
+          </div>
+
+          <div class="match-actions" style="margin-top:14px">
+            <div class="match-count-lbl" id="matchCountLbl">Chọn ít nhất 1 ngân hàng để tiếp tục</div>
+            <button class="match-send-btn" id="matchSendBtn" disabled onclick="openConsentModal()">
+              Gửi hồ sơ tín nhiệm
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- SỨC KHỎE TÀI CHÍNH -->
+      <!-- HEALTH -->
       <div class="page-view" id="pg-health">
+        <div class="pg-header"><div class="pg-title">Sức khỏe tài chính</div><div class="pg-sub">Đánh giá toàn diện các chỉ số</div></div>
+
         <div class="stat-grid">
           <div class="stat-card"><div class="stat-num" style="color:#16a34a">782</div><div class="stat-lbl">Điểm tín nhiệm</div></div>
-          <div class="stat-card"><div class="stat-num" style="color:var(--purple-600)">A–</div><div class="stat-lbl">Xếp hạng</div></div>
+          <div class="stat-card"><div class="stat-num" style="color:var(--p400)">A–</div><div class="stat-lbl">Xếp hạng</div></div>
           <div class="stat-card"><div class="stat-num" style="color:#f59e0b">28</div><div class="stat-lbl">Hệ số rủi ro</div></div>
         </div>
-        <div class="full-row">
-          <div class="card">
-            <div class="card-hdr"><div class="card-title">Chỉ số tài chính</div></div>
-            <div class="h-item"><div class="h-ic" style="background:#dcfce7"><i class="ti ti-trending-up" style="font-size:12px;color:#16a34a"></i></div><div class="h-lbl">Tăng trưởng DT MoM</div><div style="display:flex;align-items:center;gap:5px"><div class="h-val">18.6%</div><span class="badge bg" style="font-size:8.5px">Tốt</span></div></div>
-            <div class="h-item"><div class="h-ic" style="background:#dbeafe"><i class="ti ti-receipt" style="font-size:12px;color:#2563eb"></i></div><div class="h-lbl">Tỷ suất lợi nhuận gộp</div><div style="display:flex;align-items:center;gap:5px"><div class="h-val">24.3%</div><span class="badge bb" style="font-size:8.5px">Tốt</span></div></div>
-            <div class="h-item"><div class="h-ic" style="background:#fef3c7"><i class="ti ti-package" style="font-size:12px;color:#d97706"></i></div><div class="h-lbl">Vòng quay hàng tồn kho</div><div style="display:flex;align-items:center;gap:5px"><div class="h-val">6.2 vòng</div><span class="badge ba" style="font-size:8.5px">Trung bình</span></div></div>
-            <div class="h-item"><div class="h-ic" style="background:#dcfce7"><i class="ti ti-calendar-time" style="font-size:12px;color:#16a34a"></i></div><div class="h-lbl">Kỳ thu tiền bình quân DSO</div><div style="display:flex;align-items:center;gap:5px"><div class="h-val">32 ngày</div><span class="badge bg" style="font-size:8.5px">Tốt</span></div></div>
-            <div class="h-item"><div class="h-ic" style="background:#fee2e2"><i class="ti ti-arrow-back-up" style="font-size:12px;color:#dc2626"></i></div><div class="h-lbl">Tỷ lệ hoàn hàng</div><div style="display:flex;align-items:center;gap:5px"><div class="h-val" style="color:#dc2626">12.4%</div><span class="badge br" style="font-size:8.5px">Cảnh báo</span></div></div>
-          </div>
-          <div class="card">
-            <div class="card-hdr"><div class="card-title">Phân tích rủi ro</div></div>
-            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px"><span style="color:#374151">Rủi ro thanh khoản</span><span style="font-weight:500;color:#16a34a">Thấp — 15/100</span></div><div class="progress-bar"><div class="progress-fill" style="width:15%;background:#16a34a"></div></div></div>
-            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px"><span style="color:#374151">Rủi ro tín dụng</span><span style="font-weight:500;color:#d97706">Trung bình — 42/100</span></div><div class="progress-bar"><div class="progress-fill" style="width:42%;background:#d97706"></div></div></div>
-            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px"><span style="color:#374151">Rủi ro thị trường</span><span style="font-weight:500;color:#16a34a">Thấp — 22/100</span></div><div class="progress-bar"><div class="progress-fill" style="width:22%;background:#16a34a"></div></div></div>
-            <div><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px"><span style="color:#374151">Rủi ro vận hành</span><span style="font-weight:500;color:#d97706">Trung bình — 35/100</span></div><div class="progress-bar"><div class="progress-fill" style="width:35%;background:#d97706"></div></div></div>
-          </div>
-        </div>
-      </div>
 
-      <!-- DÒNG TIỀN -->
-      <div class="page-view" id="pg-cashflow">
-        <div class="stat-grid">
-          <div class="stat-card"><div class="stat-num" style="color:#16a34a">1.25 tỷ</div><div class="stat-lbl">Dòng tiền vào T8</div></div>
-          <div class="stat-card"><div class="stat-num" style="color:#ef4444">620 tr</div><div class="stat-lbl">Dòng tiền ra T8</div></div>
-          <div class="stat-card"><div class="stat-num" style="color:var(--purple-600)">630 tr</div><div class="stat-lbl">Dòng tiền ròng T8</div></div>
-        </div>
         <div class="card">
-          <div class="card-hdr"><div class="card-title">Dòng tiền theo tháng</div>
-            <div style="display:flex;gap:8px">
-              <button class="tab active" id="cf-tab-3" onclick="setCfPeriod(3,this)">3 tháng</button>
-              <button class="tab" id="cf-tab-6" onclick="setCfPeriod(6,this)">6 tháng</button>
-            </div>
+          <div class="card-hdr"><div class="card-title">Chỉ số tài chính</div></div>
+          <div class="h-item">
+            <div class="h-ic" style="background:rgba(34,197,94,.1)"><i class="ti ti-trending-up" style="color:#16a34a"></i></div>
+            <div class="h-lbl">Tăng trưởng DT (MoM)</div>
+            <div style="display:flex;align-items:center;gap:5px"><div class="h-val" style="color:#16a34a">18.6%</div><span class="badge bg">Tốt</span></div>
           </div>
-          <div style="position:relative;width:100%;height:220px"><canvas id="c3" role="img" aria-label="Dòng tiền theo tháng"></canvas></div>
+          <div class="h-item">
+            <div class="h-ic" style="background:rgba(168,85,247,.1)"><i class="ti ti-receipt" style="color:var(--p300)"></i></div>
+            <div class="h-lbl">Tỷ suất lợi nhuận gộp</div>
+            <div style="display:flex;align-items:center;gap:5px"><div class="h-val" style="color:var(--p400)">24.3%</div><span class="badge bb">Tốt</span></div>
+          </div>
+          <div class="h-item">
+            <div class="h-ic" style="background:rgba(245,158,11,.1)"><i class="ti ti-package" style="color:#d97706"></i></div>
+            <div class="h-lbl">Vòng quay hàng tồn kho</div>
+            <div style="display:flex;align-items:center;gap:5px"><div class="h-val">6.2 vòng</div><span class="badge ba">TB</span></div>
+          </div>
+          <div class="h-item">
+            <div class="h-ic" style="background:rgba(34,197,94,.1)"><i class="ti ti-calendar-time" style="color:#16a34a"></i></div>
+            <div class="h-lbl">Kỳ thu tiền (DSO)</div>
+            <div style="display:flex;align-items:center;gap:5px"><div class="h-val" style="color:#16a34a">32 ngày</div><span class="badge bg">Tốt</span></div>
+          </div>
         </div>
-      </div>
 
-      <!-- CHỈ SỐ VẬN HÀNH -->
-      <div class="page-view" id="pg-ops">
-        <div class="section-title">Chỉ số vận hành</div>
-        <div class="stat-grid">
-          <div class="stat-card"><div class="stat-num">4,280</div><div class="stat-lbl">Đơn hàng tháng</div></div>
-          <div class="stat-card"><div class="stat-num" style="color:var(--purple-600)">3.64 tr</div><div class="stat-lbl">Giá trị TB / đơn</div></div>
-          <div class="stat-card"><div class="stat-num" style="color:#16a34a">98.2%</div><div class="stat-lbl">Tỷ lệ giao thành công</div></div>
-        </div>
-        <div class="full-row">
-          <div class="card">
-            <div class="card-hdr"><div class="card-title">Đơn hàng theo kênh</div></div>
-            <div style="position:relative;width:100%;height:200px"><canvas id="c4" role="img" aria-label="Đơn hàng theo kênh"></canvas></div>
-          </div>
-          <div class="card">
-            <div class="card-hdr"><div class="card-title">Top sản phẩm bán chạy</div></div>
-            <div class="h-item"><div style="flex:1;font-size:11px;color:#374151">Áo thun basic</div><div style="font-size:11px;font-weight:500;color:var(--text-dark)">1,240 sp</div><div style="margin-left:8px"><span class="badge bg" style="font-size:8.5px">+12%</span></div></div>
-            <div class="h-item"><div style="flex:1;font-size:11px;color:#374151">Quần jeans slim</div><div style="font-size:11px;font-weight:500;color:var(--text-dark)">980 sp</div><div style="margin-left:8px"><span class="badge bg" style="font-size:8.5px">+8%</span></div></div>
-            <div class="h-item"><div style="flex:1;font-size:11px;color:#374151">Váy midi</div><div style="font-size:11px;font-weight:500;color:var(--text-dark)">760 sp</div><div style="margin-left:8px"><span class="badge ba" style="font-size:8.5px">+3%</span></div></div>
-            <div class="h-item"><div style="flex:1;font-size:11px;color:#374151">Áo sơ mi oxford</div><div style="font-size:11px;font-weight:500;color:var(--text-dark)">640 sp</div><div style="margin-left:8px"><span class="badge br" style="font-size:8.5px">-2%</span></div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- DỰ BÁO -->
-      <div class="page-view" id="pg-forecast">
-        <div class="section-title">Dự báo AI</div>
-        <div class="card" style="margin-bottom:0">
-          <div class="card-hdr"><div class="card-title">Tùy chỉnh kịch bản dự báo</div></div>
-          <div class="slider-wrap"><label style="font-size:11px;color:#374151;width:180px">Tăng trưởng doanh thu</label><input type="range" min="-20" max="50" value="15" step="1" id="sl-growth" oninput="updateForecast()"><span class="slider-val" id="sl-growth-val">+15%</span></div>
-          <div class="slider-wrap"><label style="font-size:11px;color:#374151;width:180px">Chi phí vận hành</label><input type="range" min="-10" max="30" value="5" step="1" id="sl-cost" oninput="updateForecast()"><span class="slider-val" id="sl-cost-val">+5%</span></div>
-          <div class="slider-wrap"><label style="font-size:11px;color:#374151;width:180px">Tỷ lệ hoàn hàng</label><input type="range" min="0" max="30" value="12" step="1" id="sl-return" oninput="updateForecast()"><span class="slider-val" id="sl-return-val">12%</span></div>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-          <div class="stat-card"><div class="stat-num" style="color:#16a34a" id="fc-revenue">18.2 tỷ</div><div class="stat-lbl">Doanh thu dự báo Q3</div></div>
-          <div class="stat-card"><div class="stat-num" style="color:var(--purple-600)" id="fc-cashflow">4.1 tỷ</div><div class="stat-lbl">Dòng tiền ròng Q3</div></div>
-          <div class="stat-card"><div class="stat-num" style="color:#f59e0b" id="fc-score">796</div><div class="stat-lbl">Điểm tín nhiệm dự báo</div></div>
-        </div>
         <div class="card">
-          <div style="position:relative;width:100%;height:200px"><canvas id="c5" role="img" aria-label="Dự báo kịch bản"></canvas></div>
-        </div>
-      </div>
-
-      <!-- BÁO CÁO TÍN NHIỆM -->
-      <div class="page-view" id="pg-report">
-        <div class="stat-grid">
-          <div class="stat-card"><div class="stat-num" style="color:#16a34a">782</div><div class="stat-lbl">Điểm tín nhiệm</div></div>
-          <div class="stat-card"><div class="stat-num" style="color:var(--purple-600)">5 tỷ đ</div><div class="stat-lbl">Hạn mức đề xuất</div></div>
-          <div class="stat-card"><div class="stat-num" style="color:#f59e0b">A–</div><div class="stat-lbl">Xếp hạng</div></div>
-        </div>
-        <div class="card">
-          <div class="card-hdr"><div class="card-title">Báo cáo tín nhiệm số — Credteria</div><button class="conn-btn" onclick="showToast('Đang tạo file PDF...')"><i class="ti ti-download" style="font-size:11px"></i> Xuất PDF</button></div>
-          <div style="font-size:11px;color:#6b7280;margin-bottom:14px">Cập nhật: 02/05/2024 10:00 &nbsp;·&nbsp; SME ID: 1000123</div>
-          <div style="margin-bottom:14px">
-            <div style="font-size:11.5px;font-weight:500;color:#374151;margin-bottom:6px">Mức độ tín nhiệm tổng thể</div>
-            <div class="progress-bar" style="height:10px"><div class="progress-fill" style="width:78.2%;background:linear-gradient(90deg,#16a34a,#22c55e)"></div></div>
-            <div style="display:flex;justify-content:space-between;font-size:9.5px;color:#9ca3af;margin-top:3px"><span>0</span><span style="font-weight:500;color:#16a34a">782 / 1000</span><span>1000</span></div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
-            <div style="background:rgba(222,189,255,0.1);border:1px solid rgba(168,85,247,0.15);border-radius:9px;padding:10px"><div style="font-size:10px;color:#6b7280;margin-bottom:4px">Sức khỏe dòng tiền</div><div style="font-size:13px;font-weight:600;color:#16a34a">Tốt</div><div class="progress-bar"><div class="progress-fill" style="width:82%;background:#16a34a"></div></div></div>
-            <div style="background:rgba(222,189,255,0.1);border:1px solid rgba(168,85,247,0.15);border-radius:9px;padding:10px"><div style="font-size:10px;color:#6b7280;margin-bottom:4px">Ổn định doanh thu</div><div style="font-size:13px;font-weight:600;color:#16a34a">Tốt</div><div class="progress-bar"><div class="progress-fill" style="width:75%;background:#16a34a"></div></div></div>
-            <div style="background:rgba(222,189,255,0.1);border:1px solid rgba(168,85,247,0.15);border-radius:9px;padding:10px"><div style="font-size:10px;color:#6b7280;margin-bottom:4px">Khả năng trả nợ</div><div style="font-size:13px;font-weight:600;color:var(--purple-600)">Tốt</div><div class="progress-bar"><div class="progress-fill" style="width:78%;background:var(--purple-600)"></div></div></div>
-            <div style="background:rgba(222,189,255,0.1);border:1px solid rgba(168,85,247,0.15);border-radius:9px;padding:10px"><div style="font-size:10px;color:#6b7280;margin-bottom:4px">Rủi ro tổng hợp</div><div style="font-size:13px;font-weight:600;color:#d97706">Thấp</div><div class="progress-bar"><div class="progress-fill" style="width:28%;background:#d97706"></div></div></div>
-          </div>
-          <button class="submit-btn" onclick="nav('banks',null);showToast('Chuyển đến trang Kết nối ngân hàng...')">Kết nối với ngân hàng phù hợp →</button>
-        </div>
-      </div>
-
-      <!-- ===== KẾT NỐI NGÂN HÀNG ===== -->
-      <div class="page-view" id="pg-banks">
-        <div class="bank-intro">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-            <div style="width:32px;height:32px;background:linear-gradient(135deg,rgba(147,51,234,0.15),rgba(167,139,250,0.2));border-radius:9px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(147,51,234,0.2)"><i class="ti ti-sparkles" style="font-size:15px;color:var(--purple-600)"></i></div>
-            <div class="bank-intro-title">AI tìm thấy 3 ngân hàng phù hợp nhất với điểm số 782 của bạn</div>
-          </div>
-          <div class="bank-intro-sub">Dựa trên điểm tín nhiệm, dòng tiền và lịch sử kinh doanh, hệ thống đề xuất các gói vay tối ưu cho Công ty TNHH ABC.</div>
-        </div>
-
-        <!-- STEP INDICATOR -->
-        <div style="display:flex;align-items:center;gap:6px;padding:0 4px" id="bank-steps">
-          <div class="step-dot done" id="step1">1</div>
-          <div style="font-size:10px;color:#6b7280">Xem đề xuất</div>
-          <div style="flex:1;height:1px;background:var(--border-purple)"></div>
-          <div class="step-dot active" id="step2">2</div>
-          <div style="font-size:10px;color:#6b7280">Chọn ngân hàng</div>
-          <div style="flex:1;height:1px;background:var(--border-purple)"></div>
-          <div class="step-dot" id="step3">3</div>
-          <div style="font-size:10px;color:#6b7280">Xác nhận & Gửi</div>
-        </div>
-
-        <!-- BANK CARDS -->
-        <div class="bank-cards" id="bank-cards-grid">
-          <div class="bank-card" id="bank-vpbank" onclick="toggleBank('vpbank',this)">
-            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px">
-              <div class="bank-logo" style="background:linear-gradient(135deg,#fef3c7,#fde68a)"><span style="color:#92400e;font-size:13px">VP</span></div>
-              <span class="badge ba" style="font-size:8.5px">95% phù hợp</span>
-            </div>
-            <div class="bank-name">VPBank</div>
-            <div class="bank-match"><i class="ti ti-star-filled" style="font-size:10px;color:#f59e0b"></i> Đề xuất hàng đầu</div>
-            <div class="bank-rate" style="margin-top:6px">Lãi suất từ <strong style="color:var(--text-dark)">8.5%/năm</strong></div>
-            <div class="bank-rate">Hạn mức đến <strong style="color:var(--text-dark)">6 tỷ đ</strong></div>
-            <div style="margin-top:8px;font-size:9.5px;color:#6b7280">Không cần tài sản thế chấp</div>
-            <div style="margin-top:8px">
-              <div style="display:flex;justify-content:space-between;font-size:9.5px;color:#6b7280;margin-bottom:3px"><span>Dòng tiền</span><span style="color:#16a34a">Rất tốt</span></div>
-              <div class="match-bar"><div class="match-fill" style="width:95%;background:linear-gradient(90deg,#16a34a,#22c55e)"></div></div>
-              <div style="display:flex;justify-content:space-between;font-size:9.5px;color:#6b7280;margin:4px 0 3px"><span>Xếp hạng</span><span style="color:var(--purple-600)">A–</span></div>
-              <div class="match-bar"><div class="match-fill" style="width:82%;background:linear-gradient(90deg,var(--purple-600),var(--purple-400))"></div></div>
-            </div>
-          </div>
-          <div class="bank-card" id="bank-msb" onclick="toggleBank('msb',this)">
-            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px">
-              <div class="bank-logo" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)"><span style="color:#1d4ed8;font-size:12px">MSB</span></div>
-              <span class="badge bb" style="font-size:8.5px">88% phù hợp</span>
-            </div>
-            <div class="bank-name">MSB</div>
-            <div class="bank-match" style="color:#2563eb"><i class="ti ti-trending-up" style="font-size:10px"></i> Lãi suất cạnh tranh</div>
-            <div class="bank-rate" style="margin-top:6px">Lãi suất từ <strong style="color:var(--text-dark)">9.2%/năm</strong></div>
-            <div class="bank-rate">Hạn mức đến <strong style="color:var(--text-dark)">5 tỷ đ</strong></div>
-            <div style="margin-top:8px;font-size:9.5px;color:#6b7280">Thế chấp linh hoạt</div>
-            <div style="margin-top:8px">
-              <div style="display:flex;justify-content:space-between;font-size:9.5px;color:#6b7280;margin-bottom:3px"><span>Doanh thu ổn định</span><span style="color:#2563eb">Tốt</span></div>
-              <div class="match-bar"><div class="match-fill" style="width:88%;background:linear-gradient(90deg,#2563eb,#60a5fa)"></div></div>
-              <div style="display:flex;justify-content:space-between;font-size:9.5px;color:#6b7280;margin:4px 0 3px"><span>Xếp hạng</span><span style="color:var(--purple-600)">A–</span></div>
-              <div class="match-bar"><div class="match-fill" style="width:78%;background:linear-gradient(90deg,var(--purple-600),var(--purple-400))"></div></div>
-            </div>
-          </div>
-          <div class="bank-card" id="bank-tcb" onclick="toggleBank('tcb',this)">
-            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px">
-              <div class="bank-logo" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0)"><span style="color:#15803d;font-size:12px">TCB</span></div>
-              <span class="badge bg" style="font-size:8.5px">82% phù hợp</span>
-            </div>
-            <div class="bank-name">Techcombank</div>
-            <div class="bank-match" style="color:#16a34a"><i class="ti ti-clock" style="font-size:10px"></i> Phê duyệt nhanh</div>
-            <div class="bank-rate" style="margin-top:6px">Lãi suất từ <strong style="color:var(--text-dark)">9.8%/năm</strong></div>
-            <div class="bank-rate">Hạn mức đến <strong style="color:var(--text-dark)">4.5 tỷ đ</strong></div>
-            <div style="margin-top:8px;font-size:9.5px;color:#6b7280">Phê duyệt trong 48h</div>
-            <div style="margin-top:8px">
-              <div style="display:flex;justify-content:space-between;font-size:9.5px;color:#6b7280;margin-bottom:3px"><span>Tốc độ phê duyệt</span><span style="color:#16a34a">Nhanh</span></div>
-              <div class="match-bar"><div class="match-fill" style="width:82%;background:linear-gradient(90deg,#16a34a,#4ade80)"></div></div>
-              <div style="display:flex;justify-content:space-between;font-size:9.5px;color:#6b7280;margin:4px 0 3px"><span>Xếp hạng</span><span style="color:var(--purple-600)">A–</span></div>
-              <div class="match-bar"><div class="match-fill" style="width:72%;background:linear-gradient(90deg,var(--purple-600),var(--purple-400))"></div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CONSENT BOX (hidden initially) -->
-        <div class="consent-box" id="consent-box" style="display:none">
-          <div class="consent-title"><i class="ti ti-shield-check" style="font-size:14px;color:var(--purple-600)"></i>Xác nhận chia sẻ báo cáo tín nhiệm</div>
-          <div class="consent-desc">Bạn đã chọn gửi hồ sơ đến <strong id="selected-bank-names" style="color:var(--text-mid)">các ngân hàng đã chọn</strong>. Bạn có đồng ý chia sẻ Báo cáo tín nhiệm số của mình cho các ngân hàng này không?</div>
-          <div class="consent-banks" id="consent-bank-pills"></div>
-          <div style="background:rgba(222,189,255,0.15);border:1px solid rgba(168,85,247,0.15);border-radius:8px;padding:10px;margin-top:6px">
-            <div style="font-size:10px;color:#6b7280;line-height:1.5">
-              <i class="ti ti-info-circle" style="font-size:11px;color:var(--purple-400)"></i> Báo cáo chỉ bao gồm dữ liệu tài chính ẩn danh và điểm tín nhiệm. Thông tin cá nhân không được chia sẻ trực tiếp. Bạn có thể thu hồi quyền truy cập bất kỳ lúc nào.
-            </div>
-          </div>
-          <button class="agree-btn" onclick="sendToBank()"><i class="ti ti-send" style="font-size:14px;margin-right:6px"></i>Đồng ý & Gửi báo cáo tín nhiệm</button>
-        </div>
-
-        <!-- SUCCESS MESSAGE -->
-        <div class="send-confirm" id="send-confirm">
-          <div class="success-ic"><i class="ti ti-check" style="font-size:22px;color:#fff"></i></div>
-          <div style="font-size:13px;font-weight:600;color:#16a34a;margin-bottom:6px">Đã gửi thành công!</div>
-          <div style="font-size:11px;color:#6b7280;margin-bottom:14px">Báo cáo tín nhiệm của bạn đã được gửi đến các ngân hàng đã chọn. Ngân hàng sẽ liên hệ trong vòng 1–3 ngày làm việc.</div>
-          <div id="confirm-bank-list" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px"></div>
-          <button class="conn-btn" style="padding:8px 20px;margin:0 auto;display:block" onclick="resetBankFlow()">Chọn lại</button>
-        </div>
-      </div>
-
-      <!-- LỊCH SỬ BÁO CÁO -->
-      <div class="page-view" id="pg-history">
-        <div class="section-title">Lịch sử báo cáo</div>
-        <div class="card">
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(222,189,255,0.2);font-size:11.5px"><div><div style="font-weight:500;color:var(--text-dark)">Báo cáo tháng 4/2024</div><div style="font-size:10px;color:#6b7280;margin-top:2px">Điểm: 782 · Hạn mức: 5 tỷ đ</div></div><div style="display:flex;align-items:center;gap:8px"><span class="badge bp">Mới nhất</span><button class="conn-btn" onclick="showToast('Đang tải báo cáo...')"><i class="ti ti-download" style="font-size:11px"></i></button></div></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(222,189,255,0.2);font-size:11.5px"><div><div style="font-weight:500;color:var(--text-dark)">Báo cáo tháng 3/2024</div><div style="font-size:10px;color:#6b7280;margin-top:2px">Điểm: 765 · Hạn mức: 4.5 tỷ đ</div></div><button class="conn-btn" onclick="showToast('Đang tải báo cáo...')"><i class="ti ti-download" style="font-size:11px"></i></button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;font-size:11.5px"><div><div style="font-weight:500;color:var(--text-dark)">Báo cáo tháng 2/2024</div><div style="font-size:10px;color:#6b7280;margin-top:2px">Điểm: 748 · Hạn mức: 4.2 tỷ đ</div></div><button class="conn-btn" onclick="showToast('Đang tải báo cáo...')"><i class="ti ti-download" style="font-size:11px"></i></button></div>
-        </div>
-      </div>
-
-      <!-- THÔNG TIN DOANH NGHIỆP -->
-      <div class="page-view" id="pg-company">
-        <div class="section-title">Thông tin doanh nghiệp</div>
-        <div class="card">
-          <div class="input-row">
-            <div><div class="form-lbl">Tên doanh nghiệp</div><input class="form-input" value="Công ty TNHH ABC"></div>
-            <div><div class="form-lbl">Mã số thuế</div><input class="form-input" value="0123456789"></div>
-          </div>
-          <div class="input-row">
-            <div><div class="form-lbl">Ngành nghề</div><select class="form-select"><option>Thời trang & May mặc</option><option>Thực phẩm & Đồ uống</option><option>Điện tử</option></select></div>
-            <div><div class="form-lbl">Quy mô nhân viên</div><select class="form-select"><option>10–50 người</option><option>50–200 người</option><option>200+ người</option></select></div>
-          </div>
-          <div class="form-row"><div class="form-lbl">Địa chỉ</div><input class="form-input" value="123 Nguyễn Huệ, Q.1, TP.HCM"></div>
-          <div class="form-row"><div class="form-lbl">Email liên hệ</div><input class="form-input" value="admin@congtyabc.vn" type="email"></div>
-          <div style="display:flex;gap:10px;margin-top:4px">
-            <button class="submit-btn" style="width:auto;padding:8px 22px" onclick="showToast('Đã lưu thông tin doanh nghiệp!')">Lưu thay đổi</button>
-            <button class="conn-btn" style="padding:8px 16px">Hủy</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- CÀI ĐẶT -->
-      <div class="page-view" id="pg-settings">
-        <div class="section-title">Cài đặt hệ thống</div>
-        <div class="card" style="margin-bottom:10px">
-          <div class="card-title" style="margin-bottom:14px">Thông báo</div>
-          <div style="display:flex;flex-direction:column;gap:14px">
-            <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:11.5px;color:var(--text-dark)">Cảnh báo rủi ro qua email</div><div style="font-size:10px;color:#6b7280;margin-top:1px">Nhận ngay khi phát hiện rủi ro mới</div></div><label class="toggle"><input type="checkbox" checked onchange="showToast(this.checked?'Đã bật thông báo email':'Đã tắt thông báo email')"><div class="toggle-slider"></div></label></div>
-            <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:11.5px;color:var(--text-dark)">Báo cáo hàng tuần</div><div style="font-size:10px;color:#6b7280;margin-top:1px">Tóm tắt tài chính mỗi thứ Hai</div></div><label class="toggle"><input type="checkbox" checked onchange="showToast(this.checked?'Đã bật báo cáo tuần':'Đã tắt báo cáo tuần')"><div class="toggle-slider"></div></label></div>
-            <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:11.5px;color:var(--text-dark)">Đồng bộ dữ liệu tự động</div><div style="font-size:10px;color:#6b7280;margin-top:1px">Mỗi 2 giờ từ các nguồn đã kết nối</div></div><label class="toggle"><input type="checkbox" checked onchange="showToast(this.checked?'Đã bật tự động đồng bộ':'Đã tắt tự động đồng bộ')"><div class="toggle-slider"></div></label></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title" style="margin-bottom:12px">Bảo mật</div>
+          <div class="card-hdr"><div class="card-title">Điểm thành phần</div></div>
           <div style="display:flex;flex-direction:column;gap:10px">
-            <button class="conn-btn" style="width:fit-content;padding:7px 14px" onclick="showModal('pwModal')"><i class="ti ti-lock" style="font-size:11px"></i> Đổi mật khẩu</button>
-            <button class="conn-btn" style="width:fit-content;padding:7px 14px" onclick="showToast('Tính năng 2FA sẽ sớm ra mắt!')"><i class="ti ti-shield" style="font-size:11px"></i> Bật xác thực 2 lớp</button>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px"><span style="color:var(--tm)">Dòng tiền</span><span style="font-weight:600;color:var(--p400)">85/100</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:85%;background:linear-gradient(90deg,#7c3aed,#a855f7)"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px"><span style="color:var(--tm)">Tăng trưởng</span><span style="font-weight:600;color:#22c55e">78/100</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:78%;background:linear-gradient(90deg,#16a34a,#22c55e)"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px"><span style="color:var(--tm)">Tài sản</span><span style="font-weight:600;color:#f59e0b">62/100</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:62%;background:linear-gradient(90deg,#d97706,#f59e0b)"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px"><span style="color:var(--tm)">Uy tín thanh toán</span><span style="font-weight:600;color:#22c55e">91/100</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:91%;background:linear-gradient(90deg,#16a34a,#22c55e)"></div></div>
+            </div>
           </div>
         </div>
       </div>
 
-    </div><!-- end content -->
-  </div><!-- end main -->
-</div><!-- end app -->
+      <!-- CASHFLOW -->
+      <div class="page-view" id="pg-cashflow">
+        <div class="pg-header"><div class="pg-title">Dòng tiền</div><div class="pg-sub">Phân tích chi tiết dòng tiền</div></div>
+        <div class="card">
+          <div class="card-hdr"><div class="card-title">Tổng quan dòng tiền</div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
+            <div style="text-align:center;padding:10px;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.15);border-radius:10px">
+              <div style="font-size:15px;font-weight:700;color:#16a34a;font-family:'Playfair Display',serif">1,250</div>
+              <div style="font-size:9px;color:var(--tmu)">Tiền vào (tr)</div>
+            </div>
+            <div style="text-align:center;padding:10px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:10px">
+              <div style="font-size:15px;font-weight:700;color:#dc2626;font-family:'Playfair Display',serif">620</div>
+              <div style="font-size:9px;color:var(--tmu)">Tiền ra (tr)</div>
+            </div>
+            <div style="text-align:center;padding:10px;background:rgba(168,85,247,.07);border:1px solid rgba(168,85,247,.2);border-radius:10px">
+              <div style="font-size:15px;font-weight:700;color:var(--p400);font-family:'Playfair Display',serif">630</div>
+              <div style="font-size:9px;color:var(--tmu)">Ròng (tr)</div>
+            </div>
+          </div>
+          <div class="tabs" id="cfTabs">
+            <button class="tab active" id="cf-tab3" onclick="setCfPeriod(3,this)">3 tháng</button>
+            <button class="tab" id="cf-tab6" onclick="setCfPeriod(6,this)">6 tháng</button>
+          </div>
+          <div class="chart-wrap" style="height:180px"><canvas id="c3"></canvas></div>
+        </div>
+      </div>
+
+      <!-- OPS -->
+      <div class="page-view" id="pg-ops">
+        <div class="pg-header"><div class="pg-title">Chỉ số vận hành</div><div class="pg-sub">Hiệu suất hoạt động kinh doanh</div></div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-num">4,280</div><div class="stat-lbl">Đơn hàng</div></div>
+          <div class="stat-card"><div class="stat-num" style="color:#16a34a">3.65tr</div><div class="stat-lbl">Giá trị TB</div></div>
+          <div class="stat-card"><div class="stat-num" style="color:#f59e0b">8.2%</div><div class="stat-lbl">Hoàn hàng</div></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><div class="card-title">Doanh thu theo kênh</div></div>
+          <div class="chart-wrap" style="height:180px"><canvas id="c4"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><div class="card-title">Hiệu quả vận hành</div></div>
+          <div class="h-item">
+            <div class="h-ic" style="background:rgba(168,85,247,.1)"><i class="ti ti-users" style="color:var(--p300)"></i></div>
+            <div class="h-lbl">Khách hàng mới/tháng</div>
+            <div class="h-val">+342</div>
+          </div>
+          <div class="h-item">
+            <div class="h-ic" style="background:rgba(34,197,94,.1)"><i class="ti ti-repeat" style="color:#16a34a"></i></div>
+            <div class="h-lbl">Tỷ lệ khách quay lại</div>
+            <div class="h-val" style="color:#16a34a">68.4%</div>
+          </div>
+          <div class="h-item">
+            <div class="h-ic" style="background:rgba(245,158,11,.1)"><i class="ti ti-star" style="color:#d97706"></i></div>
+            <div class="h-lbl">Đánh giá trung bình</div>
+            <div class="h-val">4.7 ★</div>
+          </div>
+          <div class="h-item">
+            <div class="h-ic" style="background:rgba(239,68,68,.1)"><i class="ti ti-clock" style="color:#dc2626"></i></div>
+            <div class="h-lbl">Thời gian giao hàng TB</div>
+            <div class="h-val">2.3 ngày</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORECAST -->
+      <div class="page-view" id="pg-forecast">
+        <div class="pg-header"><div class="pg-title">Dự báo AI</div><div class="pg-sub">Mô phỏng kịch bản tài chính</div></div>
+
+        <div class="card" style="background:linear-gradient(150deg,rgba(26,6,48,.96),rgba(45,13,82,.96));border-color:rgba(168,85,247,.3)">
+          <div class="card-hdr"><div class="card-title" style="color:#fff">Điều chỉnh tham số</div></div>
+          <div class="slider-row">
+            <div class="slider-lbl" style="color:rgba(222,189,255,.7)">Tăng trưởng</div>
+            <input type="range" id="sl-growth" min="-20" max="50" value="15" oninput="updateForecast()">
+            <div class="slider-val" id="sl-growth-val">+15%</div>
+          </div>
+          <div class="slider-row">
+            <div class="slider-lbl" style="color:rgba(222,189,255,.7)">Chi phí</div>
+            <input type="range" id="sl-cost" min="-20" max="30" value="5" oninput="updateForecast()">
+            <div class="slider-val" id="sl-cost-val">+5%</div>
+          </div>
+          <div class="slider-row">
+            <div class="slider-lbl" style="color:rgba(222,189,255,.7)">Hoàn hàng</div>
+            <input type="range" id="sl-return" min="0" max="30" value="12" oninput="updateForecast()">
+            <div class="slider-val" id="sl-return-val">12%</div>
+          </div>
+          <div class="fc-results">
+            <div class="fc-box"><div class="fc-box-lbl">Doanh thu</div><div class="fc-box-val" id="fc-revenue">18.2 tỷ</div></div>
+            <div class="fc-box"><div class="fc-box-lbl">Dòng tiền</div><div class="fc-box-val" id="fc-cashflow">4.0 tỷ</div></div>
+            <div class="fc-box"><div class="fc-box-lbl">Điểm TN</div><div class="fc-box-val" id="fc-score">782</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-hdr"><div class="card-title">Dự báo doanh thu</div></div>
+          <div class="chart-wrap" style="height:170px"><canvas id="c5"></canvas></div>
+        </div>
+      </div>
+
+      <!-- CONNECT -->
+      <div class="page-view" id="pg-connect">
+        <div class="pg-header"><div class="pg-title">Kết nối dữ liệu</div><div class="pg-sub">Quản lý tích hợp nguồn dữ liệu</div></div>
+        <div class="card">
+          <div class="card-hdr"><div class="card-title">Đã kết nối</div></div>
+          <div class="src-item" onclick="showSrcDetail('KiotViet')">
+            <div class="src-logo" style="background:rgba(229,57,53,.08)"><span style="color:#e53e3e;font-size:14px;font-weight:700">K</span></div>
+            <div style="flex:1"><div class="src-name">KiotViet</div><div class="src-type">POS & Bán hàng · 12,480 bản ghi</div></div>
+            <span class="badge bg">Đang kết nối</span>
+          </div>
+          <div class="src-item" onclick="showSrcDetail('MISA AMIS')">
+            <div class="src-logo" style="background:rgba(234,88,12,.08)"><span style="color:#ea580c;font-size:14px;font-weight:700">M</span></div>
+            <div style="flex:1"><div class="src-name">MISA AMIS</div><div class="src-type">Kế toán · 8,320 bản ghi</div></div>
+            <span class="badge bg">Đang kết nối</span>
+          </div>
+          <div class="src-item" onclick="showSrcDetail('Shopee')">
+            <div class="src-logo" style="background:rgba(224,36,94,.08)"><span style="color:#e0245e;font-size:14px;font-weight:700">S</span></div>
+            <div style="flex:1"><div class="src-name">Shopee</div><div class="src-type">Sàn TMĐT · 5,640 bản ghi</div></div>
+            <span class="badge bg">Đang kết nối</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><div class="card-title">Thêm tích hợp</div></div>
+          <div class="connect-grid">
+            <div class="connect-card" onclick="showModal('connectModal',{name:'Haravan'})">
+              <div class="connect-logo" style="background:rgba(2,132,199,.08)"><span style="color:#0284c7;font-size:16px;font-weight:700">H</span></div>
+              <div class="connect-name">Haravan</div>
+              <div class="connect-type">Đa kênh</div>
+              <button class="conn-btn" style="width:100%">Kết nối</button>
+            </div>
+            <div class="connect-card" onclick="showModal('connectModal',{name:'Lazada'})">
+              <div class="connect-logo" style="background:rgba(255,144,0,.08)"><span style="color:#ff9000;font-size:16px;font-weight:700">L</span></div>
+              <div class="connect-name">Lazada</div>
+              <div class="connect-type">Sàn TMĐT</div>
+              <button class="conn-btn" style="width:100%">Kết nối</button>
+            </div>
+            <div class="connect-card" onclick="showModal('connectModal',{name:'TikTok Shop'})">
+              <div class="connect-logo" style="background:rgba(0,0,0,.06)"><span style="color:#333;font-size:16px;font-weight:700">T</span></div>
+              <div class="connect-name">TikTok Shop</div>
+              <div class="connect-type">Sàn TMĐT</div>
+              <button class="conn-btn" style="width:100%">Kết nối</button>
+            </div>
+            <div class="connect-card" onclick="showModal('connectModal',{name:'Fast'})">
+              <div class="connect-logo" style="background:rgba(59,130,246,.08)"><span style="color:#3b82f6;font-size:14px;font-weight:700">F</span></div>
+              <div class="connect-name">Fast</div>
+              <div class="connect-type">ERP</div>
+              <button class="conn-btn" style="width:100%">Kết nối</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYNC -->
+      <div class="page-view" id="pg-sync">
+        <div class="pg-header"><div class="pg-title">Lịch sử đồng bộ</div><div class="pg-sub">Theo dõi trạng thái đồng bộ dữ liệu</div></div>
+        <div class="card">
+          <div class="card-hdr">
+            <div class="card-title">Nhật ký đồng bộ</div>
+            <button class="conn-btn" onclick="addSyncLog()">Đồng bộ ngay</button>
+          </div>
+          <div id="sync-log">
+            <div class="sync-row"><span style="color:var(--td)">KiotViet — Đồng bộ thành công</span><div style="display:flex;align-items:center;gap:8px"><span class="badge bg">Thành công</span><span style="color:var(--tmu);font-size:10px">10:00</span></div></div>
+            <div class="sync-row"><span style="color:var(--td)">MISA AMIS — Đồng bộ thành công</span><div style="display:flex;align-items:center;gap:8px"><span class="badge bg">Thành công</span><span style="color:var(--tmu);font-size:10px">09:45</span></div></div>
+            <div class="sync-row" style="border:none"><span style="color:var(--td)">Shopee — Đồng bộ thành công</span><div style="display:flex;align-items:center;gap:8px"><span class="badge bg">Thành công</span><span style="color:var(--tmu);font-size:10px">09:30</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REPORT -->
+      <div class="page-view" id="pg-report">
+        <div class="pg-header"><div class="pg-title">Báo cáo tín nhiệm</div><div class="pg-sub">Hồ sơ tín nhiệm doanh nghiệp</div></div>
+        <div class="card" style="background:linear-gradient(150deg,rgba(26,6,48,.95),rgba(45,13,82,.95));border-color:rgba(168,85,247,.3)">
+          <div style="text-align:center;padding:8px 0">
+            <div style="font-size:11px;color:rgba(222,189,255,.6);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Điểm tín nhiệm tổng hợp</div>
+            <div style="font-family:'Playfair Display',serif;font-size:54px;font-weight:700;background:linear-gradient(135deg,#fff,#debdff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">782</div>
+            <div style="font-size:12px;color:rgba(222,189,255,.6);margin-top:4px">/ 1,000 điểm</div>
+            <span class="badge bg" style="margin-top:12px;font-size:11px;padding:4px 14px">Xếp hạng A–</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><div class="card-title">Tải báo cáo</div></div>
+          <div class="chip-row">
+            <span class="chip sel" onclick="selectChip(this)">PDF</span>
+            <span class="chip" onclick="selectChip(this)">Excel</span>
+            <span class="chip" onclick="selectChip(this)">JSON</span>
+          </div>
+          <button class="submit-btn" onclick="showToast('Đang tải báo cáo...')">
+            <i class="ti ti-download" style="font-size:14px"></i> Tải báo cáo tín nhiệm
+          </button>
+        </div>
+      </div>
+
+      <!-- COMPANY -->
+      <div class="page-view" id="pg-company">
+        <div class="pg-header"><div class="pg-title">Doanh nghiệp</div><div class="pg-sub">Thông tin công ty của bạn</div></div>
+        <div class="card">
+          <div class="card-hdr"><div class="card-title">Thông tin công ty</div></div>
+          <div class="form-row"><div class="form-lbl">Tên doanh nghiệp</div><input class="form-input" value="Công ty TNHH ABC"></div>
+          <div class="form-row"><div class="form-lbl">Mã số thuế</div><input class="form-input" value="0123456789"></div>
+          <div class="input-grid">
+            <div class="form-row"><div class="form-lbl">Ngành nghề</div><input class="form-input" value="Bán lẻ"></div>
+            <div class="form-row"><div class="form-lbl">Quy mô</div><input class="form-input" value="50-200"></div>
+          </div>
+          <button class="submit-btn" onclick="showToast('Đã lưu thông tin!')">Lưu thay đổi</button>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><div class="card-title">Thông tin xác thực</div></div>
+          <div class="info-row"><span>SME ID</span><span>1000123</span></div>
+          <div class="info-row"><span>Trạng thái xác thực</span><span style="color:#16a34a">Đã xác thực ✓</span></div>
+          <div class="info-row"><span>Gói dịch vụ</span><span>Pro Plan</span></div>
+          <div class="info-row" style="border:none"><span>Ngày gia nhập</span><span>01/01/2024</span></div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="page-view" id="pg-settings">
+        <div class="pg-header"><div class="pg-title">Cài đặt</div><div class="pg-sub">Tùy chỉnh trải nghiệm của bạn</div></div>
+        <div class="card">
+          <div class="card-hdr"><div class="card-title">Thông báo</div></div>
+          <div class="settings-row">
+            <div><div class="settings-lbl">Cảnh báo rủi ro</div><div class="settings-sub">Thông báo khi điểm thay đổi</div></div>
+            <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-lbl">Đồng bộ dữ liệu</div><div class="settings-sub">Thông báo sau mỗi lần đồng bộ</div></div>
+            <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-lbl">Báo cáo tuần</div><div class="settings-sub">Tóm tắt hàng tuần qua email</div></div>
+            <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><div class="card-title">Tài khoản</div></div>
+          <div class="settings-row">
+            <div><div class="settings-lbl">Xác thực 2 bước</div><div class="settings-sub">Bảo mật tài khoản tốt hơn</div></div>
+            <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
+          <div class="settings-row" style="border:none">
+            <div><div class="settings-lbl">Chế độ tối</div><div class="settings-sub">Giao diện tối mát mắt</div></div>
+            <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end content-scroll -->
+  </div><!-- end content-wrap -->
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button class="bn-item active" data-page="dashboard" onclick="nav('dashboard')">
+      <i class="ti ti-layout-dashboard"></i>
+      <span class="bn-lbl">Dashboard</span>
+    </button>
+    <button class="bn-item" data-page="cashflow" onclick="nav('cashflow')">
+      <i class="ti ti-currency-dollar"></i>
+      <span class="bn-lbl">Dòng tiền</span>
+    </button>
+    <button class="bn-item" data-page="bankmatch" onclick="nav('bankmatch')">
+      <i class="ti ti-building-bank"></i>
+      <span class="bn-lbl">Ngân hàng</span>
+    </button>
+    <button class="bn-item" data-page="report" onclick="nav('report')">
+      <i class="ti ti-file-certificate"></i>
+      <span class="bn-lbl">Báo cáo</span>
+    </button>
+    <button class="bn-item" data-page="settings" onclick="nav('settings')">
+      <i class="ti ti-settings"></i>
+      <span class="bn-lbl">Cài đặt</span>
+    </button>
+  </nav>
+</div>
 
 <!-- MODALS -->
-<div class="modal-overlay" id="modal-connectHaravan" onclick="closeModal('connectHaravan')">
-  <div class="modal" onclick="event.stopPropagation()">
-    <div class="modal-title">Kết nối Haravan <span class="modal-close" onclick="closeModal('connectHaravan')"><i class="ti ti-x"></i></span></div>
-    <div class="form-row"><label class="form-lbl">Shop ID / Domain</label><input class="form-input" placeholder="myshop.myharavan.com"></div>
-    <div class="form-row"><label class="form-lbl">API Key</label><input class="form-input" placeholder="Nhập API Key từ Haravan" type="password"></div>
-    <div class="form-row"><label class="form-lbl">API Secret</label><input class="form-input" placeholder="Nhập API Secret" type="password"></div>
-    <button class="submit-btn" onclick="connectSource('Haravan')">Kết nối ngay</button>
+<div class="modal-overlay" id="modal-connectModal" onclick="if(event.target===this)closeModal('connectModal')">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="conn-modal-title">Kết nối nguồn dữ liệu <span class="modal-close" onclick="closeModal('connectModal')"><i class="ti ti-x"></i></span></div>
+    <div id="conn-modal-body">
+      <div class="form-row"><div class="form-lbl">API Key</div><input class="form-input" placeholder="Nhập API Key"></div>
+      <div class="form-row"><div class="form-lbl">Shop ID</div><input class="form-input" placeholder="Nhập Shop ID"></div>
+      <button class="submit-btn" onclick="connectSource()">Kết nối</button>
+    </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-connectModal" onclick="closeModal('connectModal')">
-  <div class="modal" onclick="event.stopPropagation()">
-    <div class="modal-title" id="src-modal-title">Chi tiết kết nối <span class="modal-close" onclick="closeModal('connectModal')"><i class="ti ti-x"></i></span></div>
-    <div id="src-modal-body"></div>
+<div class="modal-overlay" id="modal-consentModal" onclick="if(event.target===this)closeModal('consentModal')">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Xác nhận đồng ý <span class="modal-close" onclick="closeModal('consentModal')"><i class="ti ti-x"></i></span></div>
+    <p style="font-size:12px;color:var(--tm);line-height:1.6;margin-bottom:14px">Bạn đang gửi hồ sơ tín nhiệm đến ngân hàng đã chọn:</p>
+    <div id="consent-banks-list" style="margin-bottom:14px"></div>
+    <div style="padding:12px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.2);border-radius:10px;font-size:11px;color:var(--tm);line-height:1.6;margin-bottom:14px">
+      Tôi đồng ý chia sẻ dữ liệu tài chính và thông tin doanh nghiệp với các ngân hàng đã chọn để xét duyệt hạn mức tín dụng.
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+      <input type="checkbox" id="consent-agree" style="accent-color:#7c3aed;width:16px;height:16px">
+      <label for="consent-agree" style="font-size:11px;color:var(--tm)">Tôi đồng ý với điều khoản trên</label>
+    </div>
+    <button class="submit-btn" onclick="submitConsent()">Gửi hồ sơ</button>
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-notifModal" onclick="closeModal('notifModal')">
-  <div class="modal" onclick="event.stopPropagation()">
+<div class="modal-overlay" id="modal-successModal" onclick="if(event.target===this)closeModal('successModal')">
+  <div class="modal" style="text-align:center">
+    <div class="modal-handle"></div>
+    <div style="width:60px;height:60px;border-radius:50%;background:rgba(34,197,94,.12);border:2px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 14px">
+      <i class="ti ti-check" style="font-size:28px;color:#16a34a"></i>
+    </div>
+    <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--td);margin-bottom:8px">Gửi thành công!</div>
+    <p style="font-size:12px;color:var(--tmu);line-height:1.6;margin-bottom:14px">Hồ sơ đã được gửi đến: <div id="success-banks" style="margin-top:6px"></div></p>
+    <button class="submit-btn" onclick="closeModal('successModal')">Đóng</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-notifModal" onclick="if(event.target===this)closeModal('notifModal')">
+  <div class="modal">
+    <div class="modal-handle"></div>
     <div class="modal-title">Thông báo <span class="modal-close" onclick="closeModal('notifModal')"><i class="ti ti-x"></i></span></div>
-    <div class="risk-item"><div class="risk-ic" style="background:#fef3c7"><i class="ti ti-alert-triangle" style="font-size:12px;color:#d97706"></i></div><div><div class="risk-title">Tỷ lệ hoàn hàng tăng cao</div><div class="risk-desc">Hôm nay lúc 09:32</div></div></div>
-    <div class="risk-item"><div class="risk-ic" style="background:#dcfce7"><i class="ti ti-check" style="font-size:12px;color:#16a34a"></i></div><div><div class="risk-title">Đồng bộ dữ liệu thành công</div><div class="risk-desc">Hôm nay lúc 10:00</div></div></div>
-    <div class="risk-item" style="border-bottom:none"><div class="risk-ic" style="background:rgba(222,189,255,0.3)"><i class="ti ti-info-circle" style="font-size:12px;color:var(--purple-600)"></i></div><div><div class="risk-title">Báo cáo tháng 4 đã sẵn sàng</div><div class="risk-desc">Hôm qua lúc 18:00</div></div></div>
-    <button class="submit-btn" style="margin-top:12px" onclick="closeModal('notifModal');showToast('Đã đánh dấu tất cả đã đọc')">Đánh dấu đã đọc</button>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modal-dateModal" onclick="closeModal('dateModal')">
-  <div class="modal" onclick="event.stopPropagation()">
-    <div class="modal-title">Chọn khoảng thời gian <span class="modal-close" onclick="closeModal('dateModal')"><i class="ti ti-x"></i></span></div>
-    <div class="chip-row">
-      <span class="chip sel" onclick="selectChip(this,'01/04/2024 – 30/04/2024')">Tháng 4</span>
-      <span class="chip" onclick="selectChip(this,'01/03/2024 – 31/03/2024')">Tháng 3</span>
-      <span class="chip" onclick="selectChip(this,'01/01/2024 – 31/03/2024')">Q1 2024</span>
+    <div class="risk-item">
+      <div class="risk-ic" style="background:rgba(168,85,247,.12)"><i class="ti ti-sparkles" style="color:var(--p300)"></i></div>
+      <div style="flex:1"><div class="risk-title">Điểm tín nhiệm tăng +12</div><div class="risk-desc">782 → Xếp hạng A– · Hôm nay</div></div>
     </div>
-    <div class="input-row">
-      <div><label class="form-lbl">Từ ngày</label><input class="form-input" type="date" value="2024-04-01" id="d-from"></div>
-      <div><label class="form-lbl">Đến ngày</label><input class="form-input" type="date" value="2024-04-30" id="d-to"></div>
+    <div class="risk-item">
+      <div class="risk-ic" style="background:rgba(34,197,94,.1)"><i class="ti ti-check" style="color:#16a34a"></i></div>
+      <div style="flex:1"><div class="risk-title">Đồng bộ dữ liệu hoàn tất</div><div class="risk-desc">KiotViet, MISA, Shopee · 2 giờ trước</div></div>
     </div>
-    <button class="submit-btn" style="margin-top:4px" onclick="applyDate()">Áp dụng</button>
+    <div class="risk-item" style="border:none">
+      <div class="risk-ic" style="background:rgba(245,158,11,.1)"><i class="ti ti-alert-triangle" style="color:#d97706"></i></div>
+      <div style="flex:1"><div class="risk-title">Tỷ lệ hoàn hàng tăng cao</div><div class="risk-desc">Kiểm tra báo cáo vận hành · Hôm qua</div></div>
+    </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-pwModal" onclick="closeModal('pwModal')">
-  <div class="modal" onclick="event.stopPropagation()">
-    <div class="modal-title">Đổi mật khẩu <span class="modal-close" onclick="closeModal('pwModal')"><i class="ti ti-x"></i></span></div>
-    <div class="form-row"><label class="form-lbl">Mật khẩu hiện tại</label><input class="form-input" type="password" placeholder="••••••••"></div>
-    <div class="form-row"><label class="form-lbl">Mật khẩu mới</label><input class="form-input" type="password" placeholder="••••••••"></div>
-    <div class="form-row"><label class="form-lbl">Xác nhận mật khẩu mới</label><input class="form-input" type="password" placeholder="••••••••"></div>
-    <button class="submit-btn" onclick="closeModal('pwModal');showToast('Đã đổi mật khẩu thành công!')">Cập nhật</button>
+<div class="modal-overlay" id="modal-limitModal" onclick="if(event.target===this)closeModal('limitModal')">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Hạn mức tín dụng <span class="modal-close" onclick="closeModal('limitModal')"><i class="ti ti-x"></i></span></div>
+    <div style="text-align:center;padding:16px 0;background:linear-gradient(135deg,rgba(124,58,237,.06),rgba(168,85,247,.04));border-radius:12px;margin-bottom:14px">
+      <div style="font-size:11px;color:var(--tmu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Hạn mức tối đa không thế chấp</div>
+      <div style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:var(--p400)">5,000,000,000</div>
+      <div style="font-size:13px;color:var(--tmu)">đồng</div>
+    </div>
+    <div class="info-row"><span>Cơ sở tính</span><span>Dòng tiền dự báo</span></div>
+    <div class="info-row"><span>Điểm tín nhiệm</span><span>782 / A–</span></div>
+    <div class="info-row" style="border:none"><span>Thời hạn vay tối đa</span><span>60 tháng</span></div>
+    <button class="submit-btn" style="margin-top:14px" onclick="closeModal('limitModal');nav('bankmatch')">Xem ngân hàng phù hợp</button>
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div id="toast" class="toast"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const pages={dashboard:'Tổng quan',connect:'Kết nối dữ liệu',sources:'Nguồn dữ liệu',sync:'Lịch sử đồng bộ',health:'Sức khỏe tài chính',cashflow:'Dòng tiền',ops:'Chỉ số vận hành',forecast:'Dự báo AI',report:'Báo cáo tín nhiệm',banks:'Kết nối ngân hàng',history:'Lịch sử báo cáo',company:'Thông tin doanh nghiệp',settings:'Cài đặt'};
-const subs={dashboard:'Cái nhìn tổng quan về sức khỏe tài chính của doanh nghiệp.',connect:'Quản lý kết nối với các phần mềm kế toán và sàn TMĐT.',sources:'Danh sách và trạng thái các nguồn dữ liệu đang kết nối.',sync:'Theo dõi lịch sử đồng bộ dữ liệu tự động.',health:'Phân tích chuyên sâu sức khỏe tài chính doanh nghiệp.',cashflow:'Theo dõi và dự báo dòng tiền theo thời gian thực.',ops:'Các chỉ số vận hành và hiệu quả kinh doanh.',forecast:'Dự báo tài chính dựa trên AI và dữ liệu lịch sử.',report:'Báo cáo tín nhiệm số được tạo tự động từ dữ liệu thực.',banks:'Dựa trên điểm 782 — AI tìm thấy 3 ngân hàng phù hợp nhất cho bạn.',history:'Xem lại các báo cáo tín nhiệm đã tạo trước đây.',company:'Cập nhật thông tin cơ bản của doanh nghiệp.',settings:'Tùy chỉnh thông báo và bảo mật tài khoản.'};
-let charts={},c3chart=null,c5chart=null,cfPeriod=3;
-let selectedBanks=new Set();
-
-const bankNames={'vpbank':'VPBank','msb':'MSB','tcb':'Techcombank'};
-
-function hideCover(){
-  const c=document.getElementById('pg-cover');
-  c.classList.add('hide');
-  setTimeout(()=>{c.style.display='none'},600);
-}
-
-function nav(id,el){
-  document.querySelectorAll('.page-view').forEach(p=>p.classList.remove('active'));
-  const pg=document.getElementById('pg-'+id);
-  if(pg)pg.classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  if(el)el.classList.add('active');
-  else{document.querySelectorAll('.nav-item').forEach(n=>{if(n.getAttribute('onclick')&&n.getAttribute('onclick').includes("'"+id+"'"))n.classList.add('active')})}
-  document.getElementById('page-title').textContent=pages[id]||id;
-  document.getElementById('page-sub').textContent=subs[id]||'';
-  setTimeout(()=>initCharts(id),80);
-}
-
-function showModal(id,data){
-  if(id==='connectModal'&&data){
-    document.getElementById('src-modal-title').innerHTML='Chi tiết kết nối — '+data+' <span class="modal-close" onclick="closeModal(\'connectModal\')"><i class="ti ti-x"></i></span>';
-    const connected=['KiotViet','MISA AMIS','Shopee'].includes(data);
-    document.getElementById('src-modal-body').innerHTML=connected
-      ?'<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><div style="width:32px;height:32px;border-radius:50%;background:#dcfce7;display:flex;align-items:center;justify-content:center"><i class="ti ti-check" style="color:#16a34a;font-size:16px"></i></div><div><div style="font-size:12px;font-weight:500;color:var(--text-dark)">Đang kết nối</div><div style="font-size:10px;color:#6b7280">Đồng bộ lần cuối: 2 giờ trước</div></div></div><div class="info-row"><span>Trạng thái API</span><span style="color:#16a34a">Hoạt động</span></div><div class="info-row"><span>Bản ghi đã tải</span><span>12,480</span></div><div style="margin-top:14px;display:flex;gap:8px"><button class="submit-btn" style="background:#dc2626;box-shadow:none" onclick="closeModal(\'connectModal\');showToast(\'Đã ngắt kết nối '+data+'\')">Ngắt kết nối</button><button class="conn-btn" style="padding:9px 16px" onclick="doSync(\''+data+'\');closeModal(\'connectModal\')">Đồng bộ ngay</button></div>'
-      :'<div class="form-row"><label class="form-lbl">API Key</label><input class="form-input" placeholder="Nhập API Key"></div><div class="form-row"><label class="form-lbl">Shop ID</label><input class="form-input" placeholder="Nhập Shop ID"></div><button class="submit-btn" onclick="connectSource(\''+data+'\')">Kết nối</button>';
+// ── COVER PARTICLES ──
+(function() {
+  const c = document.getElementById('cParticles');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'c-particle';
+    const size = Math.random() * 4 + 2;
+    const colors = ['rgba(168,85,247,0.7)','rgba(124,58,237,0.6)','rgba(222,189,255,0.5)','rgba(196,153,255,0.4)'];
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      width:${size}px;height:${size}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${5+Math.random()*8}s;
+      animation-delay:${Math.random()*6}s;
+    `;
+    c.appendChild(p);
   }
-  document.getElementById('modal-'+id).classList.add('show');
-}
-function closeModal(id){document.getElementById('modal-'+id).classList.remove('show')}
-function showSrcDetail(name){showModal('connectModal',name)}
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
-}
-function connectSource(name){closeModal('connectHaravan');closeModal('connectModal');showToast(name+' đã kết nối thành công!')}
+})();
 
-function doSync(name){
-  showToast(name+' đang đồng bộ...');
-  const log=document.getElementById('sync-log');
-  if(log){
-    const d=new Date();
-    const t=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
-    log.insertAdjacentHTML('afterbegin','<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(222,189,255,0.2);font-size:11.5px;animation:fadeSlideIn .3s"><span style="color:var(--text-dark)">'+name+' — Đồng bộ thành công</span><div style="display:flex;align-items:center;gap:10px"><span class="badge bg">Thành công</span><span style="color:#6b7280">Hôm nay '+t+'</span></div></div>');
+// ── ENTER APP ──
+function enterApp() {
+  document.getElementById('cover').classList.add('cover-exit');
+  setTimeout(() => {
+    document.getElementById('cover').style.display = 'none';
+    const app = document.getElementById('app');
+    app.classList.add('visible');
+    initCharts('dashboard');
+    animateScoreRing();
+    animateBars();
+  }, 650);
+}
+
+// ── DRAWER ──
+function toggleDrawer() {
+  const d = document.getElementById('drawer');
+  const o = document.getElementById('drawerOverlay');
+  const b = document.getElementById('menuBtn');
+  const isOpen = d.classList.contains('open');
+  if (isOpen) { closeDrawer(); } else { d.classList.add('open'); o.classList.add('open'); b.classList.add('open'); }
+}
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.getElementById('menuBtn').classList.remove('open');
+}
+
+// ── NAVIGATION ──
+const pages = {
+  dashboard: 'Dashboard', bankmatch: 'Ghép ngân hàng',
+  health: 'Sức khỏe tài chính', cashflow: 'Dòng tiền',
+  ops: 'Chỉ số vận hành', forecast: 'Dự báo AI',
+  connect: 'Kết nối dữ liệu', sync: 'Lịch sử đồng bộ',
+  report: 'Báo cáo tín nhiệm', company: 'Doanh nghiệp', settings: 'Cài đặt'
+};
+let currentPage = 'dashboard';
+const charts = {};
+let c3chart = null, c5chart = null, cfPeriod = 3;
+
+function nav(id) {
+  if (id === currentPage) { closeDrawer(); return; }
+  // Deactivate current
+  const old = document.getElementById('pg-' + currentPage);
+  if (old) old.classList.remove('active');
+  document.querySelectorAll('.dr-item.active').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.bn-item.active').forEach(el => el.classList.remove('active'));
+  // Activate new
+  currentPage = id;
+  const newEl = document.getElementById('pg-' + id);
+  if (newEl) {
+    newEl.classList.add('active');
+    document.getElementById('contentScroll').scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  document.querySelectorAll(`[data-page="${id}"]`).forEach(el => el.classList.add('active'));
+  closeDrawer();
+  setTimeout(() => { initCharts(id); animateBars(); }, 80);
+}
+
+// ── ANIMATE SCORE RING ──
+function animateScoreRing() {
+  const ring = document.getElementById('scoreRing');
+  if (!ring) return;
+  const r = 39, circ = 2 * Math.PI * r;
+  const pct = 782 / 1000;
+  ring.style.strokeDasharray = circ;
+  ring.style.strokeDashoffset = circ;
+  setTimeout(() => { ring.style.strokeDashoffset = circ * (1 - pct); }, 300);
+}
+
+// ── ANIMATE BARS ──
+function animateBars() {
+  document.querySelectorAll('.sfill').forEach(el => {
+    const w = el.style.getPropertyValue('--w') || el.style.width;
+    el.style.width = '0';
+    setTimeout(() => { el.style.width = w || el.getAttribute('data-w') || '0%'; }, 100);
+  });
+  document.querySelectorAll('.progress-fill').forEach(el => {
+    const w = el.style.width;
+    el.style.width = '0';
+    setTimeout(() => { el.style.width = w; }, 150);
+  });
+}
+
+// ── SPARKLE ──
+function sparkle(e) {
+  const el = document.createElement('div');
+  el.className = 'sparkle';
+  const x = e.touches ? e.touches[0].clientX : e.clientX;
+  const y = e.touches ? e.touches[0].clientY : e.clientY;
+  el.style.cssText = `left:${x-12}px;top:${y-12}px;width:24px;height:24px`;
+  el.innerHTML = `<svg viewBox="0 0 24 24" fill="none"><path d="M12 2L13.5 9.5L21 12L13.5 14.5L12 22L10.5 14.5L3 12L10.5 9.5L12 2Z" fill="#a855f7" opacity="0.8"/></svg>`;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 650);
+}
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+// ── MODALS ──
+let pendingConnectName = '';
+function showModal(id, data) {
+  if (id === 'connectModal' && data) {
+    pendingConnectName = data.name || data;
+    const name = data.name || data;
+    document.getElementById('conn-modal-title').innerHTML = name + ' <span class="modal-close" onclick="closeModal(\'connectModal\')"><i class="ti ti-x"></i></span>';
+    const connected = ['KiotViet','MISA AMIS','Shopee'].includes(name);
+    document.getElementById('conn-modal-body').innerHTML = connected
+      ? `<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;padding:12px;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:10px"><div style="width:32px;height:32px;border-radius:50%;background:rgba(34,197,94,.1);display:flex;align-items:center;justify-content:center"><i class="ti ti-check" style="color:#16a34a;font-size:16px"></i></div><div><div style="font-size:12px;font-weight:500;color:var(--td)">Đang kết nối</div><div style="font-size:10px;color:var(--tmu)">Đồng bộ lần cuối: 2 giờ trước</div></div></div><div class="info-row"><span>Trạng thái API</span><span style="color:#16a34a">Hoạt động</span></div><div class="info-row"><span>Bản ghi đã tải</span><span>12,480</span></div><div style="margin-top:16px;display:flex;gap:8px"><button class="submit-btn" style="background:linear-gradient(135deg,#dc2626,#ef4444)" onclick="closeModal('connectModal');showToast('Đã ngắt kết nối ${name}')">Ngắt kết nối</button></div>`
+      : `<div class="form-row"><div class="form-lbl">API Key</div><input class="form-input" placeholder="Nhập API Key"></div><div class="form-row"><div class="form-lbl">Shop ID</div><input class="form-input" placeholder="Nhập Shop ID"></div><button class="submit-btn" onclick="connectSource()">Kết nối</button>`;
+  }
+  document.getElementById('modal-' + id).classList.add('show');
+}
+function closeModal(id) { document.getElementById('modal-' + id).classList.remove('show'); }
+function showSrcDetail(name) { showModal('connectModal', { name }); }
+function connectSource() {
+  closeModal('connectModal');
+  showToast(pendingConnectName + ' đã kết nối thành công!');
+}
+
+// ── BANK MATCH ──
+const selectedBanks = new Set();
+const bankNames = { vpbank: 'VPBank', msb: 'MSB', tcb: 'Techcombank' };
+function toggleBank(id, event) {
+  if (event) sparkle(event);
+  const card = document.getElementById('bank-' + id);
+  if (selectedBanks.has(id)) { selectedBanks.delete(id); card.classList.remove('selected'); }
+  else { selectedBanks.add(id); card.classList.add('selected'); }
+  const btn = document.getElementById('matchSendBtn');
+  const lbl = document.getElementById('matchCountLbl');
+  if (selectedBanks.size === 0) { btn.disabled = true; lbl.textContent = 'Chọn ít nhất 1 ngân hàng để tiếp tục'; }
+  else {
+    btn.disabled = false;
+    const names = [...selectedBanks].map(b => bankNames[b]);
+    lbl.textContent = 'Đã chọn: ' + names.join(', ');
   }
 }
-function addSyncLog(){['KiotViet','MISA AMIS','Shopee'].forEach((n,i)=>setTimeout(()=>doSync(n),i*600))}
+function openConsentModal() {
+  const list = document.getElementById('consent-banks-list');
+  list.innerHTML = [...selectedBanks].map(b => `<span class="bank-chip"><i class="ti ti-building-bank" style="font-size:11px"></i>${bankNames[b]}</span>`).join('');
+  document.getElementById('consent-agree').checked = false;
+  showModal('consentModal');
+}
+function submitConsent() {
+  if (!document.getElementById('consent-agree').checked) { showToast('Vui lòng tích xác nhận đồng ý'); return; }
+  closeModal('consentModal');
+  const sb = document.getElementById('success-banks');
+  sb.innerHTML = [...selectedBanks].map(b => `<span class="bank-chip"><i class="ti ti-check" style="font-size:11px;color:#16a34a"></i>${bankNames[b]}</span>`).join('');
+  showModal('successModal');
+}
 
-function selectChip(el,label){
-  document.querySelectorAll('.chip-row .chip').forEach(c=>c.classList.remove('sel'));
+// ── SYNC ──
+function addSyncLog() {
+  showToast('Đang đồng bộ...');
+  ['KiotViet','MISA AMIS','Shopee'].forEach((n, i) => {
+    setTimeout(() => {
+      const log = document.getElementById('sync-log');
+      if (log) {
+        const d = new Date();
+        const t = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+        const row = document.createElement('div');
+        row.className = 'sync-row';
+        row.innerHTML = `<span style="color:var(--td)">${n} — Đồng bộ thành công</span><div style="display:flex;align-items:center;gap:8px"><span class="badge bg">Thành công</span><span style="color:var(--tmu);font-size:10px">Hôm nay ${t}</span></div>`;
+        log.insertAdjacentElement('afterbegin', row);
+      }
+    }, i * 500);
+  });
+}
+
+// ── CHIP SELECT ──
+function selectChip(el) {
+  document.querySelectorAll('.chip-row .chip').forEach(c => c.classList.remove('sel'));
   el.classList.add('sel');
 }
-function applyDate(){
-  const f=document.getElementById('d-from').value;
-  const t=document.getElementById('d-to').value;
-  if(f&&t){const fmt=v=>v.split('-').reverse().join('/');document.getElementById('date-label').textContent=fmt(f)+' – '+fmt(t)}
-  closeModal('dateModal');showToast('Đã cập nhật khoảng thời gian!');
-}
 
-function updateForecast(){
-  const g=parseInt(document.getElementById('sl-growth').value);
-  const c=parseInt(document.getElementById('sl-cost').value);
-  const r=parseInt(document.getElementById('sl-return').value);
-  document.getElementById('sl-growth-val').textContent=(g>=0?'+':'')+g+'%';
-  document.getElementById('sl-cost-val').textContent=(c>=0?'+':'')+c+'%';
-  document.getElementById('sl-return-val').textContent=r+'%';
-  const baseRev=15.8;
-  const fcRev=(baseRev*(1+g/100)*(1-r/200)).toFixed(1);
-  const fcCf=(parseFloat(fcRev)*0.22*(1-c/200)).toFixed(1);
-  const fcScore=Math.min(1000,Math.round(782+(g-15)*3-(c-5)*2-(r-12)*4));
-  document.getElementById('fc-revenue').textContent=fcRev+' tỷ';
-  document.getElementById('fc-cashflow').textContent=fcCf+' tỷ';
-  document.getElementById('fc-score').textContent=fcScore;
-  if(c5chart){const base=parseFloat(fcRev);c5chart.data.datasets[0].data=[+(base*.8).toFixed(1),+(base*.88).toFixed(1),+(base*.94).toFixed(1),base];c5chart.update()}
-}
-
-function setCfPeriod(p,el){
-  cfPeriod=p;
-  document.querySelectorAll('[id^=cf-tab]').forEach(t=>t.classList.remove('active'));
+// ── CASHFLOW PERIOD ──
+function setCfPeriod(p, el) {
+  cfPeriod = p;
+  document.querySelectorAll('#cfTabs .tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
-  if(c3chart){c3chart.destroy();c3chart=null}
+  if (c3chart) { c3chart.destroy(); c3chart = null; }
   initCharts('cashflow');
 }
 
-/* BANK FLOW */
-function toggleBank(id,el){
-  if(selectedBanks.has(id)){
-    selectedBanks.delete(id);
-    el.classList.remove('selected');
-  } else {
-    selectedBanks.add(id);
-    el.classList.add('selected');
-  }
-  updateConsentBox();
-}
-
-function updateConsentBox(){
-  const box=document.getElementById('consent-box');
-  const step3=document.getElementById('step3');
-  if(selectedBanks.size>0){
-    box.style.display='block';
-    box.style.animation='fadeSlideIn .35s cubic-bezier(.4,0,.2,1)';
-    step3.classList.add('active');
-    const names=[...selectedBanks].map(k=>bankNames[k]);
-    document.getElementById('selected-bank-names').textContent=names.join(' và ');
-    const pills=document.getElementById('consent-bank-pills');
-    pills.innerHTML=names.map(n=>`<div class="consent-bank-pill"><i class="ti ti-building-bank" style="font-size:11px;color:var(--purple-600)"></i>${n}</div>`).join('');
-  } else {
-    box.style.display='none';
-    step3.classList.remove('active');
+// ── FORECAST ──
+function updateForecast() {
+  const g = parseInt(document.getElementById('sl-growth').value);
+  const c = parseInt(document.getElementById('sl-cost').value);
+  const r = parseInt(document.getElementById('sl-return').value);
+  document.getElementById('sl-growth-val').textContent = (g >= 0 ? '+' : '') + g + '%';
+  document.getElementById('sl-cost-val').textContent = (c >= 0 ? '+' : '') + c + '%';
+  document.getElementById('sl-return-val').textContent = r + '%';
+  const base = 15.8;
+  const fcRev = (base * (1 + g/100) * (1 - r/200)).toFixed(1);
+  const fcCf = (fcRev * 0.22 * (1 - c/200)).toFixed(1);
+  const fcScore = Math.min(1000, Math.round(782 + (g-15)*3 - (c-5)*2 - (r-12)*4));
+  document.getElementById('fc-revenue').textContent = fcRev + ' tỷ';
+  document.getElementById('fc-cashflow').textContent = fcCf + ' tỷ';
+  document.getElementById('fc-score').textContent = fcScore;
+  if (c5chart) {
+    const b = parseFloat(fcRev);
+    c5chart.data.datasets[0].data = [+(b*.8).toFixed(1), +(b*.88).toFixed(1), +(b*.94).toFixed(1), b];
+    c5chart.update();
   }
 }
 
-function sendToBank(){
-  const names=[...selectedBanks].map(k=>bankNames[k]);
-  // Show success
-  document.getElementById('bank-cards-grid').style.display='none';
-  document.getElementById('consent-box').style.display='none';
-  document.getElementById('bank-steps').style.display='none';
-  // Update steps to all done
-  ['step1','step2','step3'].forEach(s=>{
-    const el=document.getElementById(s);
-    el.classList.remove('active');
-    el.classList.add('done');
-  });
-  const confirm=document.getElementById('send-confirm');
-  confirm.classList.add('show');
-  const list=document.getElementById('confirm-bank-list');
-  list.innerHTML=names.map(n=>`<div class="consent-bank-pill"><i class="ti ti-check" style="font-size:11px;color:#16a34a"></i>${n}</div>`).join('');
-  showToast('Đã gửi hồ sơ thành công đến '+names.join(', ')+'!');
-}
+// ── CHARTS ──
+const chartDefaults = {
+  plugins: { legend: { display: false } },
+  scales: {
+    x: { grid: { display: false }, ticks: { font: { size: 9 }, color: '#9580b5' } },
+    y: { grid: { color: 'rgba(196,153,255,.15)' }, ticks: { font: { size: 9 }, color: '#9580b5' } }
+  }
+};
 
-function resetBankFlow(){
-  selectedBanks.clear();
-  document.querySelectorAll('.bank-card').forEach(c=>{c.classList.remove('selected')});
-  document.getElementById('bank-cards-grid').style.display='grid';
-  document.getElementById('bank-steps').style.display='flex';
-  document.getElementById('send-confirm').classList.remove('show');
-  document.getElementById('consent-box').style.display='none';
-  ['step1'].forEach(s=>{document.getElementById(s).classList.add('done')});
-  ['step2'].forEach(s=>{document.getElementById(s).classList.add('active');document.getElementById(s).classList.remove('done')});
-  ['step3'].forEach(s=>{document.getElementById(s).classList.remove('active','done')});
+function initCharts(id) {
+  if (id === 'dashboard' && !charts.c1 && document.getElementById('c1')) {
+    charts.c1 = new Chart(document.getElementById('c1'), {
+      type: 'line',
+      data: {
+        labels: ['05/24','06/24','07/24','08/24'],
+        datasets: [
+          { label: 'Vào', data: [700,900,1050,1250], borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,.07)', tension: .4, fill: true, pointRadius: 3, borderWidth: 2 },
+          { label: 'Ra', data: [550,580,600,620], borderColor: '#f87171', backgroundColor: 'rgba(248,113,113,.04)', tension: .4, fill: true, pointRadius: 3, borderWidth: 2 },
+          { label: 'Ròng', data: [150,320,450,630], borderColor: '#a855f7', backgroundColor: 'rgba(168,85,247,.06)', tension: .4, fill: true, pointRadius: 3, borderWidth: 2 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, ...chartDefaults, scales: { ...chartDefaults.scales, y: { ...chartDefaults.scales.y, ticks: { ...chartDefaults.scales.y.ticks, callback: v => v + 'tr' } } } }
+    });
+  }
+  if (id === 'dashboard' && !charts.c2 && document.getElementById('c2')) {
+    charts.c2 = new Chart(document.getElementById('c2'), {
+      type: 'doughnut',
+      data: { labels: ['Cửa hàng','Shopee','Lazada','Website','Khác'], datasets: [{ data: [45,25,15,10,5], backgroundColor: ['#7c3aed','#f87171','#fb923c','#a78bfa','#d1d5db'], borderWidth: 0 }] },
+      options: { responsive: true, maintainAspectRatio: false, cutout: '72%', plugins: { legend: { display: false } } }
+    });
+  }
+  if (id === 'cashflow' && !c3chart && document.getElementById('c3')) {
+    const l3=['06/24','07/24','08/24'], l6=['03/24','04/24','05/24','06/24','07/24','08/24'];
+    const d = { in3:[900,1050,1250], out3:[580,600,620], net3:[320,450,630], in6:[620,700,800,900,1050,1250], out6:[480,510,550,580,600,620], net6:[140,190,250,320,450,630] };
+    const p = cfPeriod === 3 ? '3' : '6';
+    c3chart = new Chart(document.getElementById('c3'), {
+      type: 'bar',
+      data: {
+        labels: cfPeriod === 3 ? l3 : l6,
+        datasets: [
+          { label: 'Vào', data: d['in'+p], backgroundColor: 'rgba(34,197,94,.7)', borderRadius: 4 },
+          { label: 'Ra', data: d['out'+p], backgroundColor: 'rgba(248,113,113,.7)', borderRadius: 4 },
+          { label: 'Ròng', data: d['net'+p], backgroundColor: 'rgba(168,85,247,.7)', borderRadius: 4 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, ...chartDefaults, scales: { ...chartDefaults.scales, y: { ...chartDefaults.scales.y, ticks: { ...chartDefaults.scales.y.ticks, callback: v => v+'tr' } } } }
+    });
+  }
+  if (id === 'ops' && !charts.c4 && document.getElementById('c4')) {
+    charts.c4 = new Chart(document.getElementById('c4'), {
+      type: 'bar',
+      data: { labels: ['Cửa hàng','Shopee','Lazada','Website','Khác'], datasets: [{ data: [1926,1070,641,428,215], backgroundColor: ['#7c3aed','#f87171','#fb923c','#a78bfa','#d1d5db'], borderRadius: 5 }] },
+      options: { responsive: true, maintainAspectRatio: false, ...chartDefaults }
+    });
+  }
+  if (id === 'forecast' && !c5chart && document.getElementById('c5')) {
+    c5chart = new Chart(document.getElementById('c5'), {
+      type: 'line',
+      data: { labels: ['T6','T7','T8','T9'], datasets: [{ label: 'Dự báo', data: [12.6,14.4,16.2,18.2], borderColor: '#a855f7', backgroundColor: 'rgba(168,85,247,.09)', tension: .4, fill: true, pointRadius: 4, borderWidth: 2 }] },
+      options: { responsive: true, maintainAspectRatio: false, ...chartDefaults, scales: { ...chartDefaults.scales, y: { ...chartDefaults.scales.y, ticks: { ...chartDefaults.scales.y.ticks, callback: v => v+' tỷ' } } } }
+    });
+  }
 }
-
-/* CHARTS */
-function initCharts(id){
-  const purpleGrad=ctx=>{const g=ctx.createLinearGradient(0,0,0,200);g.addColorStop(0,'rgba(167,139,250,0.2)');g.addColorStop(1,'rgba(167,139,250,0)');return g};
-  if(id==='dashboard'&&!charts.c1&&document.getElementById('c1')){
-    const ctx=document.getElementById('c1').getContext('2d');
-    charts.c1=new Chart(document.getElementById('c1'),{type:'line',data:{labels:['T5/2024','T6/2024','T7/2024','T8/2024'],datasets:[{label:'Vào',data:[700,900,1050,1250],borderColor:'#22c55e',backgroundColor:'rgba(34,197,94,.08)',tension:.4,fill:true,pointRadius:3,borderWidth:2},{label:'Ra',data:[550,580,600,620],borderColor:'#f87171',backgroundColor:'rgba(248,113,113,.05)',tension:.4,fill:true,pointRadius:3,borderWidth:2},{label:'Ròng',data:[150,320,450,630],borderColor:'#c084fc',backgroundColor:'rgba(192,132,252,.07)',tension:.4,fill:true,pointRadius:3,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9.5},color:'#9ca3af'}},y:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{size:9.5},color:'#9ca3af',callback:v=>v+'tr'}}}}});
-  }
-  if(id==='dashboard'&&!charts.c2&&document.getElementById('c2')){
-    charts.c2=new Chart(document.getElementById('c2'),{type:'doughnut',data:{labels:['Cửa hàng','Shopee','Lazada','Website','Khác'],datasets:[{data:[45,25,15,10,5],backgroundColor:['#c084fc','#f87171','#fb923c','#a78bfa','#d1d5db'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'72%',plugins:{legend:{display:false}}}});
-  }
-  if(id==='cashflow'&&!c3chart&&document.getElementById('c3')){
-    const l3=['T6/2024','T7/2024','T8/2024'],l6=['T3/2024','T4/2024','T5/2024','T6/2024','T7/2024','T8/2024'];
-    const d={in3:[900,1050,1250],out3:[580,600,620],net3:[320,450,630],in6:[620,700,800,900,1050,1250],out6:[480,510,550,580,600,620],net6:[140,190,250,320,450,630]};
-    const p=cfPeriod===3?'3':'6';
-    c3chart=new Chart(document.getElementById('c3'),{type:'bar',data:{labels:cfPeriod===3?l3:l6,datasets:[{label:'Vào',data:d['in'+p],backgroundColor:'rgba(34,197,94,.75)',borderRadius:5},{label:'Ra',data:d['out'+p],backgroundColor:'rgba(248,113,113,.75)',borderRadius:5},{label:'Ròng',data:d['net'+p],backgroundColor:'rgba(192,132,252,.8)',borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9.5},color:'#9ca3af'}},y:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{size:9.5},color:'#9ca3af',callback:v=>v+'tr'}}}}});
-  }
-  if(id==='ops'&&!charts.c4&&document.getElementById('c4')){
-    charts.c4=new Chart(document.getElementById('c4'),{type:'bar',data:{labels:['Cửa hàng','Shopee','Lazada','Website','Khác'],datasets:[{data:[1926,1070,641,428,215],backgroundColor:['#c084fc','#f87171','#fb923c','#a78bfa','#d1d5db'],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9.5},color:'#9ca3af'}},y:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{size:9.5},color:'#9ca3af'}}}}});
-  }
-  if(id==='forecast'&&!c5chart&&document.getElementById('c5')){
-    c5chart=new Chart(document.getElementById('c5'),{type:'line',data:{labels:['T6','T7','T8','T9'],datasets:[{label:'Doanh thu dự báo',data:[12.6,14.4,16.2,18.2],borderColor:'#c084fc',backgroundColor:'rgba(192,132,252,.08)',tension:.4,fill:true,pointRadius:4,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9.5},color:'#9ca3af'}},y:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{size:9.5},color:'#9ca3af',callback:v=>v+' tỷ'}}}}});
-  }
-}
-
-window.addEventListener('load',()=>setTimeout(()=>initCharts('dashboard'),150));
 </script>
 </body>
 </html>
