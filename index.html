@@ -527,189 +527,192 @@ body{font-family:var(--font-body);background:var(--lavender-soft);overflow:hidde
 /* ===== SCORE RING ===== */
 .score-ring-wrap{display:flex;align-items:center;justify-content:center;position:relative}
 
-/* ===== HAMBURGER ===== */
-.hamburger{
-  display:none;width:36px;height:36px;
-  align-items:center;justify-content:center;
-  border:none;background:transparent;cursor:pointer;
-  border-radius:8px;transition:background .15s;
-  flex-shrink:0;margin-right:2px;padding:0;
+/* ===== CREDIT SCORE CARD ===== */
+.cs-card{
+  background:linear-gradient(145deg,#3c0d5b 0%,#5b1a8a 45%,#3c0d5b 100%);
+  border:1px solid rgba(192,132,252,0.35);
+  border-radius:var(--radius-xl);
+  padding:18px 20px;
+  position:relative;overflow:hidden;
+  cursor:pointer;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
 }
-.hamburger:hover{background:rgba(167,139,250,0.15)}
-.hamburger i{font-size:20px;color:var(--text-mid);line-height:1}
+.cs-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(60,13,91,0.35);border-color:rgba(192,132,252,0.55)}
+.cs-card::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:220px;height:220px;
+  background:radial-gradient(circle,rgba(192,132,252,0.18) 0%,transparent 70%);
+  pointer-events:none;
+}
+.cs-card::after{
+  content:'';position:absolute;bottom:-40px;left:-30px;
+  width:160px;height:160px;
+  background:radial-gradient(circle,rgba(109,40,217,0.2) 0%,transparent 70%);
+  pointer-events:none;
+}
+.cs-grid{display:grid;grid-template-columns:auto 1fr;gap:0 24px;align-items:center;position:relative;z-index:1}
+.cs-ring-area{position:relative;width:140px;height:140px;flex-shrink:0}
+.cs-ring-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.cs-score-num{font-size:32px;font-weight:700;color:#fff;letter-spacing:-0.03em;line-height:1;font-family:var(--font-display)}
+.cs-score-max{font-size:10px;color:rgba(222,189,255,0.5);margin-top:1px}
+.cs-right{padding-left:4px}
+.cs-grade{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(222,189,255,0.25);border-radius:8px;padding:5px 12px;margin-bottom:12px}
+.cs-grade-lbl{font-size:10px;color:rgba(222,189,255,0.6);font-weight:500}
+.cs-grade-val{font-size:16px;font-weight:700;color:#fff;font-family:var(--font-display)}
+.cs-title{font-size:10px;color:rgba(222,189,255,0.45);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-weight:500}
+.cs-factors{display:flex;flex-direction:column;gap:6px}
+.cs-factor{display:flex;align-items:center;gap:8px}
+.cs-factor-lbl{font-size:10px;color:rgba(222,189,255,0.65);width:110px;flex-shrink:0}
+.cs-factor-bar{flex:1;height:5px;background:rgba(255,255,255,0.1);border-radius:10px;overflow:hidden}
+.cs-factor-fill{height:100%;border-radius:10px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.cs-factor-score{font-size:10px;font-weight:600;color:#fff;width:28px;text-align:right}
+.cs-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid rgba(222,189,255,0.12);position:relative;z-index:1}
+.cs-bottom-stat{text-align:center}
+.cs-bottom-val{font-size:13px;font-weight:600;color:#fff}
+.cs-bottom-lbl{font-size:9px;color:rgba(222,189,255,0.45);margin-top:2px}
+.cs-divider{width:1px;height:28px;background:rgba(222,189,255,0.15)}
+.cs-trend-pill{display:flex;align-items:center;gap:4px;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.25);border-radius:6px;padding:3px 9px;font-size:10px;color:#4ade80;font-weight:500}
+.cs-pulse{animation:csPulse 2s ease-in-out infinite}
+@keyframes csPulse{0%,100%{opacity:1}50%{opacity:0.6}}
 
-/* ===== SIDEBAR OVERLAY (mobile backdrop) ===== */
+/* ===== MOBILE RESPONSIVE ===== */
+.hamburger{
+  display:none;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:8px;cursor:pointer;flex-shrink:0;
+  background:rgba(167,139,250,0.1);border:1px solid rgba(168,85,247,0.2);
+  color:var(--text-mid);transition:background .15s;
+}
+.hamburger:hover{background:rgba(167,139,250,0.2)}
 .sidebar-overlay{
   display:none;position:fixed;inset:0;
-  background:rgba(45,9,71,0.55);z-index:45;
+  background:rgba(30,0,60,0.55);z-index:149;
   backdrop-filter:blur(3px);
   animation:fadeIn .2s;
 }
 .sidebar-overlay.show{display:block}
+.mobile-bottom-nav{display:none}
 
-/* ===== MOBILE NAV BOTTOM BAR ===== */
-.mobile-nav{
-  display:none;
-  position:fixed;bottom:0;left:0;right:0;
-  background:rgba(255,255,255,0.97);
-  border-top:1px solid var(--border-light);
-  backdrop-filter:blur(20px);
-  z-index:40;
-  padding:6px 0 max(6px,env(safe-area-inset-bottom));
-  justify-content:space-around;
-  box-shadow:0 -4px 20px rgba(147,51,234,0.08);
-}
-.mnav-item{
-  display:flex;flex-direction:column;align-items:center;gap:2px;
-  padding:4px 10px;border-radius:10px;cursor:pointer;
-  font-size:9px;color:#9ca3af;transition:all .15s;
-  font-family:var(--font-body);min-width:52px;
-  user-select:none;
-}
-.mnav-item i{font-size:20px;line-height:1}
-.mnav-item.active{color:var(--purple-600)}
-.mnav-item.active i{color:var(--purple-600)}
-
-/* ===== RESPONSIVE — TABLET (≤768px) ===== */
 @media(max-width:768px){
-  .app{min-height:100dvh;min-height:100vh}
+  /* === BASE === */
+  body{overflow-x:hidden;overflow-y:auto}
+  .app{height:auto;min-height:100dvh;overflow:visible;padding-bottom:60px}
+  .main{overflow:visible;flex:none;width:100%}
 
-  /* Sidebar becomes a fixed off-canvas drawer */
+  /* === SIDEBAR AS DRAWER === */
   .sidebar{
-    position:fixed;
-    left:0;top:0;height:100%;height:100dvh;
-    z-index:50;
-    transform:translateX(calc(-1 * var(--sidebar-w)));
-    transition:transform .3s cubic-bezier(.4,0,.2,1);
-    box-shadow:4px 0 24px rgba(60,13,91,0.25);
+    position:fixed;left:-260px;top:0;height:100%;z-index:150;
+    width:240px;transition:left .3s cubic-bezier(.4,0,.2,1);
   }
-  .sidebar.open{transform:translateX(0)}
+  .sidebar.open{left:0}
 
-  /* Hamburger visible */
+  /* === TOPBAR === */
   .hamburger{display:flex}
-
-  /* Topbar tweaks */
-  .topbar{padding:0 12px;height:52px}
+  .topbar{padding:0 14px;gap:10px}
+  .topbar > div:first-child{flex:1;min-width:0}
+  .page-title{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .page-sub{display:none}
-  .date-btn span{display:none}
-  .date-btn{padding:5px 8px;min-width:unset}
+  .date-btn{padding:5px 8px}
+  .date-btn .date-label-text{display:none}
 
-  /* Grid layouts → responsive */
-  .fin-kpi-row{grid-template-columns:1fr 1fr}
-  .kpi-row{grid-template-columns:1fr 1fr}
-  .mid-row{grid-template-columns:1fr}
-  .bot-row{grid-template-columns:1fr 1fr}
-  .full-row{grid-template-columns:1fr}
-  .bank-cards{grid-template-columns:1fr 1fr}
-  .input-row{grid-template-columns:1fr}
-  .connect-grid{grid-template-columns:1fr 1fr!important}
-  .report-grid-2{grid-template-columns:1fr 1fr!important}
+  /* === CONTENT === */
+  .content{padding:12px 14px;gap:12px;overflow-y:visible;height:auto;flex:none}
+  .page-view{gap:12px}
 
-  /* Content padding */
-  .content{padding:12px 12px 80px}
-
-  /* KPI sizes */
-  .kpi-num{font-size:19px}
+  /* === KPI GRIDS === */
+  .kpi-row{grid-template-columns:repeat(2,1fr)}
+  .fin-kpi-row{grid-template-columns:repeat(2,1fr)}
   .fin-kpi-value{font-size:17px}
-  .fin-kpi-ic{width:30px;height:30px;margin-bottom:7px}
+  .kpi-num{font-size:18px}
 
-  /* Section title */
-  .section-title{font-size:15px}
+  /* === LAYOUT GRIDS === */
+  .mid-row{grid-template-columns:1fr}
+  .bot-row{grid-template-columns:1fr}
+  .full-row{grid-template-columns:1fr}
+  .input-row{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
 
-  /* Topbar right gap */
-  .topbar-r{gap:6px}
+  /* === CREDIT SCORE CARD === */
+  .cs-card{padding:16px}
+  .cs-grid{grid-template-columns:1fr;gap:16px}
+  .cs-ring-area{margin:0 auto;width:130px;height:130px}
+  .cs-right{padding-left:0}
+  .cs-grade{margin-bottom:8px}
+  .cs-factor-lbl{width:90px;font-size:9px}
+  .cs-bottom{flex-wrap:wrap;gap:10px}
+  .cs-bottom-stat{flex:1;min-width:60px}
+  .cs-divider{display:none}
+  .cs-trend-pill{width:100%;justify-content:center;margin-top:4px}
 
-  /* Slider label width on forecast */
-  .slider-wrap label{width:130px!important;font-size:10.5px!important}
+  /* === COVER PAGE === */
+  .cover-title{font-size:36px}
+  .cover-slogan{font-size:12px;margin-bottom:24px}
+  .tag-1,.tag-2,.tag-3,.tag-4{display:none}
+  .cover-pills{gap:6px;margin-bottom:28px}
+  .cover-pill{font-size:9.5px;padding:5px 10px}
+  .cover-cta{padding:10px 22px;font-size:12px}
 
-  /* Cover page mobile tweaks */
-  .cover-floating-tag{display:none}
-  .cover-title{font-size:42px}
-  .cover-slogan{font-size:12px;margin-bottom:22px}
-  .cover-pills{gap:7px;margin-bottom:28px}
+  /* === CONNECT PAGE === */
+  #pg-connect > div[style]{grid-template-columns:1fr 1fr !important}
 
-  /* Toast wider on mobile */
-  .toast{right:14px;left:14px;text-align:center;font-size:12.5px}
+  /* === BANK CARDS === */
+  .bank-cards{grid-template-columns:1fr 1fr}
 
-  /* Stat grid — stays 3 col on tablet */
-  .stat-grid{grid-template-columns:repeat(3,1fr)}
+  /* === TABLES === */
+  .fstmt-scroll{max-height:none}
+  .fstmt-table th,.fstmt-table td{padding:6px 8px;font-size:10px}
+  .rpt-table th,.rpt-table td{padding:7px 8px;font-size:10.5px}
 
-  /* Bank steps — wrap on small screens */
-  #bank-steps{flex-wrap:wrap;gap:4px}
-
-  /* Mobile nav bar */
-  .mobile-nav{display:flex}
-
-  /* Quick view modal */
-  .qv-modal{width:95vw}
-
-  /* Financial statement table scrollable */
-  .fstmt-scroll{max-height:280px}
-
-  /* Report filter bar */
-  .rpt-filter-bar{flex-direction:column;align-items:stretch}
-  .rpt-search-wrap{width:100%;min-width:unset}
-  .rpt-btn{font-size:10px;padding:4px 9px}
-
-  /* Full-row report grid inside pg-report */
-  #pg-report [style*="grid-template-columns:1fr 1fr"]{
-    grid-template-columns:1fr 1fr!important;
+  /* === MODAL === */
+  .modal-overlay{align-items:flex-end}
+  .modal{
+    width:100%;max-width:100%;border-radius:16px 16px 0 0;
+    max-height:85vh;padding:18px;
   }
+  .qv-modal{width:100%;max-width:100%}
+  .modal-overlay.show{animation:slideUpModal .25s cubic-bezier(.4,0,.2,1)}
+  @keyframes slideUpModal{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+
+  /* === TOAST === */
+  .toast{left:14px;right:14px;bottom:72px;text-align:center}
+
+  /* === MISC === */
+  .section-title{font-size:15px}
+  .card{padding:12px}
+  .chip-row{gap:5px}
+  .tab-group{gap:3px}
+  .rpt-filter-bar{flex-wrap:wrap}
+  .rpt-search-wrap{min-width:100%;flex:none}
+  .info-row{font-size:10.5px}
+  .slider-wrap input[type=range]{height:4px}
+  .step-indicator{overflow-x:auto;padding-bottom:4px}
+
+  /* === MOBILE BOTTOM NAV === */
+  .mobile-bottom-nav{
+    display:flex;
+    position:fixed;bottom:0;left:0;right:0;
+    height:58px;z-index:100;
+    background:linear-gradient(165deg,#3c0d5b 0%,#5b1a8a 100%);
+    border-top:1px solid rgba(192,132,252,0.25);
+    align-items:center;justify-content:space-around;
+    padding:0 4px;
+  }
+  .mob-nav-item{
+    display:flex;flex-direction:column;align-items:center;
+    gap:3px;padding:6px 10px;cursor:pointer;
+    color:rgba(222,189,255,0.5);font-size:8.5px;font-weight:500;
+    border-radius:8px;transition:all .2s;flex:1;
+  }
+  .mob-nav-item i{font-size:20px}
+  .mob-nav-item.active{color:#fff;background:rgba(192,132,252,0.18)}
+  .mob-nav-item:hover{color:rgba(255,255,255,0.8)}
 }
 
-/* ===== RESPONSIVE — PHONE (≤480px) ===== */
-@media(max-width:480px){
-  .fin-kpi-row{grid-template-columns:1fr}
+@media(max-width:400px){
   .kpi-row{grid-template-columns:1fr 1fr}
-  .bot-row{grid-template-columns:1fr}
+  .fin-kpi-row{grid-template-columns:1fr 1fr}
   .bank-cards{grid-template-columns:1fr}
-  .connect-grid{grid-template-columns:1fr!important}
-  .stat-grid{grid-template-columns:1fr 1fr}
-
-  .cover-title{font-size:34px}
-  .cover-slogan{font-size:11px;margin-bottom:18px}
-  .cover-cta{padding:10px 20px;font-size:12px}
-  .cover-logo-ic{width:60px;height:60px;margin-bottom:16px}
-  .cover-logo-ic i{font-size:26px}
-
-  .topbar{padding:0 10px;height:50px}
-  .page-title{font-size:15px}
-  .topbar-r{gap:4px}
-  .notif-btn{width:28px;height:28px}
-  .user-av{width:28px;height:28px;font-size:9px}
-
-  .kpi-num{font-size:18px}
-  .fin-kpi-value{font-size:16px}
-  .stat-num{font-size:17px}
-
-  .content{padding:10px 10px 80px}
-
-  /* Slider full width label */
-  .slider-wrap{flex-wrap:wrap;gap:6px}
-  .slider-wrap label{width:100%!important;margin-bottom:2px}
-  .slider-wrap input[type=range]{width:100%}
-  .slider-val{min-width:50px}
-
-  /* Donut wrap stacked */
-  .donut-wrap{flex-direction:column;align-items:flex-start;gap:10px}
-  .donut-wrap canvas{width:80px!important;height:80px!important}
-
-  /* Section title */
-  .section-title{font-size:14px}
-
-  /* Bank step indicator */
-  #bank-steps{display:grid;grid-template-columns:1fr;gap:6px;margin-bottom:10px}
-  #bank-steps .step-line{display:none}
-  #bank-steps>div:nth-child(even){display:none}
-
-  /* Report grid 2-col */
-  #pg-report [style*="grid-template-columns:1fr 1fr"]{
-    grid-template-columns:1fr!important;
-  }
-  .report-grid-2{grid-template-columns:1fr!important}
-
-  /* Form */
-  .input-row{grid-template-columns:1fr}
+  .cover-title{font-size:28px}
+  .cs-ring-area{width:110px;height:110px}
 }
 </style>
 </head>
@@ -743,11 +746,11 @@ body{font-family:var(--font-body);background:var(--lavender-soft);overflow:hidde
   </div>
 </div>
 
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
 <!-- MAIN APP -->
 <div class="app">
-  <!-- MOBILE SIDEBAR BACKDROP -->
-  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
-
   <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="logo-area">
@@ -801,17 +804,17 @@ body{font-family:var(--font-body);background:var(--lavender-soft);overflow:hidde
   <!-- MAIN -->
   <div class="main">
     <div class="topbar">
-      <div style="display:flex;align-items:center;gap:2px">
-        <button class="hamburger" onclick="toggleSidebar()" aria-label="Open menu">
-          <i class="ti ti-menu-2"></i>
-        </button>
-        <div>
+      <div style="display:flex;align-items:center;gap:10px;min-width:0">
+        <div class="hamburger" id="hamburger-btn" onclick="toggleSidebar()" aria-label="Menu">
+          <i class="ti ti-menu-2" style="font-size:18px"></i>
+        </div>
+        <div style="min-width:0">
           <div class="page-title" id="page-title">Tổng quan</div>
           <div class="page-sub" id="page-sub">Xin chào, Công ty TNHH ABC! Đây là cái nhìn tổng quan về sức khỏe tài chính.</div>
         </div>
       </div>
       <div class="topbar-r">
-        <div class="date-btn" onclick="showModal('dateModal')"><i class="ti ti-calendar" style="font-size:12px;color:var(--purple-600)"></i> <span id="date-label">01/04/2024 – 30/04/2024</span> <i class="ti ti-chevron-down" style="font-size:11px;color:var(--text-muted)"></i></div>
+        <div class="date-btn" onclick="showModal('dateModal')"><i class="ti ti-calendar" style="font-size:12px;color:var(--purple-600)"></i> <span id="date-label" class="date-label-text">01/04/2024 – 30/04/2024</span> <i class="ti ti-chevron-down" style="font-size:11px;color:var(--text-muted)"></i></div>
         <div class="notif-btn" onclick="showModal('notifModal')"><i class="ti ti-bell" style="font-size:17px;color:var(--text-mid)"></i><span class="notif-badge"></span></div>
         <div class="user-av" onclick="nav('company',null)">NV</div>
       </div>
@@ -821,6 +824,85 @@ body{font-family:var(--font-body);background:var(--lavender-soft);overflow:hidde
 
       <!-- DASHBOARD -->
       <div class="page-view active" id="pg-dashboard">
+
+        <!-- CREDIT SCORE CARD -->
+        <div class="cs-card" onclick="nav('report',null)">
+          <div class="cs-grid">
+            <div class="cs-ring-area">
+              <svg width="140" height="140" style="transform:rotate(-90deg)">
+                <defs>
+                  <linearGradient id="csGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#c084fc"/>
+                    <stop offset="100%" stop-color="#818cf8"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="70" cy="70" r="58" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="10"/>
+                <circle id="cs-ring-fill" cx="70" cy="70" r="58" fill="none" stroke="url(#csGrad)" stroke-width="10"
+                  stroke-linecap="round"
+                  stroke-dasharray="364.4"
+                  stroke-dashoffset="100"
+                  style="transition:stroke-dashoffset 1.5s cubic-bezier(.4,0,.2,1)"/>
+              </svg>
+              <div class="cs-ring-center">
+                <div class="cs-score-num">782</div>
+                <div class="cs-score-max">/1000</div>
+              </div>
+            </div>
+            <div class="cs-right">
+              <div class="cs-grade">
+                <span class="cs-grade-lbl">Xếp hạng</span>
+                <span class="cs-grade-val">A–</span>
+                <span class="badge bg" style="font-size:9px;margin-left:4px">Tốt</span>
+              </div>
+              <div class="cs-title">Các yếu tố cấu thành</div>
+              <div class="cs-factors">
+                <div class="cs-factor">
+                  <span class="cs-factor-lbl">Dòng tiền</span>
+                  <div class="cs-factor-bar"><div class="cs-factor-fill" id="csf1" style="width:0%;background:linear-gradient(90deg,#4ade80,#22c55e)"></div></div>
+                  <span class="cs-factor-score">88</span>
+                </div>
+                <div class="cs-factor">
+                  <span class="cs-factor-lbl">Ổn định DT</span>
+                  <div class="cs-factor-bar"><div class="cs-factor-fill" id="csf2" style="width:0%;background:linear-gradient(90deg,#818cf8,#6366f1)"></div></div>
+                  <span class="cs-factor-score">80</span>
+                </div>
+                <div class="cs-factor">
+                  <span class="cs-factor-lbl">Khả năng trả nợ</span>
+                  <div class="cs-factor-bar"><div class="cs-factor-fill" id="csf3" style="width:0%;background:linear-gradient(90deg,#60a5fa,#3b82f6)"></div></div>
+                  <span class="cs-factor-score">76</span>
+                </div>
+                <div class="cs-factor">
+                  <span class="cs-factor-lbl">Rủi ro tổng hợp</span>
+                  <div class="cs-factor-bar"><div class="cs-factor-fill" id="csf4" style="width:0%;background:linear-gradient(90deg,#fb923c,#f97316)"></div></div>
+                  <span class="cs-factor-score">72</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cs-bottom">
+            <div class="cs-bottom-stat">
+              <div class="cs-bottom-val">Top 18%</div>
+              <div class="cs-bottom-lbl">Ngành bán lẻ</div>
+            </div>
+            <div class="cs-divider"></div>
+            <div class="cs-bottom-stat">
+              <div class="cs-bottom-val">5 tỷ đ</div>
+              <div class="cs-bottom-lbl">Hạn mức đề xuất</div>
+            </div>
+            <div class="cs-divider"></div>
+            <div class="cs-bottom-stat">
+              <div class="cs-bottom-val">3 NH</div>
+              <div class="cs-bottom-lbl">Ngân hàng phù hợp</div>
+            </div>
+            <div class="cs-divider"></div>
+            <div class="cs-trend-pill cs-pulse">
+              <i class="ti ti-trending-up" style="font-size:12px"></i>
+              +17 điểm
+              <span style="font-size:9px;color:rgba(74,222,128,0.65);margin-left:3px">So tháng trước</span>
+            </div>
+          </div>
+        </div>
+
         <!-- Financial Health KPIs -->
         <div class="fin-kpi-row">
           <div class="fin-kpi blue" onclick="nav('cashflow',null)">
@@ -973,7 +1055,7 @@ body{font-family:var(--font-body);background:var(--lavender-soft);overflow:hidde
       <!-- KẾT NỐI DỮ LIỆU -->
       <div class="page-view" id="pg-connect">
         <div class="section-title">Kết nối nguồn dữ liệu</div>
-        <div class="connect-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
           <div class="card" style="cursor:pointer" onclick="showSrcDetail('KiotViet')">
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div class="src-logo" style="background:#fff5f5;width:38px;height:38px"><span style="color:#e53e3e;font-size:14px">K</span></div><div><div class="src-name" style="font-size:12.5px">KiotViet</div><div class="src-type">POS & Bán hàng</div></div></div>
             <span class="badge bg">Đã kết nối</span><div style="font-size:9.5px;color:#6b7280;margin-top:6px">Đồng bộ: 2 giờ trước</div>
@@ -1125,6 +1207,203 @@ body{font-family:var(--font-body);background:var(--lavender-soft);overflow:hidde
         </div>
       </div>
 
+      <!-- BÁO CÁO TÀI CHÍNH -->
+      <div class="page-view" id="pg-bctc">
+        <div class="fin-kpi-row">
+          <div class="fin-kpi blue">
+            <div class="fin-kpi-ic blue"><i class="ti ti-building" style="font-size:18px;color:#2563eb"></i></div>
+            <div class="fin-kpi-label">Tổng tài sản</div>
+            <div class="fin-kpi-value blue">65.2 tỷ đ</div>
+            <div><span class="fin-kpi-delta up"><i class="ti ti-arrow-up" style="font-size:9px"></i>8.4%</span><span class="fin-kpi-hint">So Q1/2024</span></div>
+          </div>
+          <div class="fin-kpi green">
+            <div class="fin-kpi-ic green"><i class="ti ti-users" style="font-size:18px;color:#16a34a"></i></div>
+            <div class="fin-kpi-label">Vốn chủ sở hữu</div>
+            <div class="fin-kpi-value green">28.4 tỷ đ</div>
+            <div><span class="fin-kpi-delta up"><i class="ti ti-arrow-up" style="font-size:9px"></i>21.9%</span><span class="fin-kpi-hint">So đầu năm 2024</span></div>
+          </div>
+          <div class="fin-kpi purple">
+            <div class="fin-kpi-ic purple"><i class="ti ti-credit-card" style="font-size:18px;color:var(--purple-600)"></i></div>
+            <div class="fin-kpi-label">Tổng nợ phải trả</div>
+            <div class="fin-kpi-value purple">36.8 tỷ đ</div>
+            <div><span class="fin-kpi-delta down"><i class="ti ti-arrow-down" style="font-size:9px"></i>2.7%</span><span class="fin-kpi-hint">D/E ratio: 1.29</span></div>
+          </div>
+          <div class="fin-kpi amber">
+            <div class="fin-kpi-ic amber"><i class="ti ti-coin" style="font-size:18px;color:#d97706"></i></div>
+            <div class="fin-kpi-label">LN sau thuế T4/2024</div>
+            <div class="fin-kpi-value amber">1.82 tỷ đ</div>
+            <div><span class="fin-kpi-delta up"><i class="ti ti-arrow-up" style="font-size:9px"></i>24.8%</span><span class="fin-kpi-hint">Biên LN: 11.7%</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <!-- Filter & Export Bar -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+            <div style="display:flex;align-items:center;gap:6px">
+              <span style="font-size:10.5px;color:#6b7280;margin-right:2px">Kỳ:</span>
+              <button class="stab active" id="bctc-per-t4" onclick="setBctcPeriod('T4/2024',this)">T4/2024</button>
+              <button class="stab" id="bctc-per-q1" onclick="setBctcPeriod('Q1/2024',this)">Q1/2024</button>
+              <button class="stab" id="bctc-per-2023" onclick="setBctcPeriod('Năm 2023',this)">Năm 2023</button>
+            </div>
+            <div style="display:flex;gap:6px">
+              <button class="rpt-btn preview" onclick="showToast('Đang tạo bản xem trước...')"><i class="ti ti-eye" style="font-size:11px"></i> Xem trước</button>
+              <button class="rpt-btn pdf" onclick="showToast('Đang xuất PDF chuẩn VAS...')"><i class="ti ti-file-type-pdf" style="font-size:11px"></i> Xuất PDF</button>
+              <button class="rpt-btn excel" onclick="showToast('Đang xuất file Excel...')"><i class="ti ti-table" style="font-size:11px"></i> Xuất Excel</button>
+            </div>
+          </div>
+          <!-- Tabs -->
+          <div class="qv-tabs">
+            <div class="qv-tab active" id="bctc-tab-bsht" onclick="switchBctcTab('bsht',this)"><i class="ti ti-table-column" style="font-size:12px;margin-right:4px"></i>Bảng CĐKT (B01-DNN)</div>
+            <div class="qv-tab" id="bctc-tab-kqkd" onclick="switchBctcTab('kqkd',this)"><i class="ti ti-chart-line" style="font-size:12px;margin-right:4px"></i>KQHĐKD (B02-DNN)</div>
+            <div class="qv-tab" id="bctc-tab-lctt" onclick="switchBctcTab('lctt',this)"><i class="ti ti-arrows-exchange" style="font-size:12px;margin-right:4px"></i>Lưu chuyển tiền tệ (B03-DNN)</div>
+          </div>
+
+          <!-- ===== BẢNG CÂN ĐỐI KẾ TOÁN ===== -->
+          <div id="bctc-content-bsht" style="display:block;margin-top:12px">
+            <div style="font-size:10.5px;color:#6b7280;margin-bottom:8px">Đơn vị tính: Triệu đồng &nbsp;·&nbsp; Ngày lập: 02/05/2024 &nbsp;·&nbsp; Người lập: Kế toán trưởng</div>
+            <div style="max-height:430px;overflow-y:auto">
+              <table class="fstmt-table">
+                <thead><tr>
+                  <th style="width:50px">Mã số</th><th>CHỈ TIÊU</th>
+                  <th style="text-align:right">30/04/2024</th><th style="text-align:right">31/12/2023</th>
+                </tr></thead>
+                <tbody>
+                  <tr class="group-hdr"><td colspan="4" style="background:rgba(37,99,235,0.06);color:#2563eb;padding:8px 10px;text-transform:uppercase;letter-spacing:.04em">A — TÀI SẢN NGẮN HẠN</td></tr>
+                  <tr><td><span class="fstmt-code">110</span></td><td>I. Tiền và các khoản tương đương tiền</td><td class="num">8,240</td><td class="num">7,610</td></tr>
+                  <tr><td><span class="fstmt-code">120</span></td><td>II. Đầu tư tài chính ngắn hạn</td><td class="num">2,000</td><td class="num">1,500</td></tr>
+                  <tr><td><span class="fstmt-code">130</span></td><td>III. Các khoản phải thu ngắn hạn</td><td class="num">12,380</td><td class="num">11,200</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">131</span></td><td style="padding-left:18px;color:#6b7280">— Phải thu của khách hàng</td><td class="num" style="color:#6b7280">9,800</td><td class="num" style="color:#6b7280">8,900</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">136</span></td><td style="padding-left:18px;color:#6b7280">— Phải thu ngắn hạn khác</td><td class="num" style="color:#6b7280">2,580</td><td class="num" style="color:#6b7280">2,300</td></tr>
+                  <tr><td><span class="fstmt-code">140</span></td><td>IV. Hàng tồn kho</td><td class="num">14,600</td><td class="num">13,800</td></tr>
+                  <tr><td><span class="fstmt-code">150</span></td><td>V. Tài sản ngắn hạn khác</td><td class="num">1,300</td><td class="num">1,100</td></tr>
+                  <tr class="total-row"><td><span class="fstmt-code">100</span></td><td>Cộng tài sản ngắn hạn</td><td class="num">38,520</td><td class="num">35,210</td></tr>
+
+                  <tr class="group-hdr"><td colspan="4" style="background:rgba(109,40,217,0.06);color:var(--purple-mid);padding:8px 10px;text-transform:uppercase;letter-spacing:.04em">B — TÀI SẢN DÀI HẠN</td></tr>
+                  <tr><td><span class="fstmt-code">220</span></td><td>I. Tài sản cố định hữu hình</td><td class="num">22,400</td><td class="num">22,100</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">221</span></td><td style="padding-left:18px;color:#6b7280">— Nguyên giá</td><td class="num" style="color:#6b7280">31,200</td><td class="num" style="color:#6b7280">30,500</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">222</span></td><td style="padding-left:18px;color:#dc2626">— Hao mòn lũy kế</td><td class="num neg">(8,800)</td><td class="num neg">(8,400)</td></tr>
+                  <tr><td><span class="fstmt-code">260</span></td><td>II. Đầu tư tài chính dài hạn</td><td class="num">2,780</td><td class="num">2,500</td></tr>
+                  <tr><td><span class="fstmt-code">280</span></td><td>III. Tài sản dài hạn khác</td><td class="num">1,500</td><td class="num">1,300</td></tr>
+                  <tr class="total-row"><td><span class="fstmt-code">200</span></td><td>Cộng tài sản dài hạn</td><td class="num">26,680</td><td class="num">25,900</td></tr>
+
+                  <tr class="total-row" style="background:rgba(37,99,235,0.08);border-top:2px solid rgba(37,99,235,0.25)">
+                    <td><span class="fstmt-code">270</span></td><td style="color:#2563eb;font-size:12.5px;letter-spacing:.02em">TỔNG CỘNG TÀI SẢN</td>
+                    <td class="num" style="color:#2563eb;font-size:12.5px">65,200</td><td class="num" style="color:#2563eb;font-size:12.5px">61,110</td>
+                  </tr>
+                  <tr><td colspan="4" style="height:8px;border:none;background:transparent"></td></tr>
+
+                  <tr class="group-hdr"><td colspan="4" style="background:rgba(220,38,38,0.06);color:#dc2626;padding:8px 10px;text-transform:uppercase;letter-spacing:.04em">A — NỢ PHẢI TRẢ</td></tr>
+                  <tr><td><span class="fstmt-code">310</span></td><td style="font-weight:600">I. Nợ ngắn hạn</td><td class="num" style="font-weight:600">20,900</td><td class="num" style="font-weight:600">21,400</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">311</span></td><td style="padding-left:18px;color:#6b7280">— Vay và nợ thuê TC ngắn hạn</td><td class="num" style="color:#6b7280">8,500</td><td class="num" style="color:#6b7280">8,200</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">312</span></td><td style="padding-left:18px;color:#6b7280">— Phải trả người bán ngắn hạn</td><td class="num" style="color:#6b7280">7,200</td><td class="num" style="color:#6b7280">8,100</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">313</span></td><td style="padding-left:18px;color:#6b7280">— Thuế và các khoản phải nộp NN</td><td class="num" style="color:#6b7280">1,800</td><td class="num" style="color:#6b7280">1,700</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">314</span></td><td style="padding-left:18px;color:#6b7280">— Phải trả người lao động</td><td class="num" style="color:#6b7280">3,400</td><td class="num" style="color:#6b7280">3,400</td></tr>
+                  <tr><td><span class="fstmt-code">330</span></td><td style="font-weight:600">II. Nợ dài hạn</td><td class="num" style="font-weight:600">15,900</td><td class="num" style="font-weight:600">16,410</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">334</span></td><td style="padding-left:18px;color:#6b7280">— Vay và nợ thuê TC dài hạn</td><td class="num" style="color:#6b7280">14,200</td><td class="num" style="color:#6b7280">14,710</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">338</span></td><td style="padding-left:18px;color:#6b7280">— Nợ dài hạn khác</td><td class="num" style="color:#6b7280">1,700</td><td class="num" style="color:#6b7280">1,700</td></tr>
+                  <tr class="total-row"><td><span class="fstmt-code">300</span></td><td>Tổng nợ phải trả</td><td class="num">36,800</td><td class="num">37,810</td></tr>
+
+                  <tr class="group-hdr"><td colspan="4" style="background:rgba(22,163,74,0.06);color:#16a34a;padding:8px 10px;text-transform:uppercase;letter-spacing:.04em">B — VỐN CHỦ SỞ HỮU</td></tr>
+                  <tr><td><span class="fstmt-code">411</span></td><td>I. Vốn góp của chủ sở hữu</td><td class="num">20,000</td><td class="num">20,000</td></tr>
+                  <tr><td><span class="fstmt-code">417</span></td><td>II. Quỹ đầu tư phát triển</td><td class="num">3,200</td><td class="num">2,880</td></tr>
+                  <tr><td><span class="fstmt-code">421</span></td><td>III. LNST chưa phân phối</td><td class="num pos">5,200</td><td class="num pos">420</td></tr>
+                  <tr class="total-row"><td><span class="fstmt-code">400</span></td><td>Tổng vốn chủ sở hữu</td><td class="num pos">28,400</td><td class="num pos">23,300</td></tr>
+
+                  <tr class="total-row" style="background:rgba(22,163,74,0.08);border-top:2px solid rgba(22,163,74,0.25)">
+                    <td><span class="fstmt-code">440</span></td><td style="color:#16a34a;font-size:12.5px;letter-spacing:.02em">TỔNG CỘNG NGUỒN VỐN</td>
+                    <td class="num" style="color:#16a34a;font-size:12.5px">65,200</td><td class="num" style="color:#16a34a;font-size:12.5px">61,110</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ===== KQHĐKD ===== -->
+          <div id="bctc-content-kqkd" style="display:none;margin-top:12px">
+            <div style="font-size:10.5px;color:#6b7280;margin-bottom:8px">Đơn vị tính: Triệu đồng &nbsp;·&nbsp; Ngày lập: 02/05/2024</div>
+            <div style="max-height:430px;overflow-y:auto">
+              <table class="fstmt-table">
+                <thead><tr>
+                  <th style="width:50px">Mã số</th><th>CHỈ TIÊU</th>
+                  <th style="text-align:right">T4/2024</th><th style="text-align:right">T3/2024</th>
+                  <th style="text-align:right;width:80px">Chênh lệch</th>
+                </tr></thead>
+                <tbody>
+                  <tr><td><span class="fstmt-code">01</span></td><td>Doanh thu bán hàng & cung cấp dịch vụ</td><td class="num">16,800</td><td class="num">14,160</td><td class="num pos">+18.6%</td></tr>
+                  <tr><td><span class="fstmt-code">02</span></td><td>Các khoản giảm trừ doanh thu</td><td class="num neg">(1,200)</td><td class="num neg">(980)</td><td class="num neg">+22.4%</td></tr>
+                  <tr class="group-hdr"><td><span class="fstmt-code">10</span></td><td>Doanh thu thuần từ bán hàng & CCDV</td><td class="num">15,600</td><td class="num">13,180</td><td class="num pos">+18.4%</td></tr>
+                  <tr><td><span class="fstmt-code">11</span></td><td>Giá vốn hàng bán</td><td class="num neg">(11,791)</td><td class="num neg">(9,988)</td><td class="num neg">+18.1%</td></tr>
+                  <tr class="group-hdr"><td><span class="fstmt-code">20</span></td><td>Lợi nhuận gộp về bán hàng & CCDV</td><td class="num">3,809</td><td class="num">3,192</td><td class="num pos">+19.3%</td></tr>
+                  <tr><td><span class="fstmt-code">21</span></td><td>Doanh thu hoạt động tài chính</td><td class="num">45</td><td class="num">38</td><td class="num pos">+18.4%</td></tr>
+                  <tr><td><span class="fstmt-code">22</span></td><td>Chi phí tài chính</td><td class="num neg">(320)</td><td class="num neg">(310)</td><td class="num neg">+3.2%</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">23</span></td><td style="padding-left:18px;color:#6b7280">— Trong đó: chi phí lãi vay</td><td class="num" style="color:#6b7280">(320)</td><td class="num" style="color:#6b7280">(310)</td><td class="num" style="color:#6b7280">+3.2%</td></tr>
+                  <tr><td><span class="fstmt-code">24</span></td><td>Chi phí quản lý kinh doanh</td><td class="num neg">(1,248)</td><td class="num neg">(1,109)</td><td class="num neg">+12.5%</td></tr>
+                  <tr class="group-hdr"><td><span class="fstmt-code">30</span></td><td>Lợi nhuận thuần từ hoạt động kinh doanh</td><td class="num">2,286</td><td class="num">1,811</td><td class="num pos">+26.2%</td></tr>
+                  <tr><td><span class="fstmt-code">40</span></td><td>Lợi nhuận khác</td><td class="num">15</td><td class="num">12</td><td class="num pos">+25.0%</td></tr>
+                  <tr class="group-hdr"><td><span class="fstmt-code">50</span></td><td>Tổng lợi nhuận kế toán trước thuế</td><td class="num">2,301</td><td class="num">1,823</td><td class="num pos">+26.2%</td></tr>
+                  <tr><td><span class="fstmt-code">51</span></td><td>Chi phí thuế TNDN hiện hành (20%)</td><td class="num neg">(480)</td><td class="num neg">(365)</td><td class="num neg">+31.5%</td></tr>
+                  <tr class="total-row" style="background:rgba(22,163,74,0.06);border-top:2px solid rgba(22,163,74,0.25)">
+                    <td><span class="fstmt-code">60</span></td><td style="color:#16a34a;font-size:12.5px">LỢI NHUẬN SAU THUẾ TNDN</td>
+                    <td class="num pos" style="font-size:12.5px;color:#16a34a">1,821</td>
+                    <td class="num pos" style="font-size:12.5px;color:#16a34a">1,458</td>
+                    <td class="num pos">+24.9%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ===== LƯU CHUYỂN TIỀN TỆ ===== -->
+          <div id="bctc-content-lctt" style="display:none;margin-top:12px">
+            <div style="font-size:10.5px;color:#6b7280;margin-bottom:8px">Đơn vị tính: Triệu đồng &nbsp;·&nbsp; Phương pháp: Gián tiếp &nbsp;·&nbsp; Ngày lập: 02/05/2024</div>
+            <div style="max-height:430px;overflow-y:auto">
+              <table class="fstmt-table">
+                <thead><tr>
+                  <th style="width:50px">Mã số</th><th>CHỈ TIÊU</th>
+                  <th style="text-align:right">T4/2024</th><th style="text-align:right">T3/2024</th>
+                </tr></thead>
+                <tbody>
+                  <tr class="group-hdr"><td colspan="4" style="background:rgba(37,99,235,0.07);color:#2563eb;padding:8px 10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">I. LƯU CHUYỂN TIỀN TỪ HĐKD</td></tr>
+                  <tr><td><span class="fstmt-code">01</span></td><td>Lợi nhuận trước thuế</td><td class="num">2,301</td><td class="num">1,823</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">02</span></td><td style="padding-left:18px;color:#6b7280">+ Khấu hao TSCĐ</td><td class="num" style="color:#6b7280">420</td><td class="num" style="color:#6b7280">410</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">03</span></td><td style="padding-left:18px;color:#6b7280">+ Chi phí lãi vay</td><td class="num" style="color:#6b7280">320</td><td class="num" style="color:#6b7280">310</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">04</span></td><td style="padding-left:18px;color:#dc2626">− Tăng các khoản phải thu ngắn hạn</td><td class="num neg">(380)</td><td class="num neg">(210)</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">05</span></td><td style="padding-left:18px;color:#dc2626">− Tăng hàng tồn kho</td><td class="num neg">(650)</td><td class="num neg">(420)</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">06</span></td><td style="padding-left:18px;color:#16a34a">+ Tăng phải trả người bán</td><td class="num pos">680</td><td class="num pos">520</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">07</span></td><td style="padding-left:18px;color:#dc2626">− Thuế TNDN đã nộp trong kỳ</td><td class="num neg">(480)</td><td class="num neg">(365)</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">08</span></td><td style="padding-left:18px;color:#6b7280">± Thu / chi tiền khác từ HĐKD</td><td class="num" style="color:#6b7280">239</td><td class="num" style="color:#6b7280">190</td></tr>
+                  <tr class="total-row" style="background:rgba(37,99,235,0.06)"><td><span class="fstmt-code">I</span></td><td style="color:#2563eb">Lưu chuyển tiền thuần từ HĐKD</td><td class="num pos" style="color:#2563eb">2,450</td><td class="num pos" style="color:#2563eb">2,258</td></tr>
+
+                  <tr class="group-hdr"><td colspan="4" style="background:rgba(217,119,6,0.07);color:#d97706;padding:8px 10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">II. LƯU CHUYỂN TIỀN TỪ HĐĐT</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">09</span></td><td style="padding-left:18px;color:#dc2626">− Tiền chi mua sắm, xây dựng TSCĐ</td><td class="num neg">(3,500)</td><td class="num neg">(1,800)</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">10</span></td><td style="padding-left:18px;color:#16a34a">+ Tiền thu từ thanh lý, nhượng bán TS</td><td class="num pos">300</td><td class="num" style="color:#6b7280">—</td></tr>
+                  <tr class="total-row" style="background:rgba(217,119,6,0.06)"><td><span class="fstmt-code">II</span></td><td style="color:#d97706">Lưu chuyển tiền thuần từ HĐĐT</td><td class="num neg" style="color:#dc2626">(3,200)</td><td class="num neg" style="color:#dc2626">(1,800)</td></tr>
+
+                  <tr class="group-hdr"><td colspan="4" style="background:rgba(147,51,234,0.06);color:var(--purple-600);padding:8px 10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">III. LƯU CHUYỂN TIỀN TỪ HĐTC</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">11</span></td><td style="padding-left:18px;color:#16a34a">+ Tiền thu từ vay ngắn hạn, dài hạn</td><td class="num pos">2,500</td><td class="num pos">1,200</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">12</span></td><td style="padding-left:18px;color:#dc2626">− Tiền trả nợ gốc vay</td><td class="num neg">(900)</td><td class="num neg">(650)</td></tr>
+                  <tr style="font-size:10.5px"><td style="padding-left:18px"><span class="fstmt-code">13</span></td><td style="padding-left:18px;color:#dc2626">− Lãi vay đã trả trong kỳ</td><td class="num neg">(220)</td><td class="num neg">(210)</td></tr>
+                  <tr class="total-row" style="background:rgba(147,51,234,0.06)"><td><span class="fstmt-code">III</span></td><td style="color:var(--purple-600)">Lưu chuyển tiền thuần từ HĐTC</td><td class="num pos" style="color:var(--purple-600)">1,380</td><td class="num pos" style="color:var(--purple-600)">340</td></tr>
+
+                  <tr class="total-row" style="background:rgba(109,40,217,0.1);border-top:2px solid rgba(109,40,217,0.3)">
+                    <td><span class="fstmt-code">NET</span></td>
+                    <td style="color:var(--purple-mid);font-size:12.5px">Lưu chuyển tiền thuần trong kỳ (I+II+III)</td>
+                    <td class="num pos" style="color:var(--purple-mid);font-size:12.5px">630</td>
+                    <td class="num pos" style="color:var(--purple-mid);font-size:12.5px">798</td>
+                  </tr>
+                  <tr><td><span class="fstmt-code">R1</span></td><td>Tiền và tương đương tiền đầu kỳ</td><td class="num">7,610</td><td class="num">6,812</td></tr>
+                  <tr class="total-row" style="background:rgba(22,163,74,0.06);border-top:2px solid rgba(22,163,74,0.2)">
+                    <td><span class="fstmt-code">R2</span></td>
+                    <td style="color:#16a34a;font-size:12.5px">Tiền và tương đương tiền cuối kỳ</td>
+                    <td class="num pos" style="color:#16a34a;font-size:12.5px">8,240</td>
+                    <td class="num pos" style="color:#16a34a;font-size:12.5px">7,610</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- BÁO CÁO TÍN NHIỆM -->
       <div class="page-view" id="pg-report">
         <div class="stat-grid">
@@ -1140,7 +1419,7 @@ body{font-family:var(--font-body);background:var(--lavender-soft);overflow:hidde
             <div class="progress-bar" style="height:10px"><div class="progress-fill" style="width:78.2%;background:linear-gradient(90deg,#16a34a,#22c55e)"></div></div>
             <div style="display:flex;justify-content:space-between;font-size:9.5px;color:#9ca3af;margin-top:3px"><span>0</span><span style="font-weight:500;color:#16a34a">782 / 1000</span><span>1000</span></div>
           </div>
-          <div class="report-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
             <div style="background:rgba(222,189,255,0.1);border:1px solid rgba(168,85,247,0.15);border-radius:9px;padding:10px"><div style="font-size:10px;color:#6b7280;margin-bottom:4px">Sức khỏe dòng tiền</div><div style="font-size:13px;font-weight:600;color:#16a34a">Tốt</div><div class="progress-bar"><div class="progress-fill" style="width:82%;background:#16a34a"></div></div></div>
             <div style="background:rgba(222,189,255,0.1);border:1px solid rgba(168,85,247,0.15);border-radius:9px;padding:10px"><div style="font-size:10px;color:#6b7280;margin-bottom:4px">Ổn định doanh thu</div><div style="font-size:13px;font-weight:600;color:#16a34a">Tốt</div><div class="progress-bar"><div class="progress-fill" style="width:75%;background:#16a34a"></div></div></div>
             <div style="background:rgba(222,189,255,0.1);border:1px solid rgba(168,85,247,0.15);border-radius:9px;padding:10px"><div style="font-size:10px;color:#6b7280;margin-bottom:4px">Khả năng trả nợ</div><div style="font-size:13px;font-weight:600;color:var(--purple-600)">Tốt</div><div class="progress-bar"><div class="progress-fill" style="width:78%;background:var(--purple-600)"></div></div></div>
@@ -1305,25 +1584,6 @@ body{font-family:var(--font-body);background:var(--lavender-soft);overflow:hidde
   </div><!-- end main -->
 </div><!-- end app -->
 
-<!-- MOBILE BOTTOM NAV -->
-<nav class="mobile-nav" id="mobile-nav">
-  <div class="mnav-item active" id="mnav-dashboard" onclick="nav('dashboard',null);setMobileNav('dashboard')">
-    <i class="ti ti-layout-dashboard"></i><span>Dashboard</span>
-  </div>
-  <div class="mnav-item" id="mnav-cashflow" onclick="nav('cashflow',null);setMobileNav('cashflow')">
-    <i class="ti ti-currency-dollar"></i><span>Dòng tiền</span>
-  </div>
-  <div class="mnav-item" id="mnav-health" onclick="nav('health',null);setMobileNav('health')">
-    <i class="ti ti-heart-rate-monitor"></i><span>Tài chính</span>
-  </div>
-  <div class="mnav-item" id="mnav-banks" onclick="nav('banks',null);setMobileNav('banks')">
-    <i class="ti ti-building-bank"></i><span>Ngân hàng</span>
-  </div>
-  <div class="mnav-item" id="mnav-more" onclick="toggleSidebar()">
-    <i class="ti ti-dots"></i><span>Thêm</span>
-  </div>
-</nav>
-
 <!-- MODALS -->
 <div class="modal-overlay" id="modal-connectHaravan" onclick="closeModal('connectHaravan')">
   <div class="modal" onclick="event.stopPropagation()">
@@ -1380,6 +1640,25 @@ body{font-family:var(--font-body);background:var(--lavender-soft);overflow:hidde
 
 <div class="toast" id="toast"></div>
 
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-bottom-nav">
+  <div class="mob-nav-item active" id="mob-dashboard" onclick="nav('dashboard',null)">
+    <i class="ti ti-layout-dashboard"></i>Dashboard
+  </div>
+  <div class="mob-nav-item" id="mob-cashflow" onclick="nav('cashflow',null)">
+    <i class="ti ti-currency-dollar"></i>Dòng tiền
+  </div>
+  <div class="mob-nav-item" id="mob-health" onclick="nav('health',null)">
+    <i class="ti ti-heart-rate-monitor"></i>Sức khỏe
+  </div>
+  <div class="mob-nav-item" id="mob-banks" onclick="nav('banks',null)">
+    <i class="ti ti-building-bank"></i>Ngân hàng
+  </div>
+  <div class="mob-nav-item" id="mob-more" onclick="toggleSidebar()">
+    <i class="ti ti-dots"></i>Thêm
+  </div>
+</nav>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
 const pages={dashboard:'Tổng quan',connect:'Kết nối dữ liệu',sources:'Nguồn dữ liệu',sync:'Lịch sử đồng bộ',health:'Sức khỏe tài chính',cashflow:'Dòng tiền',ops:'Chỉ số vận hành',forecast:'Dự báo AI',report:'Báo cáo tín nhiệm',banks:'Kết nối ngân hàng',history:'Lịch sử báo cáo',company:'Thông tin doanh nghiệp',settings:'Cài đặt'};
@@ -1395,32 +1674,6 @@ function hideCover(){
   setTimeout(()=>{c.style.display='none'},600);
 }
 
-function toggleSidebar(){
-  const sidebar=document.querySelector('.sidebar');
-  const overlay=document.getElementById('sidebar-overlay');
-  const isOpen=sidebar.classList.toggle('open');
-  overlay.classList.toggle('show',isOpen);
-  // prevent body scroll when sidebar open
-  document.body.style.overflow=isOpen?'hidden':'';
-}
-
-function closeSidebarIfMobile(){
-  if(window.innerWidth<=768){
-    const sidebar=document.querySelector('.sidebar');
-    const overlay=document.getElementById('sidebar-overlay');
-    sidebar.classList.remove('open');
-    overlay.classList.remove('show');
-    document.body.style.overflow='';
-  }
-}
-
-function setMobileNav(id){
-  const mobileNavIds=['dashboard','cashflow','health','banks'];
-  document.querySelectorAll('.mnav-item').forEach(el=>el.classList.remove('active'));
-  const target=document.getElementById('mnav-'+id);
-  if(target)target.classList.add('active');
-}
-
 function nav(id,el){
   document.querySelectorAll('.page-view').forEach(p=>p.classList.remove('active'));
   const pg=document.getElementById('pg-'+id);
@@ -1431,10 +1684,11 @@ function nav(id,el){
   document.getElementById('page-title').textContent=pages[id]||id;
   document.getElementById('page-sub').textContent=subs[id]||'';
   setTimeout(()=>initCharts(id),80);
-  closeSidebarIfMobile();
-  // Scroll content to top
-  const content=document.querySelector('.content');
-  if(content)content.scrollTop=0;
+  // Mobile: close sidebar drawer & sync bottom nav
+  if(typeof closeSidebar==='function')closeSidebar();
+  const mobMap={dashboard:'mob-dashboard',cashflow:'mob-cashflow',health:'mob-health',banks:'mob-banks'};
+  document.querySelectorAll('.mob-nav-item').forEach(i=>i.classList.remove('active'));
+  if(mobMap[id]){const m=document.getElementById(mobMap[id]);if(m)m.classList.add('active')}
 }
 
 function showModal(id,data){
@@ -1587,7 +1841,35 @@ function initCharts(id){
   }
 }
 
-window.addEventListener('load',()=>setTimeout(()=>initCharts('dashboard'),150));
+window.addEventListener('load',()=>{
+  setTimeout(()=>initCharts('dashboard'),150);
+  // Animate credit score ring: 782/1000 → dashoffset = 364.4*(1-0.782) = ~79.4, but start from full (364.4)
+  setTimeout(()=>{
+    const ring=document.getElementById('cs-ring-fill');
+    if(ring){ring.style.strokeDashoffset=String((364.4*(1-0.782)).toFixed(1))}
+    const fills=[{id:'csf1',w:88},{id:'csf2',w:80},{id:'csf3',w:76},{id:'csf4',w:72}];
+    fills.forEach((f,i)=>{
+      setTimeout(()=>{
+        const el=document.getElementById(f.id);
+        if(el)el.style.width=f.w+'%';
+      },i*120);
+    });
+  },300);
+});
+
+/* === MOBILE SIDEBAR TOGGLE === */
+function toggleSidebar(){
+  const sb=document.querySelector('.sidebar');
+  const ov=document.getElementById('sidebar-overlay');
+  sb.classList.toggle('open');
+  ov.classList.toggle('show');
+}
+function closeSidebar(){
+  const sb=document.querySelector('.sidebar');
+  const ov=document.getElementById('sidebar-overlay');
+  sb.classList.remove('open');
+  ov.classList.remove('show');
+}
 </script>
 </body>
 </html>
