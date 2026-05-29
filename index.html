@@ -2,7 +2,10 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#3c0d5b">
 <title>Credteria — New business criteria. Real business credibility</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -574,6 +577,135 @@ body{font-family:var(--font-body);background:var(--lavender-soft);overflow:hidde
 .cs-trend-pill{display:flex;align-items:center;gap:4px;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.25);border-radius:6px;padding:3px 9px;font-size:10px;color:#4ade80;font-weight:500}
 .cs-pulse{animation:csPulse 2s ease-in-out infinite}
 @keyframes csPulse{0%,100%{opacity:1}50%{opacity:0.6}}
+/* =================== MOBILE BOTTOM NAV =================== */
+.mobile-nav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;
+  background:linear-gradient(180deg,rgba(50,11,78,.97) 0%,rgba(35,7,55,1) 100%);
+  border-top:1px solid rgba(192,132,252,.2);
+  padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));
+  z-index:50;
+  -webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);
+}
+.mobile-nav-items{display:flex;justify-content:space-around;align-items:center}
+.mobile-nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:5px 8px;cursor:pointer;min-width:52px;border-radius:10px;
+  transition:all .15s;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+}
+.mobile-nav-item i{font-size:22px;color:rgba(222,189,255,.38);transition:color .15s}
+.mobile-nav-item span{font-size:8.5px;color:rgba(222,189,255,.32);font-family:var(--font-body);transition:color .15s;white-space:nowrap}
+.mobile-nav-item.active i{color:#fff}
+.mobile-nav-item.active span{color:rgba(222,189,255,.75)}
+.mobile-nav-item:active{background:rgba(192,132,252,.12)}
+.mobile-nav-dot{
+  width:4px;height:4px;border-radius:50%;background:var(--lavender);
+  margin-top:2px;opacity:0;transition:opacity .15s;
+}
+.mobile-nav-item.active .mobile-nav-dot{opacity:1}
+
+/* =================== MOBILE RESPONSIVE =================== */
+@media(max-width:767px){
+  body{overflow-y:auto!important;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+  .app{flex-direction:column;height:auto;min-height:unset;overflow:visible}
+  .sidebar{display:none!important}
+  .main{height:100vh;height:100dvh;overflow:hidden;display:flex;flex-direction:column}
+  .mobile-nav{display:block}
+
+  /* Topbar */
+  .topbar{padding:0 14px;height:48px;position:sticky;top:0;z-index:40}
+  .page-title{font-size:15px}
+  .page-sub{display:none}
+  .date-btn{padding:4px 8px;font-size:10px}
+  .date-btn span{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+  /* Content */
+  .content{padding:12px;gap:10px;padding-bottom:76px;overflow-y:auto;flex:1}
+
+  /* Credit Score Card */
+  .cs-card{padding:14px;border-radius:var(--radius-lg)}
+  .cs-grid{display:flex;flex-direction:column;align-items:center;gap:12px}
+  .cs-ring-area{width:110px;height:110px}
+  .cs-ring-area svg{width:110px;height:110px}
+  .cs-score-num{font-size:24px}
+  .cs-right{width:100%;padding-left:0}
+  .cs-grade{margin-bottom:8px;justify-content:flex-start}
+  .cs-factor-lbl{width:95px;font-size:9.5px}
+  .cs-bottom{flex-wrap:wrap;gap:8px;justify-content:space-around;margin-top:12px;padding-top:10px}
+  .cs-divider{display:none}
+  .cs-bottom-stat{flex:1;min-width:60px}
+  .cs-bottom-val{font-size:12px}
+  .cs-trend-pill{flex:0 0 100%;justify-content:center;margin-top:2px}
+
+  /* KPI cards: 2 cols */
+  .fin-kpi-row{grid-template-columns:repeat(2,1fr);gap:8px}
+  .fin-kpi{padding:11px 12px}
+  .fin-kpi-ic{width:30px;height:30px;border-radius:8px;margin-bottom:7px}
+  .fin-kpi-value{font-size:16px}
+  .fin-kpi-label{font-size:9px}
+
+  /* All grids → single column */
+  .mid-row{grid-template-columns:1fr!important}
+  .bot-row{grid-template-columns:1fr!important}
+  .full-row{grid-template-columns:1fr!important}
+  .kpi-row{grid-template-columns:repeat(2,1fr)}
+  .stat-grid{gap:8px}
+  .stat-num{font-size:18px}
+
+  /* Inline grid overrides */
+  .bank-cards{grid-template-columns:repeat(2,1fr)!important}
+
+  /* Tables: force horizontal scroll */
+  .fstmt-table{min-width:580px}
+  .rpt-table{min-width:540px}
+
+  /* Cover */
+  .cover-title{font-size:32px}
+  .cover-slogan{font-size:11px;margin-bottom:20px}
+  .cover-logo-ic{width:56px;height:56px}
+  .cover-logo-ic i{font-size:24px}
+  .tag-1,.tag-2,.tag-3,.tag-4{display:none}
+  .cover-pills{gap:6px;margin-bottom:28px}
+  .cover-pill{font-size:9.5px;padding:5px 10px}
+  .cover-cta{padding:10px 22px;font-size:12px}
+
+  /* Modals → bottom sheet */
+  .modal-overlay{align-items:flex-end;padding:0}
+  .modal{
+    width:100%;max-width:100%;
+    border-radius:20px 20px 0 0;
+    animation:mobileSheetIn .3s cubic-bezier(.4,0,.2,1)!important;
+    max-height:88vh;
+  }
+  .qv-modal{width:100%;max-width:100%}
+  @keyframes mobileSheetIn{from{transform:translateY(100%)}to{transform:translateY(0)}}
+
+  /* Step indicators */
+  .step-indicator{flex-wrap:wrap;gap:6px}
+  .step-label{display:none}
+
+  /* Donut chart */
+  .donut-wrap{gap:10px}
+
+  /* Risk / health items */
+  .risk-item,.h-item{padding:7px 0}
+
+  /* Report filter bar */
+  .rpt-filter-bar{flex-wrap:wrap}
+  .rpt-search-wrap{min-width:100%}
+
+  /* Input rows */
+  .input-row{grid-template-columns:1fr}
+
+  /* Touch improvements */
+  *{-webkit-tap-highlight-color:transparent}
+  button,
+  .nav-item,.kpi,.fin-kpi,.src-item,.bank-card,.conn-btn,
+  .submit-btn,.agree-btn,.chip,.stab,.tab,.rpt-btn{
+    touch-action:manipulation;
+  }
+}
 </style>
 </head>
 <body>
@@ -681,7 +813,7 @@ body{font-family:var(--font-body);background:var(--lavender-soft);overflow:hidde
         <div class="cs-card" onclick="nav('report',null)">
           <div class="cs-grid">
             <div class="cs-ring-area">
-              <svg width="140" height="140" style="transform:rotate(-90deg)">
+              <svg width="140" height="140" viewBox="0 0 140 140" style="transform:rotate(-90deg)">
                 <defs>
                   <linearGradient id="csGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stop-color="#c084fc"/>
@@ -1517,6 +1649,13 @@ function nav(id,el){
   document.getElementById('page-title').textContent=pages[id]||id;
   document.getElementById('page-sub').textContent=subs[id]||'';
   setTimeout(()=>initCharts(id),80);
+  // Sync mobile bottom nav
+  if(typeof setMobileNav==='function')setMobileNav(id);
+  // Scroll content area to top on mobile
+  const content=document.querySelector('.content');
+  if(content)content.scrollTop=0;
+  // Fix inline grids for mobile
+  if(typeof fixMobileGrids==='function')setTimeout(fixMobileGrids,50);
 }
 
 function showModal(id,data){
@@ -1669,9 +1808,31 @@ function initCharts(id){
   }
 }
 
+function setMobileNav(id){
+  document.querySelectorAll('.mobile-nav-item').forEach(el=>el.classList.remove('active'));
+  const mn=document.getElementById('mn-'+id);
+  if(mn)mn.classList.add('active');
+  // also sync the unmapped pages to nearest nav item
+  const map={dashboard:'dashboard',cashflow:'cashflow',ops:'cashflow',forecast:'cashflow',
+             health:'health',report:'health',bctc:'health',
+             banks:'banks',connect:'banks',sources:'banks',history:'banks',sync:'banks',
+             company:'settings',settings:'settings'};
+  const parent=map[id]||id;
+  const pm=document.getElementById('mn-'+parent);
+  if(pm){document.querySelectorAll('.mobile-nav-item').forEach(el=>el.classList.remove('active'));pm.classList.add('active')}
+}
+
+// Mobile: fix inline grid styles on connect page
+function fixMobileGrids(){
+  if(window.innerWidth>767)return;
+  document.querySelectorAll('[style*="repeat(3"]').forEach(el=>{
+    el.style.gridTemplateColumns='repeat(2,1fr)';
+  });
+}
+
 window.addEventListener('load',()=>{
+  fixMobileGrids();
   setTimeout(()=>initCharts('dashboard'),150);
-  // Animate credit score ring: 782/1000 → dashoffset = 364.4*(1-0.782) = ~79.4, but start from full (364.4)
   setTimeout(()=>{
     const ring=document.getElementById('cs-ring-fill');
     if(ring){ring.style.strokeDashoffset=String((364.4*(1-0.782)).toFixed(1))}
@@ -1685,5 +1846,36 @@ window.addEventListener('load',()=>{
   },300);
 });
 </script>
+<!-- MOBILE BOTTOM NAV -->
+<div class="mobile-nav">
+  <div class="mobile-nav-items">
+    <div class="mobile-nav-item active" id="mn-dashboard" onclick="nav('dashboard',null);setMobileNav('dashboard')">
+      <i class="ti ti-layout-dashboard"></i>
+      <span>Tổng quan</span>
+      <div class="mobile-nav-dot"></div>
+    </div>
+    <div class="mobile-nav-item" id="mn-cashflow" onclick="nav('cashflow',null);setMobileNav('cashflow')">
+      <i class="ti ti-currency-dollar"></i>
+      <span>Dòng tiền</span>
+      <div class="mobile-nav-dot"></div>
+    </div>
+    <div class="mobile-nav-item" id="mn-health" onclick="nav('health',null);setMobileNav('health')">
+      <i class="ti ti-heart-rate-monitor"></i>
+      <span>Phân tích</span>
+      <div class="mobile-nav-dot"></div>
+    </div>
+    <div class="mobile-nav-item" id="mn-banks" onclick="nav('banks',null);setMobileNav('banks')">
+      <i class="ti ti-building-bank"></i>
+      <span>Ngân hàng</span>
+      <div class="mobile-nav-dot"></div>
+    </div>
+    <div class="mobile-nav-item" id="mn-settings" onclick="nav('settings',null);setMobileNav('settings')">
+      <i class="ti ti-settings"></i>
+      <span>Cài đặt</span>
+      <div class="mobile-nav-dot"></div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
